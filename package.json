@@ -1,0 +1,24 @@
+{
+  "name": "vertexworkout",
+  "version": "1.0.0",
+  "description": "VERTEXworkout is a fitness ecosystem covering a Phase 1 store, exercise library, VERTEX Academy, and client profile, with coach, admin, and mobile capabilities planned for later phases. This repository handoff contains the consolidated official documentation only; it contains no application implementation.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YonisMo/VERTEXworkout.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/YonisMo/VERTEXworkout/issues"
+  },
+  "homepage": "https://github.com/YonisMo/VERTEXworkout#readme"
+}
