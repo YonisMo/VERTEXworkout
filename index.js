@@ -40,6 +40,7 @@ PROFILE: ${weight}kg, ${age}y, ${gender} | BMI: ${bmi}
 PLAN: ${goal}
 ========================================
 `;
+    // حفظ البيانات في الملف
     fs.appendFileSync('clients_database.txt', clientData);
     console.log("\n--- Client Successfully Registered! ---");
 }
@@ -47,13 +48,22 @@ PLAN: ${goal}
 // --- دالة البحث عن عميل ---
 function searchClient() {
     const nameToFind = readline.question('Enter client name to search: ');
+    
+    // التأكد من وجود الملف قبل القراءة
+    if (!fs.existsSync('clients_database.txt')) {
+        console.log("\nNo database file found.");
+        return;
+    }
+    
     const data = fs.readFileSync('clients_database.txt', 'utf8');
     const records = data.split('========================================');
     const found = records.filter(record => record.includes(nameToFind));
     
     if (found.length > 0) {
         console.log("\n--- Search Results ---");
-        found.forEach(res => console.log(res));
+        found.forEach(res => {
+            if(res.trim() !== "") console.log(res);
+        });
     } else {
         console.log("\nNo client found with that name.");
     }
@@ -78,7 +88,10 @@ while (running) {
             console.log("Nutrition:", nutrition);
             console.log("Equipment:", equipment);
             break;
-        case '4': running = false; break;
-        default: console.log("Invalid option.");
+        case '4': 
+            running = false; 
+            console.log("System Closed. Data secured."); 
+            break;
+        default: console.log("Invalid option, please try again.");
     }
 }
