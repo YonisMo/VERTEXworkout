@@ -1,0 +1,1 @@
+console.log("VERTEXworkout system is online!")
