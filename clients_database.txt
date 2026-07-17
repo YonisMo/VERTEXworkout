@@ -1,0 +1,53 @@
+
+========================================
+[DATE: ١٧‏/٧‏/٢٠٢٦]
+--- CLIENT CONTACT INFO ---
+NAME: Ahmed
+PHONE: 01234567890
+EMAIL: 25 street
+NATIONAL ID: 12345678901234
+ADDRESS: 25 street
+--- SUBSCRIPTION & MEDICAL ---
+TYPE:  | PAYMENT: 
+CONDITIONS: 
+--- METRICS & PLAN ---
+PROFILE: NaNkg, NaNcm, NaNy, 
+BMI: NaN | BMR: NaN kcal | TDEE: NaN kcal
+PLAN: 3 days moderate strength training + 2 days light cardio.
+========================================
+
+========================================
+[DATE: ١٧‏/٧‏/٢٠٢٦]
+--- CLIENT CONTACT ---
+NAME: Ahmed | PHONE: 01234567890 | EMAIL: 0000@mail.com
+ID: 01234567890123 | ADDRESS: 25 street
+--- SUBSCRIPTION & MEDICAL ---
+TYPE: bisac | PAYMENT: paid | MEDICAL: yes
+--- METRICS & PLAN ---
+PROFILE: 75kg, 25y, male | BMI: 24.49
+PLAN: fat loss
+========================================
+
+========================================
+[DATE: ١٧‏/٧‏/٢٠٢٦]
+--- CLIENT CONTACT ---
+NAME: mohamed | PHONE: 0122222222 | EMAIL: fgjfj@ymail.com
+ID: 0000000000 | ADDRESS: 111 street
+--- SUBSCRIPTION & MEDICAL ---
+TYPE: p | PAYMENT:  | MEDICAL: o
+--- METRICS & PLAN ---
+PROFILE: 75kg, 25y, male | BMI: 24.49
+PLAN: f
+========================================
+
+========================================
+[DATE: ١٧‏/٧‏/٢٠٢٦]
+--- CLIENT CONTACT ---
+NAME: ahmed | PHONE: 01234567890 | EMAIL: ahmed@gmail.com
+ID: 01234567891234 | ADDRESS: 25street
+--- SUBSCRIPTION & MEDICAL ---
+TYPE: non | PAYMENT: Paid | MEDICAL: good
+--- METRICS & PLAN ---
+PROFILE: 25kg, 25y, male | BMI: 8.16
+PLAN: Fat loss
+========================================

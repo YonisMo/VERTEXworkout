@@ -1,0 +1,27 @@
+Client Profile: Weight: 70kg, Height: 175cm, Age: 25, Gender: male
+BMI: 22.86
+Estimated BMR: 1674 kcal/day
+------------------------
+Profile: Weight:75kg, Goal:Fat loss
+BMI: 24.49
+Estimated BMR: 1724 kcal/day
+Plan: Recommended: 3 days high-intensity cardio + 2 days full-body strength training.
+------------------------
+Profile: Weight:75kg, Goal:Fat loss, Activity:2
+BMI: 24.49
+Base BMR: 1724 kcal
+Daily Calories Needed (TDEE): 2370 kcal
+Plan: Recommended: 3 days high-intensity cardio + 2 days strength training.
+------------------------
+
+[DATE: ١٧‏/٧‏/٢٠٢٦]
+CLIENT: Ahmed
+SUBSCRIPTION: basic
+PAYMENT: paid
+----------------------------------------
+PROFILE: 75kg, 175cm, 25y, male
+BMI: 24.49
+BMR: 1724 kcal
+TDEE: 2370 kcal
+PLAN: 3 days high-intensity cardio + 2 days strength training.
+----------------------------------------
