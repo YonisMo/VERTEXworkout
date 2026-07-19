@@ -1,0 +1,17 @@
+{
+  "name": "vertexworkout",
+  "private": true,
+  "packageManager": "pnpm@11.15.0",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "turbo": "^2.5.5",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2"
+  }
+}
