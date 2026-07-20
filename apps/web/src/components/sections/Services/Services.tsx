@@ -1,123 +1,82 @@
 import {
+  Container,
+  Section,
+  SectionTitle,
+} from "@/components/ui/layout";
+
+import {
   Dumbbell,
-  Waves,
-  GraduationCap,
-  ShoppingBag,
+  HeartPulse,
+  Target,
+  Trophy,
 } from "lucide-react";
 
 const services = [
   {
+    icon: Dumbbell,
     title: "Functional Training",
     description:
-      "Professional functional fitness programs for all levels.",
-    icon: Dumbbell,
+      "Build real-world strength, mobility and athletic performance.",
   },
   {
-    title: "Swimming Programs",
+    icon: HeartPulse,
+    title: "Fat Loss",
     description:
-      "Structured swimming plans from beginner to advanced.",
-    icon: Waves,
+      "Personalized programs to burn fat while maintaining muscle.",
   },
   {
-    title: "VERTEX Academy",
+    icon: Target,
+    title: "Personal Coaching",
     description:
-      "Courses and certifications for fitness professionals.",
-    icon: GraduationCap,
+      "One-on-one coaching tailored to your goals.",
   },
   {
-    title: "Equipment Store",
+    icon: Trophy,
+    title: "Athletic Performance",
     description:
-      "Premium training equipment and VERTEX products.",
-    icon: ShoppingBag,
+      "Improve speed, power, agility and endurance.",
   },
 ];
 
 export default function Services() {
   return (
-    <section
-      style={{
-        padding: "100px 20px",
-        background: "#ffffff",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-        }}
-      >
-        <h2
-          style={{
-            textAlign: "center",
-            fontSize: "42px",
-            color: "#022859",
-            marginBottom: "16px",
-          }}
-        >
-          Our Services
-        </h2>
+    <Section className="bg-white">
+      <Container>
 
-        <p
-          style={{
-            textAlign: "center",
-            color: "#666",
-            maxWidth: "700px",
-            margin: "0 auto 60px",
-            fontSize: "18px",
-          }}
-        >
-          Everything you need to build strength, improve performance,
-          and transform your fitness journey.
-        </p>
+        <SectionTitle
+          title="Our Services"
+          subtitle="Professional coaching designed to transform your fitness journey."
+        />
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
-            gap: "25px",
-          }}
-        >
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
+
           {services.map((service) => {
             const Icon = service.icon;
 
             return (
               <div
                 key={service.title}
-                style={{
-                  padding: "35px",
-                  borderRadius: "18px",
-                  boxShadow: "0 10px 25px rgba(0,0,0,.08)",
-                  textAlign: "center",
-                }}
+                className="rounded-3xl border bg-white p-8 shadow-sm transition hover:-translate-y-2 hover:shadow-xl"
               >
                 <Icon
-                  size={50}
-                  color="#022859"
-                  strokeWidth={2}
+                  size={42}
+                  className="mb-6 text-[#022859]"
                 />
 
-                <h3
-                  style={{
-                    marginTop: "20px",
-                    color: "#022859",
-                  }}
-                >
+                <h3 className="mb-3 text-2xl font-bold">
                   {service.title}
                 </h3>
 
-                <p
-                  style={{
-                    color: "#666",
-                    lineHeight: 1.7,
-                  }}
-                >
+                <p className="text-gray-600">
                   {service.description}
                 </p>
               </div>
             );
           })}
+
         </div>
-      </div>
-    </section>
+
+      </Container>
+    </Section>
   );
 }
