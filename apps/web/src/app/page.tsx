@@ -7,6 +7,7 @@ import Programs from "@/components/sections/Programs";
 import StorePreview from "@/components/sections/StorePreview";
 import AcademyPreview from "@/components/sections/AcademyPreview";
 import Testimonials from "@/components/sections/Testimonials";
+import CTA from "@/components/sections/CTA";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
         <StorePreview />
         <AcademyPreview />
         <Testimonials />
+        <CTA />
       </main>
     </>
   );
