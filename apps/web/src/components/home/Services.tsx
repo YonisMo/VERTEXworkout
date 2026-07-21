@@ -1,129 +1,76 @@
+import Container from "@/components/ui/Container";
+import SectionTitle from "@/components/ui/SectionTitle";
+import Card from "@/components/ui/Card";
+
+const services = [
+  {
+    icon: "🏋️",
+    title: "Functional Training",
+    description:
+      "Science-based functional training programs designed to improve strength, mobility, endurance, balance, and real-world performance.",
+  },
+  {
+    icon: "🥊",
+    title: "Boxing Fitness",
+    description:
+      "Dynamic boxing workouts that develop speed, coordination, cardiovascular fitness, fat loss, and total-body conditioning.",
+  },
+  {
+    icon: "🏊",
+    title: "Swimming Programs",
+    description:
+      "Structured swimming programs for beginners, competitive athletes, fitness improvement, and rehabilitation.",
+  },
+  {
+    icon: "🎓",
+    title: "Fitness Academy",
+    description:
+      "Professional educational courses, certifications, workshops, and practical resources for coaches and fitness professionals.",
+  },
+  {
+    icon: "🛍️",
+    title: "VERTEX Store",
+    description:
+      "Premium functional fitness equipment and innovative training tools engineered for performance, durability, and versatility.",
+  },
+  {
+    icon: "💻",
+    title: "Online Coaching",
+    description:
+      "Personalized online coaching with customized training plans, nutrition guidance, progress tracking, and continuous support.",
+  },
+];
+
 export default function Services() {
-  const services = [
-    {
-      icon: "🏋️",
-      title: "Functional Training",
-      description:
-        "Modern functional workouts designed to improve strength, mobility and athletic performance.",
-    },
-    {
-      icon: "🥊",
-      title: "Boxing Fitness",
-      description:
-        "High intensity boxing workouts for endurance, fat loss and conditioning.",
-    },
-    {
-      icon: "🏊",
-      title: "Swimming Programs",
-      description:
-        "Professional swimming plans for beginners, athletes and rehabilitation.",
-    },
-    {
-      icon: "🎓",
-      title: "Fitness Academy",
-      description:
-        "Courses, certifications and educational content for coaches and trainers.",
-    },
-    {
-      icon: "🛍️",
-      title: "VERTEX Store",
-      description:
-        "Premium functional fitness equipment and innovative training products.",
-    },
-    {
-      icon: "💻",
-      title: "Online Coaching",
-      description:
-        "Personalized online coaching with continuous follow-up and progress tracking.",
-    },
-  ];
-
   return (
-    <section
-      style={{
-        background: "#ffffff",
-        padding: "100px 40px",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-        }}
-      >
-        <h2
-          style={{
-            textAlign: "center",
-            color: "#022859",
-            fontSize: "50px",
-            fontWeight: 800,
-            marginBottom: "20px",
-          }}
-        >
-          Our Services
-        </h2>
+    <section className="bg-white py-24">
+      <Container>
+        <SectionTitle
+          title="Our Services"
+          subtitle="Everything you need in one professional fitness ecosystem—from training and education to equipment and coaching."
+        />
 
-        <p
-          style={{
-            textAlign: "center",
-            color: "#64748b",
-            fontSize: "20px",
-            marginBottom: "60px",
-          }}
-        >
-          Everything you need in one professional fitness ecosystem.
-        </p>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit,minmax(320px,1fr))",
-            gap: "30px",
-          }}
-        >
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {services.map((service) => (
-            <div
+            <Card
               key={service.title}
-              style={{
-                background: "#022859",
-                color: "#ffffff",
-                padding: "35px",
-                borderRadius: "24px",
-                transition: ".3s",
-                boxShadow: "0 12px 30px rgba(0,0,0,.08)",
-              }}
+              className="group h-full bg-[#022859] text-white transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
             >
-              <div
-                style={{
-                  fontSize: "48px",
-                  marginBottom: "20px",
-                }}
-              >
+              <div className="mb-6 text-5xl transition-transform duration-300 group-hover:scale-110">
                 {service.icon}
               </div>
 
-              <h3
-                style={{
-                  color: "#F2EA79",
-                  marginBottom: "15px",
-                  fontSize: "28px",
-                }}
-              >
+              <h3 className="mb-4 text-2xl font-bold text-[#F2EA79]">
                 {service.title}
               </h3>
 
-              <p
-                style={{
-                  lineHeight: 1.8,
-                  color: "#f1f5f9",
-                }}
-              >
+              <p className="leading-8 text-slate-200">
                 {service.description}
               </p>
-            </div>
+            </Card>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

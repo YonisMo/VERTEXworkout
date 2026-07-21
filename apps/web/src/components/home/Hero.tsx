@@ -1,101 +1,45 @@
+import Link from "next/link";
+
+import Container from "@/components/ui/Container";
+import Button from "@/components/ui/Button";
+
 export default function Hero() {
   return (
-    <section
-      style={{
-        background: "#022859",
-        color: "#ffffff",
-        minHeight: "calc(100vh - 70px)",
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          padding: "0 40px",
-          textAlign: "center",
-        }}
-      >
-        <span
-          style={{
-            color: "#F2EA79",
-            border: "1px solid #F2EA79",
-            borderRadius: "999px",
-            padding: "10px 24px",
-            display: "inline-block",
-            marginBottom: "30px",
-            fontWeight: 600,
-          }}
-        >
+    <section className="flex min-h-[calc(100vh-72px)] items-center bg-[#022859] text-white">
+      <Container className="text-center">
+
+        <span className="inline-block rounded-full border border-[#F2EA79] px-6 py-3 font-semibold text-[#F2EA79]">
           Functional Fitness • Academy • Store
         </span>
 
-        <h1
-          style={{
-            fontSize: "72px",
-            fontWeight: 800,
-            lineHeight: 1.1,
-            marginBottom: "30px",
-          }}
-        >
+        <h1 className="mt-8 text-5xl font-extrabold leading-tight md:text-7xl">
           Train Smarter.
           <br />
           Live Stronger.
         </h1>
 
-        <p
-          style={{
-            fontSize: "22px",
-            color: "#dbe4f0",
-            maxWidth: "850px",
-            margin: "0 auto 50px",
-            lineHeight: 1.8,
-          }}
-        >
+        <p className="mx-auto mt-8 max-w-4xl text-xl leading-9 text-slate-300">
           VERTEXworkout is your complete ecosystem for Functional Training,
           Fitness Education, Premium Equipment and Professional Coaching.
         </p>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: "20px",
-            flexWrap: "wrap",
-          }}
-        >
-          <button
-            style={{
-              background: "#F2EA79",
-              color: "#022859",
-              border: "none",
-              padding: "18px 45px",
-              borderRadius: "18px",
-              fontSize: "18px",
-              fontWeight: 700,
-              cursor: "pointer",
-            }}
-          >
-            Start Training
-          </button>
+        <div className="mt-12 flex flex-wrap justify-center gap-5">
 
-          <button
-            style={{
-              background: "transparent",
-              color: "#F2EA79",
-              border: "2px solid #F2EA79",
-              padding: "18px 45px",
-              borderRadius: "18px",
-              fontSize: "18px",
-              fontWeight: 700,
-              cursor: "pointer",
-            }}
-          >
-            Explore Programs
-          </button>
+          <Link href="/programs">
+            <Button>
+              Start Training
+            </Button>
+          </Link>
+
+          <Link href="/programs">
+            <Button variant="secondary">
+              Explore Programs
+            </Button>
+          </Link>
+
         </div>
-      </div>
+
+      </Container>
     </section>
   );
 }

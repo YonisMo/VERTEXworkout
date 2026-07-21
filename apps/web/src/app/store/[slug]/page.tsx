@@ -2,6 +2,10 @@
 
 import { notFound } from "next/navigation";
 import { use } from "react";
+
+import Container from "@/components/ui/Container";
+import Button from "@/components/ui/Button";
+
 import { ProductService } from "@/services/product.service";
 import { useCart } from "@/context/CartContext";
 
@@ -23,61 +27,90 @@ export default function ProductPage({ params }: Props) {
   }
 
   return (
-    <main className="bg-gray-50 min-h-screen py-16">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid gap-14 lg:grid-cols-2">
-          <div className="rounded-3xl bg-white p-8 shadow-lg">
+    <main className="min-h-screen bg-slate-50 py-20">
+
+      <Container>
+
+        <div className="grid gap-16 lg:grid-cols-2">
+
+          {/* Image */}
+
+          <div className="overflow-hidden rounded-3xl bg-white p-8 shadow-xl">
+
             <img
               src={product.images[0]}
               alt={product.name}
-              className="w-full rounded-2xl object-cover"
+              className="w-full rounded-2xl object-cover transition duration-500 hover:scale-105"
             />
+
           </div>
 
+          {/* Details */}
+
           <div>
-            <span className="inline-block rounded-full bg-[#F2EA79] px-5 py-2 font-semibold text-[#022859]">
+
+            <span className="inline-block rounded-full bg-[#F2EA79] px-5 py-2 font-bold text-[#022859]">
               {product.badge}
             </span>
 
-            <h1 className="mt-6 text-5xl font-black text-[#022859]">
+            <h1 className="mt-6 text-5xl font-extrabold text-[#022859]">
               {product.name}
             </h1>
 
-            <p className="mt-6 text-lg leading-8 text-gray-600">
+            <p className="mt-8 text-lg leading-9 text-slate-600">
               {product.description}
             </p>
 
-            <div className="mt-8 text-5xl font-black text-[#022859]">
+            <div className="mt-8 text-5xl font-extrabold text-[#022859]">
               {product.price} EGP
             </div>
 
-            <div className="mt-10 flex gap-5">
-              <button
+            {/* Buttons */}
+
+            <div className="mt-10 flex flex-wrap gap-4">
+
+              <Button
                 onClick={() => addToCart(product)}
-                className="rounded-xl bg-[#F2EA79] px-8 py-4 font-bold text-[#022859] transition duration-300 hover:scale-105"
               >
                 Add To Cart
-              </button>
+              </Button>
 
-              <button className="rounded-xl border-2 border-[#022859] px-8 py-4 font-bold text-[#022859] transition duration-300 hover:bg-[#022859] hover:text-white">
+              <Button variant="outline">
                 Buy Now
-              </button>
+              </Button>
+
             </div>
 
-            <div className="mt-12 rounded-2xl bg-white p-8 shadow">
-              <h2 className="mb-5 text-2xl font-bold text-[#022859]">
+            {/* Features */}
+
+            <div className="mt-14 rounded-3xl bg-white p-8 shadow-lg">
+
+              <h2 className="mb-6 text-2xl font-bold text-[#022859]">
                 Product Features
               </h2>
 
-              <ul className="space-y-4 text-lg text-gray-700">
+              <ul className="space-y-4">
+
                 {product.features.map((feature, index) => (
-                  <li key={index}>✅ {feature}</li>
+                  <li
+                    key={index}
+                    className="flex items-center gap-3 text-lg text-slate-700"
+                  >
+                    <span className="text-green-600">✔</span>
+                    {feature}
+                  </li>
                 ))}
+
               </ul>
+
             </div>
+
           </div>
+
         </div>
-      </div>
+
+      </Container>
+
     </main>
   );
 }

@@ -1,7 +1,6 @@
 import products from "@/data/store/products";
 
 export const ProductService = {
-
   getAll() {
     return products;
   },
@@ -19,7 +18,15 @@ export const ProductService = {
   },
 
   getBySlug(slug: string) {
-    return products.find((product) => product.slug === slug);
+    return products.find(
+      (product) => product.slug === slug
+    );
+  },
+
+  getById(id: number) {
+    return products.find(
+      (product) => product.id === id
+    );
   },
 
   getByCategory(category: string) {
@@ -28,10 +35,29 @@ export const ProductService = {
     );
   },
 
+  getCategories() {
+    return [...new Set(products.map((p) => p.category))];
+  },
+
   search(keyword: string) {
-    return products.filter((product) =>
-      product.name.toLowerCase().includes(keyword.toLowerCase())
+    const value = keyword.toLowerCase().trim();
+
+    return products.filter(
+      (product) =>
+        product.name.toLowerCase().includes(value) ||
+        product.description.toLowerCase().includes(value) ||
+        product.category.toLowerCase().includes(value) ||
+        product.brand.toLowerCase().includes(value)
     );
   },
 
+  getRelated(productId: number, category: string) {
+    return products
+      .filter(
+        (product) =>
+          product.id !== productId &&
+          product.category === category
+      )
+      .slice(0, 4);
+  },
 };

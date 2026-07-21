@@ -3,6 +3,7 @@
 import {
   createContext,
   useContext,
+  useMemo,
   useState,
   ReactNode,
 } from "react";
@@ -25,6 +26,8 @@ type CartContextType = {
   addToCart: (product: Product) => void;
 
   removeFromCart: (id: number) => void;
+
+  updateQuantity: (id: number, quantity: number) => void;
 
   clearCart: () => void;
 
@@ -75,18 +78,45 @@ export function CartProvider({
     );
   }
 
+  function updateQuantity(id: number, quantity: number) {
+    if (quantity <= 0) {
+      removeFromCart(id);
+      return;
+    }
+
+    setCart((prev) =>
+      prev.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              quantity,
+            }
+          : item
+      )
+    );
+  }
+
   function clearCart() {
     setCart([]);
   }
 
-  const totalItems = cart.reduce(
-    (sum, item) => sum + item.quantity,
-    0
+  const totalItems = useMemo(
+    () =>
+      cart.reduce(
+        (sum, item) => sum + item.quantity,
+        0
+      ),
+    [cart]
   );
 
-  const totalPrice = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
+  const totalPrice = useMemo(
+    () =>
+      cart.reduce(
+        (sum, item) =>
+          sum + item.price * item.quantity,
+        0
+      ),
+    [cart]
   );
 
   return (
@@ -95,6 +125,7 @@ export function CartProvider({
         cart,
         addToCart,
         removeFromCart,
+        updateQuantity,
         clearCart,
         totalItems,
         totalPrice,

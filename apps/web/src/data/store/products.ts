@@ -1,239 +1,181 @@
 import { Product } from "@/types/product";
 
 const products: Product[] = [
+  {
+    id: 1,
+    sku: "VPB-005",
+    slug: "vertex-power-bag-5kg",
+    name: "VERTEX Power Bag 5 KG",
 
-{
-id:1,
+    shortDescription: "Functional Training Sand Bag",
 
-sku:"VPB-005",
+    description:
+      "Professional Power Bag made from heavy-duty nylon with reinforced handles. Perfect for Functional Training, CrossFit, HIIT and Strength Workouts.",
 
-slug:"vertex-power-bag-5kg",
+    category: "Power Bags",
+    brand: "VERTEXworkout",
 
-name:"VERTEX Power Bag 5 KG",
+    badge: "NEW",
 
-shortDescription:"Functional Training Sand Bag",
+    price: 900,
+    oldPrice: 1000,
+    discount: 10,
 
-description:
-"Professional Power Bag made from heavy-duty nylon with reinforced handles. Perfect for functional training, CrossFit, HIIT and strength workouts.",
+    stock: 15,
 
-category:"Power Bags",
+    weight: "5 KG",
+    size: "Small",
+    color: "Black",
 
-brand:"VERTEXworkout",
+    featured: true,
+    bestseller: true,
+    isNew: true,
 
-badge:"NEW",
+    rating: 4.9,
+    reviews: 38,
 
-price:900,
+    images: ["/products/powerbag5.jpg"],
 
-oldPrice:1000,
+    features: [
+      "Heavy Duty Nylon",
+      "Reinforced Handles",
+      "Functional Training",
+      "Indoor & Outdoor",
+      "Lifetime Stitching",
+    ],
+  },
 
-discount:10,
+  {
+    id: 2,
+    sku: "VPB-010",
+    slug: "vertex-power-bag-10kg",
+    name: "VERTEX Power Bag 10 KG",
 
-stock:15,
+    shortDescription: "Functional Training Sand Bag",
 
-weight:"5 KG",
+    description:
+      "Professional Power Bag for athletes and coaches.",
 
-size:"Small",
+    category: "Power Bags",
+    brand: "VERTEXworkout",
 
-color:"Black",
+    badge: "BEST SELLER",
 
-featured:true,
+    price: 1100,
+    oldPrice: 1250,
+    discount: 12,
 
-bestseller:true,
+    stock: 20,
 
-isNew:true,
+    weight: "10 KG",
+    size: "Medium",
+    color: "Black",
 
-rating:4.9,
+    featured: true,
+    bestseller: true,
+    isNew: false,
 
-reviews:38,
+    rating: 5,
+    reviews: 62,
 
-images:[
-"/products/powerbag5.jpg"
-],
+    images: ["/products/powerbag10.jpg"],
 
-features:[
-"Heavy Duty Nylon",
-"Reinforced Handles",
-"Functional Training",
-"Indoor & Outdoor",
-"Lifetime Stitching"
-]
+    features: [
+      "Heavy Duty Nylon",
+      "Professional Handles",
+      "Military Grade",
+      "Functional Fitness",
+      "Premium Quality",
+    ],
+  },
 
-},
+  {
+    id: 3,
+    sku: "VPB-015",
+    slug: "vertex-power-bag-15kg",
+    name: "VERTEX Power Bag 15 KG",
 
-{
-id:2,
+    shortDescription: "Professional Sand Bag",
 
-sku:"VPB-010",
+    description:
+      "Professional Functional Fitness Equipment.",
 
-slug:"vertex-power-bag-10kg",
+    category: "Power Bags",
+    brand: "VERTEXworkout",
 
-name:"VERTEX Power Bag 10 KG",
+    badge: "HOT",
 
-shortDescription:"Functional Training Sand Bag",
+    price: 1350,
+    oldPrice: 1500,
+    discount: 10,
 
-description:
-"Professional Power Bag for athletes and coaches.",
+    stock: 10,
 
-category:"Power Bags",
+    weight: "15 KG",
+    size: "Large",
+    color: "Black",
 
-brand:"VERTEXworkout",
+    featured: true,
+    bestseller: false,
+    isNew: false,
 
-badge:"BEST SELLER",
+    rating: 4.8,
+    reviews: 41,
 
-price:1100,
+    images: ["/products/powerbag15.jpg"],
 
-oldPrice:1250,
+    features: [
+      "Premium Nylon",
+      "Multiple Grip Handles",
+      "CrossFit",
+      "Gym",
+      "Outdoor",
+    ],
+  },
 
-discount:12,
+  {
+    id: 4,
+    sku: "VPB-020",
+    slug: "vertex-power-bag-20kg",
+    name: "VERTEX Power Bag 20 KG",
 
-stock:20,
+    shortDescription: "Elite Functional Training",
 
-weight:"10 KG",
+    description:
+      "Designed for elite athletes and coaches.",
 
-size:"Medium",
+    category: "Power Bags",
+    brand: "VERTEXworkout",
 
-color:"Black",
+    badge: "PRO",
 
-featured:true,
+    price: 1600,
+    oldPrice: 1800,
+    discount: 11,
 
-bestseller:true,
+    stock: 8,
 
-isNew:false,
+    weight: "20 KG",
+    size: "XL",
+    color: "Black",
 
-rating:5,
+    featured: true,
+    bestseller: true,
+    isNew: true,
 
-reviews:62,
+    rating: 5,
+    reviews: 74,
 
-images:[
-"/products/powerbag10.jpg"
-],
+    images: ["/products/powerbag20.jpg"],
 
-features:[
-"Heavy Duty Nylon",
-"Professional Handles",
-"Military Grade",
-"Functional Fitness",
-"Premium Quality"
-]
-
-},
-
-{
-id:3,
-
-sku:"VPB-015",
-
-slug:"vertex-power-bag-15kg",
-
-name:"VERTEX Power Bag 15 KG",
-
-shortDescription:"Professional Sand Bag",
-
-description:
-"Professional Functional Fitness Equipment.",
-
-category:"Power Bags",
-
-brand:"VERTEXworkout",
-
-badge:"HOT",
-
-price:1350,
-
-oldPrice:1500,
-
-discount:10,
-
-stock:10,
-
-weight:"15 KG",
-
-size:"Large",
-
-color:"Black",
-
-featured:true,
-
-bestseller:false,
-
-isNew:false,
-
-rating:4.8,
-
-reviews:41,
-
-images:[
-"/products/powerbag15.jpg"
-],
-
-features:[
-"Premium Nylon",
-"Multiple Grip Handles",
-"CrossFit",
-"Gym",
-"Outdoor"
-]
-
-},
-
-{
-id:4,
-
-sku:"VPB-020",
-
-slug:"vertex-power-bag-20kg",
-
-name:"VERTEX Power Bag 20 KG",
-
-shortDescription:"Elite Functional Training",
-
-description:
-"Designed for elite athletes and coaches.",
-
-category:"Power Bags",
-
-brand:"VERTEXworkout",
-
-badge:"PRO",
-
-price:1600,
-
-oldPrice:1800,
-
-discount:11,
-
-stock:8,
-
-weight:"20 KG",
-
-size:"XL",
-
-color:"Black",
-
-featured:true,
-
-bestseller:true,
-
-isNew:true,
-
-rating:5,
-
-reviews:74,
-
-images:[
-"/products/powerbag20.jpg"
-],
-
-features:[
-"Elite Build",
-"Heavy Duty",
-"Extreme Durability",
-"Competition Ready",
-"Professional Quality"
-]
-
-}
-
+    features: [
+      "Elite Build",
+      "Heavy Duty",
+      "Extreme Durability",
+      "Competition Ready",
+      "Professional Quality",
+    ],
+  },
 ];
 
 export default products;

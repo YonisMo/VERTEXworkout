@@ -1,5 +1,4 @@
 export interface Product {
-
   id: number;
 
   sku: string;
@@ -46,4 +45,13 @@ export interface Product {
 
   features: string[];
 
+  // Future Ready
+
+  tags?: string[];
+
+  specifications?: Record<string, string>;
+
+  createdAt?: string;
+
+  updatedAt?: string;
 }
