@@ -1,0 +1,323 @@
+/* ==========================================================
+   VERTEXworkout Design System
+   Animations
+========================================================== */
+
+/* ================================
+   GLOBAL TRANSITION
+================================ */
+
+*{
+    transition:
+        background-color .3s ease,
+        color .3s ease,
+        border-color .3s ease,
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+/* ================================
+   FADE
+================================ */
+
+.fade-in{
+
+    animation:fadeIn .7s ease forwards;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+/* ================================
+   SLIDE UP
+================================ */
+
+.slide-up{
+
+    animation:slideUp .7s ease forwards;
+
+}
+
+@keyframes slideUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ================================
+   SLIDE LEFT
+================================ */
+
+.slide-left{
+
+    animation:slideLeft .7s ease forwards;
+
+}
+
+@keyframes slideLeft{
+
+    from{
+
+        opacity:0;
+
+        transform:translateX(50px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateX(0);
+
+    }
+
+}
+
+/* ================================
+   SLIDE RIGHT
+================================ */
+
+.slide-right{
+
+    animation:slideRight .7s ease forwards;
+
+}
+
+@keyframes slideRight{
+
+    from{
+
+        opacity:0;
+
+        transform:translateX(-50px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateX(0);
+
+    }
+
+}
+
+/* ================================
+   ZOOM
+================================ */
+
+.zoom{
+
+    animation:zoom .6s ease forwards;
+
+}
+
+@keyframes zoom{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.9);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+/* ================================
+   FLOAT
+================================ */
+
+.float{
+
+    animation:float 4s ease-in-out infinite;
+
+}
+
+@keyframes float{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-10px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ================================
+   BUTTON HOVER
+================================ */
+
+.hover-scale:hover{
+
+    transform:scale(1.05);
+
+}
+
+.hover-lift:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+.hover-rotate:hover{
+
+    transform:rotate(-2deg);
+
+}
+
+/* ================================
+   IMAGE HOVER
+================================ */
+
+.image-hover{
+
+    overflow:hidden;
+
+}
+
+.image-hover img{
+
+    transition:.5s;
+
+}
+
+.image-hover:hover img{
+
+    transform:scale(1.08);
+
+}
+
+/* ================================
+   CARD HOVER
+================================ */
+
+.card-hover{
+
+    transition:.35s;
+
+}
+
+.card-hover:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:var(--shadow-xl);
+
+}
+
+/* ================================
+   ICON HOVER
+================================ */
+
+.icon-hover:hover{
+
+    color:var(--vertex-secondary);
+
+    transform:scale(1.15);
+
+}
+
+/* ================================
+   SPIN
+================================ */
+
+.spin:hover{
+
+    transform:rotate(360deg);
+
+}
+
+/* ================================
+   PULSE
+================================ */
+
+.pulse{
+
+    animation:pulse 2s infinite;
+
+}
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.05);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+/* ================================
+   SMOOTH SCROLL
+================================ */
+
+html{
+
+    scroll-behavior:smooth;
+
+}

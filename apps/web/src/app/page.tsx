@@ -1,31 +1,19 @@
-import { Navbar, Footer } from "@/components/layout";
+import Hero from "@/components/home/Hero";
+import Welcome from "@/components/home/Welcome";
+import Why from "@/components/home/Why";
+import Services from "@/components/home/Services";
+import Statistics from "@/components/home/Statistics";
+import CTA from "@/components/home/CTA";
 
-import Hero from "@/components/sections/Hero";
-import Statistics from "@/components/sections/Statistics";
-import Services from "@/components/sections/Services";
-import Programs from "@/components/sections/Programs";
-import StorePreview from "@/components/sections/StorePreview";
-import AcademyPreview from "@/components/sections/AcademyPreview";
-import Testimonials from "@/components/sections/Testimonials";
-import CTA from "@/components/sections/CTA";
-
-export default function Home() {
+export default function HomePage() {
   return (
     <>
-      <Navbar />
-
-      <main>
-        <Hero />
-        <Statistics />
-        <Services />
-        <Programs />
-        <StorePreview />
-        <AcademyPreview />
-        <Testimonials />
-        <CTA />
-      </main>
-
-      <Footer />
+      <Hero />
+      <Welcome />
+      <Why />
+      <Services />
+      <Statistics />
+      <CTA />
     </>
   );
 }

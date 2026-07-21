@@ -1,0 +1,329 @@
+/* ==========================================================
+   VERTEXworkout Design System
+   Components
+========================================================== */
+
+/* ============================
+   BUTTONS
+============================ */
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:.6rem;
+
+    padding:.95rem 1.8rem;
+
+    border:none;
+
+    border-radius:var(--radius-lg);
+
+    cursor:pointer;
+
+    font-family:"Cairo",sans-serif;
+
+    font-weight:700;
+
+    text-decoration:none;
+
+    transition:var(--transition-normal);
+}
+
+.btn-primary{
+
+    background:var(--vertex-primary);
+
+    color:#fff;
+
+}
+
+.btn-primary:hover{
+
+    background:#033B79;
+
+    transform:translateY(-3px);
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+.btn-secondary{
+
+    background:var(--vertex-secondary);
+
+    color:var(--vertex-primary);
+
+}
+
+.btn-secondary:hover{
+
+    background:var(--vertex-gold);
+
+    transform:translateY(-3px);
+
+}
+
+.btn-outline{
+
+    background:transparent;
+
+    color:var(--vertex-primary);
+
+    border:2px solid var(--vertex-primary);
+
+}
+
+.btn-outline:hover{
+
+    background:var(--vertex-primary);
+
+    color:white;
+
+}
+
+/* ============================
+   CARDS
+============================ */
+
+.card{
+
+    background:var(--bg-card);
+
+    border:1px solid var(--border-color);
+
+    border-radius:var(--radius-xl);
+
+    box-shadow:var(--shadow-sm);
+
+    overflow:hidden;
+
+    transition:var(--transition-normal);
+
+}
+
+.card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:var(--shadow-xl);
+
+}
+
+/* ============================
+   BADGES
+============================ */
+
+.badge{
+
+    display:inline-block;
+
+    padding:.45rem .9rem;
+
+    border-radius:999px;
+
+    font-size:.85rem;
+
+    font-weight:700;
+
+}
+
+.badge-primary{
+
+    background:var(--vertex-primary);
+
+    color:white;
+
+}
+
+.badge-gold{
+
+    background:var(--vertex-secondary);
+
+    color:var(--vertex-primary);
+
+}
+
+.badge-premium{
+
+    background:var(--vertex-premium);
+
+    color:white;
+
+}
+
+/* ============================
+   INPUTS
+============================ */
+
+.input{
+
+    width:100%;
+
+    padding:1rem;
+
+    border-radius:var(--radius-md);
+
+    border:1px solid var(--border-color);
+
+    background:white;
+
+    outline:none;
+
+}
+
+.input:focus{
+
+    border-color:var(--vertex-secondary);
+
+    box-shadow:0 0 0 4px rgba(242,234,121,.35);
+
+}
+
+/* ============================
+   SECTION
+============================ */
+
+.section{
+
+    padding:6rem 0;
+
+}
+
+/* ============================
+   CONTAINER
+============================ */
+
+.container-vertex{
+
+    width:min(1280px,92%);
+
+    margin-inline:auto;
+
+}
+
+/* ============================
+   PRODUCT IMAGE
+============================ */
+
+.product-image{
+
+    overflow:hidden;
+
+    border-radius:var(--radius-xl);
+
+}
+
+.product-image img{
+
+    width:100%;
+
+    transition:.5s;
+
+}
+
+.product-image:hover img{
+
+    transform:scale(1.08);
+
+}
+
+/* ============================
+   NAVBAR
+============================ */
+
+.nav-link{
+
+    position:relative;
+
+    font-weight:700;
+
+    color:var(--vertex-primary);
+
+}
+
+.nav-link::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    bottom:-5px;
+
+    width:0;
+
+    height:3px;
+
+    background:var(--vertex-secondary);
+
+    transition:.3s;
+
+}
+
+.nav-link:hover::after{
+
+    width:100%;
+
+}
+
+/* ============================
+   FOOTER
+============================ */
+
+.footer{
+
+    background:var(--vertex-primary);
+
+    color:white;
+
+}
+
+.footer a{
+
+    color:white;
+
+}
+
+.footer a:hover{
+
+    color:var(--vertex-secondary);
+
+}
+
+/* ============================
+   DIVIDER
+============================ */
+
+.divider{
+
+    width:80px;
+
+    height:5px;
+
+    background:var(--vertex-secondary);
+
+    border-radius:999px;
+
+}
+
+/* ============================
+   RESPONSIVE
+============================ */
+
+@media(max-width:768px){
+
+    .section{
+
+        padding:4rem 0;
+
+    }
+
+    .btn{
+
+        width:100%;
+
+    }
+
+}

@@ -1,66 +1,81 @@
 export default function Footer() {
   return (
-    <footer className="bg-[#011d42] text-white">
-      <div className="mx-auto max-w-7xl px-6 py-16">
+    <footer
+      style={{
+        background: "#022859",
+        color: "#ffffff",
+        padding: "70px 40px 30px",
+        marginTop: "80px",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "1280px",
+          margin: "0 auto",
+          display: "grid",
+          gridTemplateColumns: "2fr 1fr 1fr 1fr",
+          gap: "50px",
+        }}
+      >
+        <div>
+          <h2
+            style={{
+              color: "#F2EA79",
+              marginBottom: "20px",
+            }}
+          >
+            VERTEXworkout
+          </h2>
 
-        <div className="grid gap-12 md:grid-cols-4">
-
-          <div>
-            <h2 className="mb-4 text-3xl font-bold text-[#F2EA79]">
-              VERTEXworkout
-            </h2>
-
-            <p className="leading-7 text-slate-300">
-              Professional Functional Training,
-              Coaching, Academy and Premium
-              Fitness Equipment.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="mb-4 text-xl font-semibold">
-              Navigation
-            </h3>
-
-            <ul className="space-y-3 text-slate-300">
-              <li>Home</li>
-              <li>Programs</li>
-              <li>Academy</li>
-              <li>Store</li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="mb-4 text-xl font-semibold">
-              Contact
-            </h3>
-
-            <ul className="space-y-3 text-slate-300">
-              <li>Alexandria, Egypt</li>
-              <li>info@vertexworkout.com</li>
-              <li>+20 XXX XXX XXXX</li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="mb-4 text-xl font-semibold">
-              Follow Us
-            </h3>
-
-            <div className="flex gap-4">
-              <div className="h-10 w-10 rounded-full bg-[#F2EA79]" />
-              <div className="h-10 w-10 rounded-full bg-[#F2EA79]" />
-              <div className="h-10 w-10 rounded-full bg-[#F2EA79]" />
-              <div className="h-10 w-10 rounded-full bg-[#F2EA79]" />
-            </div>
-          </div>
-
+          <p
+            style={{
+              color: "#d1d5db",
+              lineHeight: 1.8,
+            }}
+          >
+            Professional Functional Fitness Platform combining
+            Training, Education, Equipment and Innovation.
+          </p>
         </div>
 
-        <div className="mt-12 border-t border-slate-700 pt-6 text-center text-slate-400">
-          © 2026 VERTEXworkout. All Rights Reserved.
+        <div>
+          <h3 style={{ color: "#F2EA79" }}>Platform</h3>
+
+          <p>Home</p>
+          <p>Store</p>
+          <p>Academy</p>
+          <p>Exercises</p>
         </div>
 
+        <div>
+          <h3 style={{ color: "#F2EA79" }}>Support</h3>
+
+          <p>Contact</p>
+          <p>FAQ</p>
+          <p>Privacy</p>
+          <p>Terms</p>
+        </div>
+
+        <div>
+          <h3 style={{ color: "#F2EA79" }}>Follow Us</h3>
+
+          <p>Instagram</p>
+          <p>Facebook</p>
+          <p>YouTube</p>
+          <p>TikTok</p>
+        </div>
+      </div>
+
+      <div
+        style={{
+          marginTop: "60px",
+          borderTop: "1px solid rgba(255,255,255,.15)",
+          paddingTop: "20px",
+          textAlign: "center",
+          color: "#d1d5db",
+        }}
+      >
+        © 2026 VERTEXworkout. All rights reserved.
       </div>
     </footer>
   );

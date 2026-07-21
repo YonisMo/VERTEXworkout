@@ -1,0 +1,181 @@
+/* ==========================================================
+   VERTEXworkout Design System v1
+   Theme
+========================================================== */
+
+:root {
+
+  /* =========================
+      BRAND COLORS
+  ========================== */
+
+  --vertex-primary: #022859;
+  --vertex-secondary: #F2EA79;
+  --vertex-accent: #F2DF80;
+  --vertex-neutral: #BFB8BA;
+  --vertex-premium: #A68986;
+
+  /* =========================
+      BACKGROUNDS
+  ========================== */
+
+  --bg-page: #ffffff;
+  --bg-section: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-footer: #022859;
+
+  /* =========================
+      TEXT
+  ========================== */
+
+  --text-primary: #022859;
+  --text-secondary: #4b5563;
+  --text-light: #ffffff;
+  --text-muted: #9ca3af;
+
+  /* =========================
+      BUTTONS
+  ========================== */
+
+  --btn-primary: #022859;
+  --btn-primary-hover: #033B79;
+
+  --btn-secondary: #F2EA79;
+  --btn-secondary-hover: #F2DF80;
+
+  --btn-light: #ffffff;
+
+  /* =========================
+      BORDER
+  ========================== */
+
+  --border-color: #BFB8BA;
+
+  /* =========================
+      SUCCESS
+  ========================== */
+
+  --success: #22c55e;
+
+  /* =========================
+      WARNING
+  ========================== */
+
+  --warning: #f59e0b;
+
+  /* =========================
+      ERROR
+  ========================== */
+
+  --danger: #dc2626;
+
+  /* =========================
+      SHADOWS
+  ========================== */
+
+  --shadow-xs:
+    0 2px 4px rgba(0,0,0,.05);
+
+  --shadow-sm:
+    0 6px 12px rgba(0,0,0,.08);
+
+  --shadow-md:
+    0 12px 24px rgba(0,0,0,.10);
+
+  --shadow-lg:
+    0 20px 40px rgba(0,0,0,.15);
+
+  --shadow-xl:
+    0 30px 60px rgba(0,0,0,.18);
+
+  /* =========================
+      BORDER RADIUS
+  ========================== */
+
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-2xl: 40px;
+  --radius-pill: 999px;
+
+  /* =========================
+      TRANSITIONS
+  ========================== */
+
+  --transition-fast: .2s ease;
+  --transition-normal: .35s ease;
+  --transition-slow: .5s ease;
+
+  /* =========================
+      GRADIENTS
+  ========================== */
+
+  --gradient-primary:
+  linear-gradient(
+      135deg,
+      #022859 0%,
+      #033B79 100%
+  );
+
+  --gradient-gold:
+  linear-gradient(
+      135deg,
+      #F2EA79 0%,
+      #F2DF80 100%
+  );
+
+}
+
+/* ==================================
+      Utility Classes
+================================== */
+
+.bg-primary{
+  background:var(--vertex-primary);
+}
+
+.bg-secondary{
+  background:var(--vertex-secondary);
+}
+
+.bg-accent{
+  background:var(--vertex-accent);
+}
+
+.bg-card{
+  background:var(--bg-card);
+}
+
+.text-primary{
+  color:var(--text-primary);
+}
+
+.text-secondary{
+  color:var(--text-secondary);
+}
+
+.text-light{
+  color:var(--text-light);
+}
+
+.border-theme{
+  border:1px solid var(--border-color);
+}
+
+.shadow-theme{
+  box-shadow:var(--shadow-md);
+}
+
+.rounded-theme{
+  border-radius:var(--radius-lg);
+}
+
+.gradient-primary{
+  background:var(--gradient-primary);
+}
+
+.gradient-gold{
+  background:var(--gradient-gold);
+}
