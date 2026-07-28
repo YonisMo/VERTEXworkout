@@ -15,7 +15,7 @@
 body{font-family:'Tajawal','Cairo',Inter,ui-sans-serif,system-ui,Arial,sans-serif;background:var(--bg);margin:0;color:#0f172a}
 .container{max-width:900px;margin:32px auto;padding:20px}
 .card{background:var(--card);border-radius:8px;padding:16px;box-shadow:0 2px 6px rgba(0,0,0,0.06);margin-bottom:16px}
-.form-row{display:flex;gap:8px;margin-bottom:8px}
+.form-row{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap}
 .form-row input, .form-row select{flex:1;padding:10px;border:1px solid rgba(15,23,42,0.06);border-radius:8px;background:#fff}
 
 /* Buttons */
@@ -44,3 +44,4 @@ button:focus{outline:3px solid rgba(2,40,89,0.18);outline-offset:2px}
 @keyframes slideIn { from { transform: translateY(12px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
 @keyframes fadeOut { to { opacity: 0; transform: translateY(12px) scale(0.98) } }
 .toast{ animation: slideIn 320ms cubic-bezier(.2,.8,.2,1) both, fadeOut 420ms linear 3s both }
+\n.form-row input, .form-row select{min-width:160px;direction:rtl;text-align:right}\n.toast-container{left:16px;right:auto;align-items:flex-start}\n
