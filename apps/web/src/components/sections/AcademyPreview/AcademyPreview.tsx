@@ -4,7 +4,7 @@ import {
   Section,
   SectionTitle,
 } from "@/components/ui/layout";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 
 const courses = [
   {
