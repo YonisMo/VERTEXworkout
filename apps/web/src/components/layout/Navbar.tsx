@@ -15,25 +15,23 @@ const links = [
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-50 border-b-2 border-[#F2EA79] bg-[#022859]">
+    <header className="sticky top-0 z-50 border-b border-[#022859]/10 bg-white/90 backdrop-blur-md shadow-sm">
       <Container className="flex h-[72px] items-center justify-between">
         {/* Logo */}
-
         <Link
           href="/"
-          className="text-3xl font-extrabold text-[#F2EA79] transition hover:opacity-90"
+          className="font-cairo text-2xl font-black tracking-wider text-[#022859] transition hover:opacity-90 sm:text-3xl"
         >
-          VERTEXworkout
+          VERTEX<span className="text-[#022859]/70">workout</span>
         </Link>
 
         {/* Navigation */}
-
-        <nav className="hidden items-center gap-8 lg:flex">
+        <nav className="hidden items-center gap-7 lg:flex font-tajawal">
           {links.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className="font-semibold text-white transition hover:text-[#F2EA79]"
+              className="text-base font-bold text-[#022859] transition-colors duration-200 hover:text-[#A68986]"
             >
               {link.name}
             </Link>
@@ -41,14 +39,17 @@ export default function Navbar() {
         </nav>
 
         {/* Actions */}
-
-        <div className="flex gap-3">
+        <div className="flex items-center gap-3 font-tajawal">
           <Link href="/login">
-            <Button variant="secondary">Login</Button>
+            <Button variant="secondary" size="sm">
+              Login
+            </Button>
           </Link>
 
           <Link href="/register">
-            <Button>Join Now</Button>
+            <Button variant="primary" size="sm">
+              Join Now
+            </Button>
           </Link>
         </div>
       </Container>

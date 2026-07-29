@@ -1,6 +1,5 @@
 import Container from "@/components/ui/Container";
 import SectionTitle from "@/components/ui/SectionTitle";
-import Card from "@/components/ui/Card";
 
 const services = [
   {
@@ -43,29 +42,37 @@ const services = [
 
 export default function Services() {
   return (
-    <section className="bg-white py-24">
+    <section className="bg-slate-50 py-24 border-b border-[#BFB8BA]/20 font-tajawal">
       <Container>
         <SectionTitle
+          badge="OUR SERVICES"
           title="Our Services"
           subtitle="Everything you need in one professional fitness ecosystem—from training and education to equipment and coaching."
         />
 
-        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {services.map((service) => (
-            <Card
+            <div
               key={service.title}
-              className="group h-full bg-[#022859] text-white transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+              className="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-[#022859] p-8 text-white border border-[#F2EA79]/30 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:border-[#F2EA79] hover:shadow-2xl"
             >
-              <div className="mb-6 text-5xl transition-transform duration-300 group-hover:scale-110">
-                {service.icon}
+              <div>
+                {/* Icon Container */}
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 text-4xl backdrop-blur-md transition-transform duration-300 group-hover:scale-110 border border-[#F2EA79]/40">
+                  {service.icon}
+                </div>
+
+                {/* Title */}
+                <h3 className="mb-4 font-cairo text-2xl font-bold text-[#F2EA79]">
+                  {service.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-base leading-relaxed text-[#BFB8BA] font-normal">
+                  {service.description}
+                </p>
               </div>
-
-              <h3 className="mb-4 text-2xl font-bold text-[#F2EA79]">
-                {service.title}
-              </h3>
-
-              <p className="leading-8 text-slate-200">{service.description}</p>
-            </Card>
+            </div>
           ))}
         </div>
       </Container>

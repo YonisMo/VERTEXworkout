@@ -1,6 +1,6 @@
 import { GraduationCap, Award, Users } from "lucide-react";
 import { Container, Section, SectionTitle } from "@/components/ui/layout";
-import { Button } from "@/components/ui/Button";
+import Button from "../../ui/Button";
 
 const courses = [
   {

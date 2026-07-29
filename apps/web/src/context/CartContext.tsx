@@ -1,20 +1,25 @@
 "use client";
 
-import { createContext, useContext, useMemo, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+  ReactNode,
+} from "react";
 
-type Product = {
+import type { Product } from "@/types/product";
+
+export interface CartItem {
   id: number;
   slug: string;
   name: string;
   price: number;
   image: string;
-};
-
-type CartItem = Product & {
   quantity: number;
-};
+}
 
-type CartContextType = {
+interface CartContextType {
   cart: CartItem[];
 
   addToCart: (product: Product) => void;
@@ -28,7 +33,7 @@ type CartContextType = {
   totalItems: number;
 
   totalPrice: number;
-};
+}
 
 const CartContext = createContext<CartContextType | null>(null);
 
@@ -36,11 +41,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
 
   function addToCart(product: Product) {
-    setCart((prev) => {
-      const existing = prev.find((item) => item.id === product.id);
+    setCart((currentCart) => {
+      const existing = currentCart.find(
+        (item) => item.id === product.id,
+      );
 
       if (existing) {
-        return prev.map((item) =>
+        return currentCart.map((item) =>
           item.id === product.id
             ? {
                 ...item,
@@ -51,9 +58,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
 
       return [
-        ...prev,
+        ...currentCart,
         {
-          ...product,
+          id: product.id,
+          slug: product.slug,
+          name: product.name,
+          price: product.price,
+          image: product.images[0],
           quantity: 1,
         },
       ];
@@ -61,7 +72,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }
 
   function removeFromCart(id: number) {
-    setCart((prev) => prev.filter((item) => item.id !== id));
+    setCart((currentCart) =>
+      currentCart.filter((item) => item.id !== id),
+    );
   }
 
   function updateQuantity(id: number, quantity: number) {
@@ -70,8 +83,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    setCart((prev) =>
-      prev.map((item) =>
+    setCart((currentCart) =>
+      currentCart.map((item) =>
         item.id === id
           ? {
               ...item,
@@ -87,12 +100,21 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }
 
   const totalItems = useMemo(
-    () => cart.reduce((sum, item) => sum + item.quantity, 0),
+    () =>
+      cart.reduce(
+        (total, item) => total + item.quantity,
+        0,
+      ),
     [cart],
   );
 
   const totalPrice = useMemo(
-    () => cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+    () =>
+      cart.reduce(
+        (total, item) =>
+          total + item.price * item.quantity,
+        0,
+      ),
     [cart],
   );
 
@@ -117,7 +139,9 @@ export function useCart() {
   const context = useContext(CartContext);
 
   if (!context) {
-    throw new Error("useCart must be used inside CartProvider");
+    throw new Error(
+      "useCart must be used inside CartProvider",
+    );
   }
 
   return context;

@@ -1,89 +1,116 @@
+import Link from "next/link";
 import Container from "@/components/ui/Container";
 
 export default function Footer() {
   return (
-    <footer className="mt-20 bg-[#022859] text-white">
-      <Container className="py-16">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
-          {/* Brand */}
-
-          <div>
-            <h2 className="mb-5 text-3xl font-extrabold text-[#F2EA79]">
-              VERTEXworkout
+    <footer className="mt-20 border-t border-[#F2EA79]/20 bg-[#022859] text-white">
+      <Container className="py-16 font-tajawal">
+        <div className="grid gap-12 text-center md:grid-cols-2 lg:grid-cols-4">
+          {/* Brand / About */}
+          <div className="flex flex-col items-center">
+            <h2 className="mb-5 font-cairo text-2xl font-bold text-[#F2EA79]">
+              About Us
             </h2>
 
-            <p className="leading-8 text-slate-300">
-              Professional Functional Fitness Platform combining Training,
-              Education, Equipment and Innovation.
+            <p className="max-w-xs text-base leading-relaxed text-[#BFB8BA]">
+              A professional functional fitness platform combining training,
+              education, equipment, and innovation under one ecosystem
             </p>
           </div>
 
           {/* Platform */}
+          <div className="flex flex-col items-center">
+            <h3 className="mb-5 font-cairo text-xl font-bold text-[#F2EA79]">
+              Platform
+            </h3>
 
-          <div>
-            <h3 className="mb-5 text-xl font-bold text-[#F2EA79]">Platform</h3>
-
-            <ul className="space-y-3 text-slate-300">
+            <ul className="space-y-3 text-[#BFB8BA]">
               <li>
-                <a href="#">Home</a>
+                <Link href="/" className="transition-colors hover:text-[#F2EA79]">
+                  Home
+                </Link>
               </li>
               <li>
-                <a href="#">Store</a>
+                <Link href="/store" className="transition-colors hover:text-[#F2EA79]">
+                  Store
+                </Link>
               </li>
               <li>
-                <a href="#">Academy</a>
+                <Link href="/academy" className="transition-colors hover:text-[#F2EA79]">
+                  Academy
+                </Link>
               </li>
               <li>
-                <a href="#">Exercises</a>
+                <Link href="/exercises" className="transition-colors hover:text-[#F2EA79]">
+                  Exercises
+                </Link>
               </li>
             </ul>
           </div>
 
           {/* Support */}
+          <div className="flex flex-col items-center">
+            <h3 className="mb-5 font-cairo text-xl font-bold text-[#F2EA79]">
+              Support
+            </h3>
 
-          <div>
-            <h3 className="mb-5 text-xl font-bold text-[#F2EA79]">Support</h3>
-
-            <ul className="space-y-3 text-slate-300">
+            <ul className="space-y-3 text-[#BFB8BA]">
               <li>
-                <a href="#">Contact</a>
+                <Link href="/contact" className="transition-colors hover:text-[#F2EA79]">
+                  Contact
+                </Link>
               </li>
               <li>
-                <a href="#">FAQ</a>
+                <Link href="/faq" className="transition-colors hover:text-[#F2EA79]">
+                  FAQ
+                </Link>
               </li>
               <li>
-                <a href="#">Privacy</a>
+                <Link href="/privacy" className="transition-colors hover:text-[#F2EA79]">
+                  Privacy
+                </Link>
               </li>
               <li>
-                <a href="#">Terms</a>
+                <Link href="/terms" className="transition-colors hover:text-[#F2EA79]">
+                  Terms
+                </Link>
               </li>
             </ul>
           </div>
 
           {/* Social */}
+          <div className="flex flex-col items-center">
+            <h3 className="mb-5 font-cairo text-xl font-bold text-[#F2EA79]">
+              Follow Us
+            </h3>
 
-          <div>
-            <h3 className="mb-5 text-xl font-bold text-[#F2EA79]">Follow Us</h3>
-
-            <ul className="space-y-3 text-slate-300">
+            <ul className="space-y-3 text-[#BFB8BA]">
               <li>
-                <a href="#">Instagram</a>
+                <a href="#" className="transition-colors hover:text-[#F2EA79]">
+                  Instagram
+                </a>
               </li>
               <li>
-                <a href="#">Facebook</a>
+                <a href="#" className="transition-colors hover:text-[#F2EA79]">
+                  Facebook
+                </a>
               </li>
               <li>
-                <a href="#">YouTube</a>
+                <a href="#" className="transition-colors hover:text-[#F2EA79]">
+                  YouTube
+                </a>
               </li>
               <li>
-                <a href="#">TikTok</a>
+                <a href="#" className="transition-colors hover:text-[#F2EA79]">
+                  TikTok
+                </a>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-16 border-t border-white/20 pt-6 text-center text-slate-400">
-          © 2026 VERTEXworkout. All rights reserved.
+        <div className="mt-16 border-t border-[#BFB8BA]/20 pt-8 text-center text-sm font-medium text-[#A68986]">
+          © {new Date().getFullYear()} All rights reserved.
         </div>
       </Container>
     </footer>

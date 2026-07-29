@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Container from "@/components/ui/Container";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Button from "@/components/ui/Button";
@@ -64,7 +65,9 @@ export default function AboutPage() {
                   {item.title}
                 </h3>
 
-                <p className="mt-5 leading-8 text-slate-600">{item.text}</p>
+                <p className="mt-5 leading-8 text-slate-600">
+                  {item.text}
+                </p>
               </div>
             ))}
           </div>
@@ -84,9 +87,11 @@ export default function AboutPage() {
             </p>
 
             <div className="mt-12 flex justify-center">
-              <Button href="/contact" size="lg">
-                Contact Us
-              </Button>
+              <Link href="/contact">
+                <Button size="lg">
+                  Contact Us
+                </Button>
+              </Link>
             </div>
           </div>
         </Container>

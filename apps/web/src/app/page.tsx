@@ -11,7 +11,7 @@ import CTA from "@/components/home/CTA";
 
 export default function HomePage() {
   return (
-    <>
+    <main className="min-h-screen bg-slate-50 font-tajawal text-[#022859] selection:bg-[#F2EA79] selection:text-[#022859]">
       <Hero />
       <Welcome />
       <Why />
@@ -22,6 +22,6 @@ export default function HomePage() {
       <Statistics />
       <Testimonials />
       <CTA />
-    </>
+    </main>
   );
 }
