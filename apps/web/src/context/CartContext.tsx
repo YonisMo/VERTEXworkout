@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useMemo,
-  useState,
-  ReactNode,
-} from "react";
+import { createContext, useContext, useMemo, useState, ReactNode } from "react";
 
 type Product = {
   id: number;
@@ -38,18 +32,12 @@ type CartContextType = {
 
 const CartContext = createContext<CartContextType | null>(null);
 
-export function CartProvider({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
 
   function addToCart(product: Product) {
     setCart((prev) => {
-      const existing = prev.find(
-        (item) => item.id === product.id
-      );
+      const existing = prev.find((item) => item.id === product.id);
 
       if (existing) {
         return prev.map((item) =>
@@ -58,7 +46,7 @@ export function CartProvider({
                 ...item,
                 quantity: item.quantity + 1,
               }
-            : item
+            : item,
         );
       }
 
@@ -73,9 +61,7 @@ export function CartProvider({
   }
 
   function removeFromCart(id: number) {
-    setCart((prev) =>
-      prev.filter((item) => item.id !== id)
-    );
+    setCart((prev) => prev.filter((item) => item.id !== id));
   }
 
   function updateQuantity(id: number, quantity: number) {
@@ -91,8 +77,8 @@ export function CartProvider({
               ...item,
               quantity,
             }
-          : item
-      )
+          : item,
+      ),
     );
   }
 
@@ -101,22 +87,13 @@ export function CartProvider({
   }
 
   const totalItems = useMemo(
-    () =>
-      cart.reduce(
-        (sum, item) => sum + item.quantity,
-        0
-      ),
-    [cart]
+    () => cart.reduce((sum, item) => sum + item.quantity, 0),
+    [cart],
   );
 
   const totalPrice = useMemo(
-    () =>
-      cart.reduce(
-        (sum, item) =>
-          sum + item.price * item.quantity,
-        0
-      ),
-    [cart]
+    () => cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+    [cart],
   );
 
   return (
@@ -140,9 +117,7 @@ export function useCart() {
   const context = useContext(CartContext);
 
   if (!context) {
-    throw new Error(
-      "useCart must be used inside CartProvider"
-    );
+    throw new Error("useCart must be used inside CartProvider");
   }
 
   return context;

@@ -15,8 +15,7 @@ const exercises = [
   },
   {
     title: "Hip Mobility Exercises",
-    description:
-      "Improve hip movement, stability, and lower-body performance.",
+    description: "Improve hip movement, stability, and lower-body performance.",
   },
   {
     title: "Shoulder Mobility Exercises",
@@ -59,9 +58,7 @@ export default function MobilityExercisesPage() {
                 {exercise.title}
               </h2>
 
-              <p className="leading-8 text-slate-600">
-                {exercise.description}
-              </p>
+              <p className="leading-8 text-slate-600">{exercise.description}</p>
             </div>
           ))}
         </div>

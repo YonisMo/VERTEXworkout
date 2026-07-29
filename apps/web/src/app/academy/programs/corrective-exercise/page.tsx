@@ -32,10 +32,9 @@ export default function CorrectiveExerciseProgramPage() {
           </h2>
 
           <p className="mb-10 leading-8 text-slate-600">
-            The VERTEXworkout Corrective Exercise Program teaches coaches how
-            to understand movement limitations, improve mobility and
-            stability, and create safer training experiences for different
-            populations.
+            The VERTEXworkout Corrective Exercise Program teaches coaches how to
+            understand movement limitations, improve mobility and stability, and
+            create safer training experiences for different populations.
           </p>
 
           <div className="grid gap-4 md:grid-cols-2">

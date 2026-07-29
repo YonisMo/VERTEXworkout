@@ -59,9 +59,7 @@ export default function RecoveryBlogPage() {
                 {article.title}
               </h2>
 
-              <p className="leading-8 text-slate-600">
-                {article.description}
-              </p>
+              <p className="leading-8 text-slate-600">{article.description}</p>
             </article>
           ))}
         </div>

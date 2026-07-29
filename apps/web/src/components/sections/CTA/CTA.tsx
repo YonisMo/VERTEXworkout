@@ -5,7 +5,6 @@ export default function CTA() {
     <Section className="bg-[#022859] text-white">
       <Container>
         <div className="mx-auto max-w-4xl text-center">
-
           <h2 className="mb-6 text-5xl font-bold">
             Ready to Start Your VERTEX Journey?
           </h2>
@@ -16,7 +15,6 @@ export default function CTA() {
           </p>
 
           <div className="flex flex-col justify-center gap-5 sm:flex-row">
-
             <button className="rounded-xl bg-[#F2EA79] px-8 py-4 font-bold text-[#022859] transition hover:scale-105">
               Start Training
             </button>
@@ -24,9 +22,7 @@ export default function CTA() {
             <button className="rounded-xl border-2 border-[#F2EA79] px-8 py-4 font-bold text-[#F2EA79] transition hover:bg-[#F2EA79] hover:text-[#022859]">
               Contact Us
             </button>
-
           </div>
-
         </div>
       </Container>
     </Section>

@@ -24,13 +24,7 @@ export default function Statistics() {
   );
 }
 
-function Card({
-  number,
-  title,
-}: {
-  number: string;
-  title: string;
-}) {
+function Card({ number, title }: { number: string; title: string }) {
   return (
     <div
       style={{

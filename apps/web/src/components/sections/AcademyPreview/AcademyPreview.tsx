@@ -1,9 +1,5 @@
 import { GraduationCap, Award, Users } from "lucide-react";
-import {
-  Container,
-  Section,
-  SectionTitle,
-} from "@/components/ui/layout";
+import { Container, Section, SectionTitle } from "@/components/ui/layout";
 import { Button } from "@/components/ui/Button";
 
 const courses = [
@@ -45,22 +41,13 @@ export default function AcademyPreview() {
                 key={course.title}
                 className="rounded-3xl border bg-white p-8 shadow-sm transition hover:-translate-y-2 hover:shadow-xl"
               >
-                <Icon
-                  size={42}
-                  className="mb-6 text-[#022859]"
-                />
+                <Icon size={42} className="mb-6 text-[#022859]" />
 
-                <h3 className="mb-4 text-2xl font-bold">
-                  {course.title}
-                </h3>
+                <h3 className="mb-4 text-2xl font-bold">{course.title}</h3>
 
-                <p className="mb-8 text-gray-600">
-                  {course.description}
-                </p>
+                <p className="mb-8 text-gray-600">{course.description}</p>
 
-                <Button className="w-full">
-                  Learn More
-                </Button>
+                <Button className="w-full">Learn More</Button>
               </div>
             );
           })}

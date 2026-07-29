@@ -64,9 +64,7 @@ export default function Services() {
                 {service.title}
               </h3>
 
-              <p className="leading-8 text-slate-200">
-                {service.description}
-              </p>
+              <p className="leading-8 text-slate-200">{service.description}</p>
             </Card>
           ))}
         </div>

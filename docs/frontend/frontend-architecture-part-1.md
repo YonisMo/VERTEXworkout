@@ -1,4 +1,5 @@
 # Frontend Architecture & Design System Implementation — VERTEXworkout
+
 **المرحلة 8 من 18 — المرجع الرسمي لفريق Frontend**
 **الإصدار:** 1.0 — الجزء 1 من عدة أجزاء
 
@@ -11,6 +12,7 @@
 **Best Practices:** فصل `apps/` عن `packages/` بصرامة؛ كل ما هو "تطبيق قابل للنشر" في `apps/`، وكل ما هو "قابل لإعادة الاستخدام" في `packages/`.
 **Folder Location:** جذر المستودع (`/`).
 **Example Structure:**
+
 ```
 vertexworkout/
 ├── apps/{web,admin,coach,mobile}
@@ -24,6 +26,7 @@ vertexworkout/
 ├── pnpm-workspace.yaml
 └── package.json
 ```
+
 **Dependencies:** pnpm ≥ 9، Node.js ≥ 20 LTS، Turborepo ≥ 2.
 **Notes:** هذا الهيكل مُعتمد ومجمّد من Phase 1 — لا تعديل عليه هنا، فقط تفصيل تنفيذي إضافي.
 **Common Mistakes:** وضع كود تطبيق داخل `packages/` (يجب أن تبقى الحزم بدون منطق صفحات)؛ استيراد مباشر بين تطبيقين في `apps/` (يجب أن يمر أي تشارك عبر `packages/`).
@@ -37,6 +40,7 @@ vertexworkout/
 **Best Practices:** تعريف `pipeline` واضح في `turbo.json` لكل مهمة (`build`, `dev`, `lint`, `test`) مع تحديد `dependsOn` الصحيح؛ تفعيل **Remote Caching** عبر Vercel لمشاركة الـ Cache بين أعضاء الفريق و CI.
 **Folder Location:** `turbo.json` في الجذر.
 **Example Structure:**
+
 ```json
 {
   "$schema": "https://turbo.build/schema.json",
@@ -49,6 +53,7 @@ vertexworkout/
   }
 }
 ```
+
 **Dependencies:** `turbo` (devDependency في الجذر فقط، ليس داخل كل حزمة).
 **Notes:** `^build` يعني "ابنِ تبعيات هذه الحزمة أولاً" — أساس عمل Turborepo بالكامل.
 **Common Mistakes:** نسيان تحديد `outputs` (يمنع الـ Caching من العمل بكفاءة)؛ تشغيل `dev` بـ Cache مفعّل (يجب أن يكون `cache: false` دائمًا للتطوير الحي).
@@ -62,6 +67,7 @@ vertexworkout/
 **Best Practices:** كل `page.tsx` يبقى Server Component بشكل افتراضي؛ التفاعلية (`onClick`, `useState`) تُعزل داخل مكونات فرعية بـ `"use client"` فقط عند الحاجة الفعلية — وليس على مستوى الصفحة كاملة.
 **Folder Location:** `apps/web/src/app/`.
 **Example Structure:**
+
 ```
 app/
 ├── [locale]/
@@ -74,6 +80,7 @@ app/
 ├── globals.css
 └── favicon.ico
 ```
+
 **Dependencies:** `next@14+`.
 **Notes:** أي `page.tsx` يحتاج تفاعلية كاملة (نموذج معقد) يُقسَّم: القشرة الخارجية Server Component (تجلب البيانات)، والجزء التفاعلي Client Component منفصل يُستدعى بداخلها.
 **Common Mistakes:** وضع `"use client"` أعلى `page.tsx` بالكامل "لتجنب التفكير في الفصل" — يُفقد كل ميزة SSR وSEO للصفحة.
@@ -100,12 +107,14 @@ app/
 **Best Practices:** Layout متداخل بمستويات: `RootLayout` (اللغة + الخط + Providers) → `MarketingLayout` (Header/Footer عام) → لا حاجة لـ Layout إضافي داخل كل صفحة فرعية إلا عند الضرورة (لوحة التحكم فقط).
 **Folder Location:** `layout.tsx` في كل مستوى مجلد يحتاج هيكلًا مشتركًا.
 **Example Structure:**
+
 ```
 app/[locale]/
 ├── layout.tsx              # Root: <html>, Fonts, Providers, Theme
 ├── (marketing)/layout.tsx  # Header + Footer العام
 └── (client)/dashboard/layout.tsx  # Sidebar + Header لوحة التحكم
 ```
+
 **Dependencies:** لا شيء إضافي.
 **Notes:** `RootLayout` هو المكان الوحيد المسموح فيه بوضع `<html lang={locale} dir={dir}>` — التحكم بالاتجاه (RTL/LTR) يبدأ من هنا حصريًا.
 **Common Mistakes:** تكرار استيراد الخطوط أو Providers في أكثر من Layout (يجب أن تكون في `RootLayout` فقط).
@@ -119,6 +128,7 @@ app/[locale]/
 **Best Practices:** ترتيب الـ Providers مهم — الأعمّ (Theme) في الخارج، الأكثر تخصصًا (Toast) في الداخل؛ كل Provider يحتاج تفاعلية هو حتمًا `"use client"`.
 **Folder Location:** `apps/web/src/app/[locale]/providers.tsx`.
 **Example Structure:**
+
 ```tsx
 // providers.tsx ("use client")
 export function AppProviders({ children }: { children: React.ReactNode }) {
@@ -136,6 +146,7 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
   );
 }
 ```
+
 **Dependencies:** `next-themes`, `@tanstack/react-query`, Supabase Auth Helpers.
 **Notes:** `QueryClient` يُنشأ داخل `useState(() => new QueryClient())` لضمان عدم مشاركته بين طلبات مستخدمين مختلفين على السيرفر (خطأ أمني شائع).
 **Common Mistakes:** إنشاء `QueryClient` كمتغيّر عام خارج المكوّن — يسبب تسرّب بيانات بين المستخدمين في SSR.
@@ -161,11 +172,21 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
 **Best Practices:** استخدام `next/font/google` حصريًا (Self-hosted تلقائيًا، بدون طلب شبكي خارجي وقت التشغيل).
 **Folder Location:** `apps/web/src/app/[locale]/fonts.ts`.
 **Example Structure:**
+
 ```ts
-import { Cairo, Inter } from 'next/font/google';
-export const cairo = Cairo({ subsets: ['arabic', 'latin'], variable: '--font-cairo', display: 'swap' });
-export const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
+import { Cairo, Inter } from "next/font/google";
+export const cairo = Cairo({
+  subsets: ["arabic", "latin"],
+  variable: "--font-cairo",
+  display: "swap",
+});
+export const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 ```
+
 **Dependencies:** `next/font` (مدمج في Next.js).
 **Notes:** `display: 'swap'` يمنع النص الشفاف أثناء تحميل الخط (FOIT).
 **Common Mistakes:** استيراد الخط عبر وسم `<link>` تقليدي في `<head>` — يفقد كل مزايا التحسين التلقائي لـ Next.js.
@@ -191,6 +212,7 @@ export const inter = Inter({ subsets: ['latin'], variable: '--font-inter', displ
 **Best Practices:** التوسّع (`extend`) وليس الاستبدال الكامل لثيم Tailwind الافتراضي (نحافظ على القيم المفيدة مثل `screens`)؛ `content` يغطي `apps/web` و`packages/ui` معًا.
 **Folder Location:** `packages/config/tailwind/index.ts` (يُستهلك عبر `apps/web/tailwind.config.ts`).
 **Example Structure:**
+
 ```ts
 export default {
   darkMode: 'class',
@@ -206,6 +228,7 @@ export default {
   plugins: [require('tailwindcss-animate')],
 };
 ```
+
 **Dependencies:** `tailwindcss`, `tailwindcss-animate`.
 **Notes:** ملف Tailwind Config مشترك في `packages/config` يضمن اتساق الألوان بين `apps/web` و`apps/admin` و`apps/coach` مستقبلًا.
 **Common Mistakes:** تكرار تعريف الألوان يدويًا في كل تطبيق بدل استيراد `packages/config/tailwind` مركزيًا.
@@ -218,6 +241,7 @@ export default {
 **Why:** shadcn/ui يعتمد بالكامل على متغيرات CSS دلالية (`--primary`, `--background`...) بدل قيم Hex مباشرة.
 **Folder Location:** `apps/web/src/app/globals.css` (داخل `@layer base`).
 **Example Structure:**
+
 ```css
 @layer base {
   :root {
@@ -234,6 +258,7 @@ export default {
   }
 }
 ```
+
 **Dependencies:** لا شيء — CSS Native Custom Properties.
 **Notes:** القيم بصيغة `H S% L%` (بدون `hsl()`) — هذا متطلب shadcn/ui لدمجها داخل `hsl(var(--primary))` في Tailwind.
 **Common Mistakes:** كتابة القيم كـ Hex مباشرة في المتغيرات — يكسر تكامل shadcn/ui بالكامل.
@@ -269,17 +294,18 @@ export default {
 **Purpose:** منهجية تسمية وتنظيم داخلية إضافية فوق الثلاث مستويات أعلاه.
 **Why:** يساعد فريق كبير على التحدث بلغة موحدة عند مناقشة حجم/مسؤولية أي مكوّن.
 **Best Practices:** تطبيق مبسّط (وليس Atomic Design الكلاسيكي الصارم بـ5 مستويات — أثقل من اللازم لمشروع بهذا الحجم):
-| المستوى | يقابل | مثال |
-|---|---|---|
-| Atoms | Primitives (shadcn) | `Button`, `Input`, `Badge` |
-| Molecules | Composite بسيطة | `SearchBar` (Input + Button + Icon) |
-| Organisms | Composite معقّدة/Feature | `ProductCard`, `ExerciseFilterPanel` |
-| Templates | Layouts | `DashboardLayout`, `MarketingLayout` |
-| Pages | `page.tsx` | تجميع كل ما سبق + جلب البيانات |
-**Folder Location:** لا مجلدات فعلية بأسماء Atoms/Molecules — هذا تصنيف مفاهيمي فقط يوجّه القرار "أين أضع هذا المكوّن".
-**Dependencies:** لا شيء.
-**Notes:** لا نُنشئ مجلدات حرفية `atoms/molecules/organisms` — الخبرة العملية أثبتت أنها تُنتج بنية مصطنعة أثقل من فائدتها الفعلية.
-**Common Mistakes:** الجدل الطويل حول "هل هذا Atom أم Molecule؟" — القرار العملي (Rule of Three + مكان الاستخدام) أهم من التصنيف النظري الدقيق.
+
+| المستوى                                                                                                                                         | يقابل                    | مثال                                 |
+| ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ | ------------------------------------ |
+| Atoms                                                                                                                                           | Primitives (shadcn)      | `Button`, `Input`, `Badge`           |
+| Molecules                                                                                                                                       | Composite بسيطة          | `SearchBar` (Input + Button + Icon)  |
+| Organisms                                                                                                                                       | Composite معقّدة/Feature | `ProductCard`, `ExerciseFilterPanel` |
+| Templates                                                                                                                                       | Layouts                  | `DashboardLayout`, `MarketingLayout` |
+| Pages                                                                                                                                           | `page.tsx`               | تجميع كل ما سبق + جلب البيانات       |
+| **Folder Location:** لا مجلدات فعلية بأسماء Atoms/Molecules — هذا تصنيف مفاهيمي فقط يوجّه القرار "أين أضع هذا المكوّن".                         |
+| **Dependencies:** لا شيء.                                                                                                                       |
+| **Notes:** لا نُنشئ مجلدات حرفية `atoms/molecules/organisms` — الخبرة العملية أثبتت أنها تُنتج بنية مصطنعة أثقل من فائدتها الفعلية.             |
+| **Common Mistakes:** الجدل الطويل حول "هل هذا Atom أم Molecule؟" — القرار العملي (Rule of Three + مكان الاستخدام) أهم من التصنيف النظري الدقيق. |
 
 ---
 
@@ -289,6 +315,7 @@ export default {
 **Best Practices:** كل مكوّن يُصدَّر عبر `index.ts` مركزي (Barrel Export)؛ كل مكوّن مستقل تمامًا (لا يستورد من `apps/`).
 **Folder Location:** `packages/ui/src/`.
 **Example Structure:**
+
 ```
 packages/ui/src/
 ├── components/
@@ -302,6 +329,7 @@ packages/ui/src/
 ├── hooks/               # hooks مشتركة على مستوى UI فقط (useMediaQuery...)
 └── index.ts
 ```
+
 **Dependencies:** React, Tailwind (عبر peerDependency)، lucide-react.
 **Notes:** `EmptyState` مكوّن واحد قابل لإعادة الاستخدام بـ Props (`icon`, `title`, `description`, `action`) يغطي كل حالات Empty States الموثّقة في Wireframes.
 **Common Mistakes:** استيراد بيانات (Supabase calls) داخل `packages/ui` — يجب أن تبقى الحزمة "غبية" بصريًا فقط (Props in, JSX out).
@@ -326,12 +354,14 @@ packages/ui/src/
 **Best Practices:** كل Hook يبدأ بـ `use`، ملف واحد لكل Hook، اختبار منفصل لكل Hook منطقي معقّد.
 **Folder Location:** `apps/web/src/features/*/hooks/` (خاصة بميزة) أو `packages/ui/src/hooks/` (عامة، مثل `useMediaQuery`, `useDebounce`).
 **Example Structure:**
+
 ```
 features/store/hooks/
 ├── useCart.ts
 ├── useProductFilters.ts
 └── useWishlist.ts
 ```
+
 **Dependencies:** React، وربما `packages/api` لو الـ Hook يجلب بيانات.
 **Notes:** Hooks المتعلقة بجلب بيانات تُبنى فوق TanStack Query (لا `useEffect` + `fetch` يدوي).
 **Common Mistakes:** Hook واحد يقوم بأكثر من مسؤولية (جلب بيانات + منطق فورم + Side effects) — يجب تقسيمه.
@@ -355,12 +385,14 @@ features/store/hooks/
 **Best Practices:** Store واحد لكل نطاق منطقي (وليس Store عملاق واحد للتطبيق بالكامل)؛ استخدام `persist` middleware فقط للحالة التي يجب أن تبقى بين الجلسات (السلة)، وليس لكل شيء.
 **Folder Location:** `apps/web/src/store/`.
 **Example Structure:**
+
 ```
 store/
 ├── cart-store.ts        # persist: نعم (localStorage)
 ├── ui-store.ts          # حالة القائمة الجانبية، المودالات المفتوحة — persist: لا
 └── locale-store.ts      # persist: نعم
 ```
+
 **Dependencies:** `zustand`, `zustand/middleware` (لـ `persist`).
 **Notes:** كل Store يُصدَّر مع Selector Hooks جاهزة (`useCartItems()`, `useCartTotal()`) لتفادي إعادة الرسم غير الضرورية عند تغيّر جزء واحد فقط من الـ Store.
 **Common Mistakes:** استدعاء `useCartStore()` كاملاً داخل مكوّن يحتاج فقط `total` — يعيد رسم المكوّن عند أي تغيير في أي حقل بالـ Store، حتى غير المستخدَم.
@@ -373,12 +405,14 @@ store/
 **Best Practices:** `queryKey` منظّم هرميًا (`['products', 'list', filters]`, `['products', 'detail', id]`) لتسهيل الإبطال الجزئي (Invalidation) الدقيق؛ كل Feature تملك ملف `queries.ts` و`mutations.ts` منفصلين.
 **Folder Location:** `apps/web/src/features/*/services/`.
 **Example Structure:**
+
 ```
 features/store/services/
 ├── queries.ts    # useProductsQuery, useProductDetailQuery
 ├── mutations.ts  # useAddToCartMutation, useCreateReviewMutation
 └── query-keys.ts # مصدر واحد لكل queryKey (تفادي التكرار/الأخطاء الإملائية)
 ```
+
 **Dependencies:** `@tanstack/react-query`.
 **Notes:** كل Mutation ناجحة تستدعي `queryClient.invalidateQueries` بمفتاح دقيق (وليس إبطال كل الـ Cache بالكامل).
 **Common Mistakes:** استدعاء API مباشرة داخل مكوّن بـ `useEffect` بدل TanStack Query — يفقد كل مزايا الـ Caching والـ Retry التلقائي وحالات Loading/Error الموحّدة.
@@ -391,16 +425,18 @@ features/store/services/
 **Best Practices:** كل دالة هنا **نقية بالمدخلات/المخرجات** (Typed Input → Typed Output)، لا تحتوي JSX ولا React Hooks إطلاقًا — تُستهلك من `services/queries.ts` عبر TanStack Query.
 **Folder Location:** `packages/api/src/{store,programs,academy,client}/`.
 **Example Structure:**
+
 ```ts
 // packages/api/src/store/getProducts.ts
 export async function getProducts(filters: ProductFilters): Promise<Product[]> {
   return productRepository.list(filters); // من packages/database
 }
 ```
+
 **Dependencies:** `packages/database`, `packages/validation` (للتحقق من المدخلات قبل التنفيذ).
 **Notes:** هذه الطبقة قابلة للاستدعاء من `apps/web` (عبر TanStack Query) **و**من `apps/admin`/`apps/coach` **و**من Server Actions مباشرة — نفس المنطق، استهلاك مختلف.
 **Common Mistakes:** استدعاء Supabase مباشرة من مكوّن في `apps/web` بدل المرور عبر `packages/api` — يكسر مبدأ Clean Architecture ويصعّب تتبع منطق الأعمال لاحقًا.
 
 ---
 
-*(تكملة الوثيقة في الجزء التالي مباشرة: Server/Client Components، Server Actions، Forms، Auth/RBAC، Middleware، Performance، SEO، i18n، Tooling، Testing، CI/CD، Standards، وشجرة المشروع الكاملة.)*
+_(تكملة الوثيقة في الجزء التالي مباشرة: Server/Client Components، Server Actions، Forms، Auth/RBAC، Middleware، Performance، SEO، i18n، Tooling، Testing، CI/CD، Standards، وشجرة المشروع الكاملة.)_

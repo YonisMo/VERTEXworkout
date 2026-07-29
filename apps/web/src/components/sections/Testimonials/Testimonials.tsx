@@ -1,9 +1,5 @@
 import { Star } from "lucide-react";
-import {
-  Container,
-  Section,
-  SectionTitle,
-} from "@/components/ui/layout";
+import { Container, Section, SectionTitle } from "@/components/ui/layout";
 
 const testimonials = [
   {
@@ -44,17 +40,11 @@ export default function Testimonials() {
                 ))}
               </div>
 
-              <p className="mb-6 text-gray-600">
-                "{item.text}"
-              </p>
+              <p className="mb-6 text-gray-600">"{item.text}"</p>
 
-              <h3 className="text-xl font-bold">
-                {item.name}
-              </h3>
+              <h3 className="text-xl font-bold">{item.name}</h3>
 
-              <p className="text-[#022859] font-semibold">
-                {item.result}
-              </p>
+              <p className="text-[#022859] font-semibold">{item.result}</p>
             </div>
           ))}
         </div>

@@ -53,8 +53,7 @@ const products: Product[] = [
 
     shortDescription: "Functional Training Sand Bag",
 
-    description:
-      "Professional Power Bag for athletes and coaches.",
+    description: "Professional Power Bag for athletes and coaches.",
 
     category: "Power Bags",
     brand: "VERTEXworkout",
@@ -97,8 +96,7 @@ const products: Product[] = [
 
     shortDescription: "Professional Sand Bag",
 
-    description:
-      "Professional Functional Fitness Equipment.",
+    description: "Professional Functional Fitness Equipment.",
 
     category: "Power Bags",
     brand: "VERTEXworkout",
@@ -141,8 +139,7 @@ const products: Product[] = [
 
     shortDescription: "Elite Functional Training",
 
-    description:
-      "Designed for elite athletes and coaches.",
+    description: "Designed for elite athletes and coaches.",
 
     category: "Power Bags",
     brand: "VERTEXworkout",

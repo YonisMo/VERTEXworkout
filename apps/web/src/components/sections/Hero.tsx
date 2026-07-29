@@ -2,7 +2,6 @@ export default function Hero() {
   return (
     <section className="bg-[#022859] text-white">
       <div className="mx-auto flex min-h-[calc(100vh-70px)] max-w-7xl flex-col items-center justify-center px-6 text-center">
-
         <span className="mb-4 rounded-full border border-[#F2EA79] px-4 py-2 text-sm font-medium text-[#F2EA79]">
           Functional Fitness • Academy • Store
         </span>
@@ -27,7 +26,6 @@ export default function Hero() {
             Explore Programs
           </button>
         </div>
-
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 # Frontend Architecture — الجزء 4 (نهائي محدَّث): شجرة المشروع الكاملة
+
 **VERTEXworkout — Final Project Tree (v1.1 — بعد إضافات المراجعة النهائية)**
 
 ---
@@ -106,14 +107,15 @@ vertexworkout/
 ```
 
 ## ملخص التعديلات (v1.0 → v1.1)
-| التغيير | السبب |
-|---|---|
-| ➕ `packages/email` | فصل قوالب ومنطق البريد الإلكتروني عن باقي البنية التحتية — يخدم `notification_templates` (channel='email') من Database Schema |
-| ➕ `packages/storage` | فصل عمليات الملفات الفعلية (Upload/Delete/Resize) عن `packages/database` الذي يتعامل مع سجلات `media` فقط، لا الملفات نفسها |
-| ➕ `packages/analytics` | عزل كل تكامل تتبع السلوك (كان مبعثرًا كملف واحد داخل `lib`) |
-| ➕ `apps/web/src/services/` | طبقة Composition تُهيّئ كل حزمة بإعدادات web المحلية، فتبقى `features/` غير مدركة تمامًا لتفاصيل التهيئة |
-| ➕ `packages/testing` | مصدر واحد لكل بيانات ووظائف الاختبار الوهمية، يُستهلك من Vitest وPlaywright معًا |
-| 🔄 `packages/lib` | تقليص نطاقه إلى البنية التحتية الأساسية فقط بعد فصل email/storage/analytics |
+
+| التغيير                     | السبب                                                                                                                         |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| ➕ `packages/email`         | فصل قوالب ومنطق البريد الإلكتروني عن باقي البنية التحتية — يخدم `notification_templates` (channel='email') من Database Schema |
+| ➕ `packages/storage`       | فصل عمليات الملفات الفعلية (Upload/Delete/Resize) عن `packages/database` الذي يتعامل مع سجلات `media` فقط، لا الملفات نفسها   |
+| ➕ `packages/analytics`     | عزل كل تكامل تتبع السلوك (كان مبعثرًا كملف واحد داخل `lib`)                                                                   |
+| ➕ `apps/web/src/services/` | طبقة Composition تُهيّئ كل حزمة بإعدادات web المحلية، فتبقى `features/` غير مدركة تمامًا لتفاصيل التهيئة                      |
+| ➕ `packages/testing`       | مصدر واحد لكل بيانات ووظائف الاختبار الوهمية، يُستهلك من Vitest وPlaywright معًا                                              |
+| 🔄 `packages/lib`           | تقليص نطاقه إلى البنية التحتية الأساسية فقط بعد فصل email/storage/analytics                                                   |
 
 ---
 

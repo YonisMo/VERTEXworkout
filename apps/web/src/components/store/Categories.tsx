@@ -31,9 +31,7 @@ const categories = [
 export default function Categories() {
   return (
     <section className="bg-slate-50 py-24">
-
       <Container>
-
         <SectionTitle
           badge="Categories"
           title="Shop by Category"
@@ -41,7 +39,6 @@ export default function Categories() {
         />
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-
           {categories.map((category) => (
             <div
               key={category.title}
@@ -56,19 +53,14 @@ export default function Categories() {
               </div>
 
               <div className="p-8">
-
                 <h3 className="text-3xl font-bold text-[#022859] transition group-hover:text-[#d9c84e]">
                   {category.title}
                 </h3>
-
               </div>
             </div>
           ))}
-
         </div>
-
       </Container>
-
     </section>
   );
 }

@@ -59,9 +59,7 @@ export default function CorrectiveExercisesPage() {
                 {exercise.title}
               </h2>
 
-              <p className="leading-8 text-slate-600">
-                {exercise.description}
-              </p>
+              <p className="leading-8 text-slate-600">{exercise.description}</p>
             </div>
           ))}
         </div>

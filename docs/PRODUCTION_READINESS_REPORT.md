@@ -2,13 +2,13 @@
 
 ## Documentation Metrics
 
-| Measure | Result | Basis |
-|---|---:|---|
-| Documentation completeness | 92% | All provided subject areas are present and indexed; several operational/support documents remain proposed. |
-| Architecture consistency | 91% | Four documented issues remain to be applied to their owning documents. |
-| Cross-reference coverage | 100% | Every canonical document is reachable from `INDEX.md` or its subject folder. |
-| Broken Markdown links | 0% | The source contained no Markdown links; delivered Markdown links were validated. |
-| Duplicate source content | 0% | Six exact duplicate copies and two superseded deployment fragments were removed from the canonical tree. |
+| Measure                    | Result | Basis                                                                                                      |
+| -------------------------- | -----: | ---------------------------------------------------------------------------------------------------------- |
+| Documentation completeness |    92% | All provided subject areas are present and indexed; several operational/support documents remain proposed. |
+| Architecture consistency   |    91% | Four documented issues remain to be applied to their owning documents.                                     |
+| Cross-reference coverage   |   100% | Every canonical document is reachable from `INDEX.md` or its subject folder.                               |
+| Broken Markdown links      |     0% | The source contained no Markdown links; delivered Markdown links were validated.                           |
+| Duplicate source content   |     0% | Six exact duplicate copies and two superseded deployment fragments were removed from the canonical tree.   |
 
 ## Deferred Decisions and Known Risks
 

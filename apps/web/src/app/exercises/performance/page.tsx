@@ -35,8 +35,7 @@ const exercises = [
   },
   {
     title: "Athletic Conditioning Drills",
-    description:
-      "Improve sport-specific endurance and performance capacity.",
+    description: "Improve sport-specific endurance and performance capacity.",
   },
 ];
 
@@ -59,9 +58,7 @@ export default function PerformanceExercisesPage() {
                 {exercise.title}
               </h2>
 
-              <p className="leading-8 text-slate-600">
-                {exercise.description}
-              </p>
+              <p className="leading-8 text-slate-600">{exercise.description}</p>
             </div>
           ))}
         </div>

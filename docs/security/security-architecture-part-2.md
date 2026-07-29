@@ -1,4 +1,5 @@
 # Security Architecture — VERTEXworkout
+
 **الجزء 2 من 4: SQL Injection, RLS Policies, File/Storage Security, API/CORS/CSP, Secrets & Env Security**
 
 ---
@@ -9,11 +10,17 @@
 
 ```ts
 // ✅ آمن — Query Builder يتعامل مع القيمة كمعامل منفصل تلقائيًا
-const { data } = await supabase.from('products').select('*').eq('category_id', userInput);
+const { data } = await supabase
+  .from("products")
+  .select("*")
+  .eq("category_id", userInput);
 
 // ❌ ممنوع تمامًا في هذا المشروع — SQL خام مُركَّب بمدخل مستخدم
-const { data } = await supabase.rpc('raw_sql', { query: `SELECT * FROM products WHERE id = '${userInput}'` });
+const { data } = await supabase.rpc("raw_sql", {
+  query: `SELECT * FROM products WHERE id = '${userInput}'`,
+});
 ```
+
 **القاعدة الصارمة:** استخدام `supabase.rpc()` لاستدعاء SQL Functions مُعرَّفة مسبقًا في قاعدة البيانات (Stored Procedures) مسموح ومُشجَّع للاستعلامات المعقدة (مثل Full-text Search)، لكن **يُمنع منعًا باتًا** بناء أي SQL كنص من مدخلات مستخدم مباشرة في أي مكان بالكود — يُفرض هذا عبر مراجعة الكود (Code Review) كقاعدة إلزامية، وليس فقط أداة آلية.
 
 ---
@@ -76,11 +83,11 @@ CREATE POLICY "strictly_owner_only_medical_files" ON media
 
 بالإضافة لآليات API Design (القسم 21-22)، الطبقات الأمنية الإضافية:
 
-| التهديد | الحماية |
-|---|---|
-| رفع ملف تنفيذي مموَّه كصورة (`.php` بامتداد `.jpg`) | فحص **Magic Bytes** الفعلية للملف (وليس الاعتماد على الامتداد أو `Content-Type` المُرسَل من العميل فقط) عبر مكتبة `file-type` قبل القبول |
-| Zip Bomb / ملفات ضخمة مموَّهة | حد أقصى صارم للحجم يُتحقق منه **قبل** بدء المعالجة (`sharp`)، ليس بعدها |
-| تنفيذ كود عبر SVG (يمكن أن يحتوي `<script>`) | **رفض ملفات SVG بالكامل** من رفع المستخدمين (مراجعات، صور شخصية) — يُسمح بها فقط من الأدمن للأيقونات الثابتة بعد فحص يدوي |
+| التهديد                                                              | الحماية                                                                                                                                  |
+| -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| رفع ملف تنفيذي مموَّه كصورة (`.php` بامتداد `.jpg`)                  | فحص **Magic Bytes** الفعلية للملف (وليس الاعتماد على الامتداد أو `Content-Type` المُرسَل من العميل فقط) عبر مكتبة `file-type` قبل القبول |
+| Zip Bomb / ملفات ضخمة مموَّهة                                        | حد أقصى صارم للحجم يُتحقق منه **قبل** بدء المعالجة (`sharp`)، ليس بعدها                                                                  |
+| تنفيذ كود عبر SVG (يمكن أن يحتوي `<script>`)                         | **رفض ملفات SVG بالكامل** من رفع المستخدمين (مراجعات، صور شخصية) — يُسمح بها فقط من الأدمن للأيقونات الثابتة بعد فحص يدوي                |
 | اسم ملف يحتوي مسارًا خبيثًا (Path Traversal، مثل `../../etc/passwd`) | اسم الملف المخزَّن يُولَّد دائمًا بـ UUID عشوائي من السيرفر — **لا يُستخدم اسم الملف الأصلي المُرسَل من العميل إطلاقًا** في مسار التخزين |
 
 ---
@@ -95,12 +102,12 @@ CREATE POLICY "strictly_owner_only_medical_files" ON media
 
 ## 15. API Security (تعميق إضافي فوق ما ورد في API Design)
 
-| الإجراء الإضافي | التفصيل |
-|---|---|
-| **Request Size Limiting** | حد أقصى لحجم Body لكل طلب JSON (100KB) عدا رفع الملفات — يمنع هجمات إغراق الذاكرة |
-| **Timeout صارم** | كل استعلام قاعدة بيانات له Timeout أقصى (5 ثوانٍ) — يمنع استعلامات معلَّقة تستنزف الموارد (Slow Query DoS) |
-| **إخفاء تفاصيل السيرفر** | رأس `X-Powered-By` وأي معلومات تقنية عن الإصدار (Next.js version, Node version) تُزال من كل استجابة — تقليل المعلومات المتاحة لمهاجم محتمل (Security through obscurity كطبقة إضافية، وليست وحيدة) |
-| **API Keys مستقبلية (Public API)** | تُخزَّن مُشفَّرة (Hashed) في قاعدة البيانات — **لا** تُخزَّن كنص صريح حتى في جانب VERTEX نفسه، تمامًا مثل كلمات المرور |
+| الإجراء الإضافي                    | التفصيل                                                                                                                                                                                           |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Request Size Limiting**          | حد أقصى لحجم Body لكل طلب JSON (100KB) عدا رفع الملفات — يمنع هجمات إغراق الذاكرة                                                                                                                 |
+| **Timeout صارم**                   | كل استعلام قاعدة بيانات له Timeout أقصى (5 ثوانٍ) — يمنع استعلامات معلَّقة تستنزف الموارد (Slow Query DoS)                                                                                        |
+| **إخفاء تفاصيل السيرفر**           | رأس `X-Powered-By` وأي معلومات تقنية عن الإصدار (Next.js version, Node version) تُزال من كل استجابة — تقليل المعلومات المتاحة لمهاجم محتمل (Security through obscurity كطبقة إضافية، وليست وحيدة) |
+| **API Keys مستقبلية (Public API)** | تُخزَّن مُشفَّرة (Hashed) في قاعدة البيانات — **لا** تُخزَّن كنص صريح حتى في جانب VERTEX نفسه، تمامًا مثل كلمات المرور                                                                            |
 
 ---
 
@@ -124,12 +131,13 @@ Content-Security-Policy:
   base-uri 'self';
   form-action 'self';
 ```
-| التوجيه | الغرض |
-|---|---|
-| `default-src 'self'` | كل مورد غير محدَّد صراحة يُرفض افتراضيًا من مصادر خارجية |
-| `script-src` بقائمة بيضاء دقيقة | يمنع تحميل أي JavaScript من نطاق غير موثوق — دفاع حاسم إضافي ضد XSS حتى لو نجح حقن كود بطريقة ما |
-| `frame-ancestors 'none'` | يمنع تضمين موقع VERTEX داخل `<iframe>` من مواقع أخرى — حماية من هجمات Clickjacking |
-| `object-src 'none'` (ضمنيًا عبر default-src) | يمنع تحميل Flash/Plugins قديمة الثغرات |
+
+| التوجيه                                      | الغرض                                                                                            |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `default-src 'self'`                         | كل مورد غير محدَّد صراحة يُرفض افتراضيًا من مصادر خارجية                                         |
+| `script-src` بقائمة بيضاء دقيقة              | يمنع تحميل أي JavaScript من نطاق غير موثوق — دفاع حاسم إضافي ضد XSS حتى لو نجح حقن كود بطريقة ما |
+| `frame-ancestors 'none'`                     | يمنع تضمين موقع VERTEX داخل `<iframe>` من مواقع أخرى — حماية من هجمات Clickjacking               |
+| `object-src 'none'` (ضمنيًا عبر default-src) | يمنع تحميل Flash/Plugins قديمة الثغرات                                                           |
 
 **آلية التوليد:** CSP يُبنى ديناميكيًا في `next.config.js` مع **Nonce عشوائي** لكل طلب لأي Script Inline ضروري (بدل `unsafe-inline` الفضفاض حيثما أمكن تجنبه)، لتقييد إضافي أدق.
 
@@ -140,30 +148,37 @@ Content-Security-Policy:
 ```ts
 // next.config.js — headers()
 const securityHeaders = [
-  { key: 'X-Content-Type-Options', value: 'nosniff' },
-  { key: 'X-Frame-Options', value: 'DENY' },
-  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-  { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
-  { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(self)' },
-  { key: 'X-DNS-Prefetch-Control', value: 'on' },
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "X-Frame-Options", value: "DENY" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  {
+    key: "Strict-Transport-Security",
+    value: "max-age=63072000; includeSubDomains; preload",
+  },
+  {
+    key: "Permissions-Policy",
+    value: "camera=(), microphone=(), geolocation=(self)",
+  },
+  { key: "X-DNS-Prefetch-Control", value: "on" },
 ];
 ```
-| الرأس | الغرض |
-|---|---|
-| `X-Content-Type-Options: nosniff` | يمنع المتصفح من "تخمين" نوع الملف خلافًا للمُعلَن — يمنع بعض هجمات MIME Sniffing |
+
+| الرأس                              | الغرض                                                                                                  |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `X-Content-Type-Options: nosniff`  | يمنع المتصفح من "تخمين" نوع الملف خلافًا للمُعلَن — يمنع بعض هجمات MIME Sniffing                       |
 | `Strict-Transport-Security` (HSTS) | يجبر المتصفح على استخدام HTTPS فقط لهذا النطاق لمدة سنتين، حتى لو حاول المستخدم كتابة `http://` يدويًا |
-| `Permissions-Policy` | يعطّل صراحة وصول الموقع لكاميرا/ميكروفون المستخدم افتراضيًا (لا حاجة لهما في VERTEXworkout حاليًا) |
+| `Permissions-Policy`               | يعطّل صراحة وصول الموقع لكاميرا/ميكروفون المستخدم افتراضيًا (لا حاجة لهما في VERTEXworkout حاليًا)     |
 
 ---
 
 ## 19. Secrets Management
 
-| القاعدة | التفصيل |
-|---|---|
-| **لا Secrets في الكود المصدري مطلقًا** | يُفرض عبر أداة فحص تلقائي (`gitleaks` أو `trufflehog`) ضمن CI Pipeline — يفشل الـ Build فورًا لو اكتُشف أي مفتاح مسرَّب في Commit |
-| **مصدر واحد للحقيقة** | كل الـ Secrets تُدار حصريًا عبر **Vercel Environment Variables** (مُشفَّرة عند التخزين)، مقسَّمة حسب البيئة (Development/Staging/Production) — لا ملفات `.env` حقيقية تُرفع لأي مكان |
+| القاعدة                                             | التفصيل                                                                                                                                                                                          |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **لا Secrets في الكود المصدري مطلقًا**              | يُفرض عبر أداة فحص تلقائي (`gitleaks` أو `trufflehog`) ضمن CI Pipeline — يفشل الـ Build فورًا لو اكتُشف أي مفتاح مسرَّب في Commit                                                                |
+| **مصدر واحد للحقيقة**                               | كل الـ Secrets تُدار حصريًا عبر **Vercel Environment Variables** (مُشفَّرة عند التخزين)، مقسَّمة حسب البيئة (Development/Staging/Production) — لا ملفات `.env` حقيقية تُرفع لأي مكان             |
 | **مبدأ الحد الأدنى من الصلاحيات (Least Privilege)** | `SUPABASE_SERVICE_ROLE_KEY` (صلاحيات كاملة، يتجاوز RLS) يُستخدم **فقط** في عمليات سيرفر محدَّدة جدًا وموثّقة (مثل Webhooks، عمليات إدارية) — **لا يُستخدم كإعداد افتراضي** في أي مكان آخر بالكود |
-| **تدوير دوري (Rotation)** | مفاتيح API لبوابات الدفع والخدمات الخارجية تُجدَّد كل 90 يومًا كسياسة وقائية، حتى بدون وجود اشتباه تسريب |
+| **تدوير دوري (Rotation)**                           | مفاتيح API لبوابات الدفع والخدمات الخارجية تُجدَّد كل 90 يومًا كسياسة وقائية، حتى بدون وجود اشتباه تسريب                                                                                         |
 
 ---
 
@@ -181,8 +196,9 @@ const envSchema = z.object({
 });
 export const env = envSchema.parse(process.env); // يُفشل الـ Build فورًا لو نقص أي متغيّر إلزامي
 ```
+
 **قاعدة صارمة:** أي متغيّر بدون بادئة `NEXT_PUBLIC_` **يُمنع برمجيًا** من الاستيراد داخل أي ملف يحمل `"use client"` — يُفرض عبر ESLint rule مخصصة تفحص استيراد `process.env.SUPABASE_SERVICE_ROLE_KEY` (أو أي مفتاح خاص) داخل ملفات العميل وتُفشل الـ Build فورًا عند اكتشافه.
 
 ---
 
-*(الجزء 3 التالي: Encryption Strategy، Password Hashing، Webhook Security المتعمّق، Rate Limiting/Brute Force/DDoS، Audit Logging، Monitoring & Alerts، Backup Strategy، Disaster Recovery Plan.)*
+_(الجزء 3 التالي: Encryption Strategy، Password Hashing، Webhook Security المتعمّق، Rate Limiting/Brute Force/DDoS، Audit Logging، Monitoring & Alerts، Backup Strategy، Disaster Recovery Plan.)_

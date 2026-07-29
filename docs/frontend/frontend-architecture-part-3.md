@@ -1,4 +1,5 @@
 # Frontend Architecture & Design System Implementation — VERTEXworkout
+
 **الجزء 3 — Accessibility, i18n, Tooling, Testing, CI/CD, Standards**
 
 ---
@@ -20,10 +21,16 @@
 **Best Practices:** فصل ملفات الترجمة حسب النطاق (وليس ملف واحد ضخم) لسهولة الصيانة؛ استخدام `useTranslations('namespace')` بدل مفاتيح مسطّحة عامة.
 **Folder Location:** `apps/web/messages/{ar,en}/{common,store,academy,auth,dashboard}.json`.
 **Example Structure:**
+
 ```json
 // messages/ar/store.json
-{ "addToCart": "أضف للسلة", "outOfStock": "غير متوفر حاليًا", "filters": { "title": "الفلاتر", "category": "التصنيف" } }
+{
+  "addToCart": "أضف للسلة",
+  "outOfStock": "غير متوفر حاليًا",
+  "filters": { "title": "الفلاتر", "category": "التصنيف" }
+}
 ```
+
 **Dependencies:** `next-intl`.
 **Notes:** المحتوى الديناميكي (اسم منتج، وصف مقال) يأتي من جداول `_translations` في قاعدة البيانات (Database Schema)، **وليس** من ملفات `next-intl` — next-intl يُستخدم فقط لنصوص الواجهة الثابتة (أزرار، تسميات، رسائل).
 **Common Mistakes:** الخلط بين نوعي الترجمة (محتوى ديناميكي من DB مقابل نصوص واجهة ثابتة من next-intl) — كل نوع له مصدره الصحيح ولا يجب مزجهما.
@@ -52,6 +59,7 @@
 **Purpose:** إدارة آمنة ومنظمة لكل مفاتيح API وإعدادات البيئة.
 **Folder Location:** `.env.example` في الجذر (مُوثَّق بالكامل، بدون قيم حقيقية).
 **Example Structure:**
+
 ```bash
 # --- Supabase ---
 NEXT_PUBLIC_SUPABASE_URL=              # رابط المشروع، آمن للعرض العام
@@ -73,6 +81,7 @@ STRIPE_SECRET_KEY=
 # --- Feature Flags ---
 MAINTENANCE_MODE=false
 ```
+
 **Dependencies:** `zod` (للتحقق من وجود كل المتغيرات المطلوبة عند بدء التشغيل عبر `env.ts`).
 **Notes:** أي متغيّر بدون بادئة `NEXT_PUBLIC_` يبقى محصورًا في السيرفر فقط تلقائيًا — قاعدة Next.js أساسية للأمان.
 **Common Mistakes:** إضافة `NEXT_PUBLIC_` لمفتاح حساس (مثل `SERVICE_ROLE_KEY`) عن طريق الخطأ — يُصدَّر المفتاح كاملاً داخل حزمة JavaScript العامة المرسلة للمتصفح.
@@ -81,14 +90,14 @@ MAINTENANCE_MODE=false
 
 ## 52. Configuration Files (ملخص شامل)
 
-| الملف | الموقع | الغرض |
-|---|---|---|
-| `next.config.js` | `apps/web/` | إعدادات الصور، i18n، Headers الأمنية |
-| `tailwind.config.ts` | `apps/web/` (يمتد من `packages/config`) | التوكنز البصرية |
-| `tsconfig.json` | كل حزمة/تطبيق (يمتد من `packages/config/typescript`) | إعدادات TypeScript الصارمة |
-| `components.json` | `packages/ui/` | تهيئة shadcn/ui |
-| `.eslintrc.js` | كل حزمة (يمتد من `packages/config/eslint`) | قواعد جودة الكود |
-| `.prettierrc` | الجذر (مشترك للكل) | تنسيق الكود |
+| الملف                | الموقع                                               | الغرض                                |
+| -------------------- | ---------------------------------------------------- | ------------------------------------ |
+| `next.config.js`     | `apps/web/`                                          | إعدادات الصور، i18n، Headers الأمنية |
+| `tailwind.config.ts` | `apps/web/` (يمتد من `packages/config`)              | التوكنز البصرية                      |
+| `tsconfig.json`      | كل حزمة/تطبيق (يمتد من `packages/config/typescript`) | إعدادات TypeScript الصارمة           |
+| `components.json`    | `packages/ui/`                                       | تهيئة shadcn/ui                      |
+| `.eslintrc.js`       | كل حزمة (يمتد من `packages/config/eslint`)           | قواعد جودة الكود                     |
+| `.prettierrc`        | الجذر (مشترك للكل)                                   | تنسيق الكود                          |
 
 ---
 
@@ -104,8 +113,15 @@ MAINTENANCE_MODE=false
 
 **Best Practices:** `.prettierrc` واحد في الجذر يُطبَّق على كل المستودع؛ `prettier-plugin-tailwindcss` لترتيب كلاسات Tailwind تلقائيًا بترتيب منطقي موحّد (Layout → Spacing → Typography → Color).
 **Example Structure:**
+
 ```json
-{ "semi": true, "singleQuote": true, "trailingComma": "all", "printWidth": 100, "plugins": ["prettier-plugin-tailwindcss"] }
+{
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "printWidth": 100,
+  "plugins": ["prettier-plugin-tailwindcss"]
+}
 ```
 
 ---
@@ -115,10 +131,12 @@ MAINTENANCE_MODE=false
 **Purpose:** فرض جودة الكود **قبل** الوصول لمستودع Git، لا بعده.
 **Folder Location:** `.husky/pre-commit`, `.husky/commit-msg`.
 **Example Structure:**
+
 ```bash
 # .husky/pre-commit
 pnpm lint-staged
 ```
+
 **Dependencies:** `husky`, `lint-staged`.
 **Notes:** `lint-staged` يُشغِّل ESLint وPrettier فقط على الملفات المُعدَّلة (Staged) — سريع، لا يفحص المشروع بالكامل في كل Commit.
 
@@ -129,10 +147,12 @@ pnpm lint-staged
 **Purpose:** فرض تنسيق موحّد لرسائل الـ Commits (Conventional Commits) — يُسهِّل توليد Changelog تلقائيًا لاحقًا.
 **Folder Location:** `commitlint.config.js` في الجذر، مُفعَّل عبر `.husky/commit-msg`.
 **Example Structure:**
+
 ```js
-module.exports = { extends: ['@commitlint/config-conventional'] };
+module.exports = { extends: ["@commitlint/config-conventional"] };
 // أمثلة صحيحة: "feat(store): add wishlist button" | "fix(auth): resolve token refresh bug"
 ```
+
 **Common Mistakes:** رسائل Commit غامضة مثل `"fix"` أو `"تحديثات"` بدون نطاق (Scope) أو وصف واضح — يصعّب تتبع تاريخ المشروع لاحقًا.
 
 ---
@@ -150,15 +170,19 @@ module.exports = { extends: ['@commitlint/config-conventional'] };
 **Best Practices:** تغطية المسارات الحرجة فقط (Critical Paths): تسجيل/دخول، شراء كامل، اشتراك ببرنامج، تبديل اللغة والتحقق من RTL. تشغيل على 3 متصفحات (Chromium, Firefox, WebKit) وعرضين (Desktop, Mobile Viewport).
 **Folder Location:** `tests/e2e/{auth,checkout,program-enrollment}.spec.ts`.
 **Example Structure:**
+
 ```ts
-test('يكمل المستخدم عملية شراء كاملة', async ({ page }) => {
-  await page.goto('/ar/store');
+test("يكمل المستخدم عملية شراء كاملة", async ({ page }) => {
+  await page.goto("/ar/store");
   await page.click('[data-testid="product-card"]:first-child');
   await page.click('[data-testid="add-to-cart"]');
   await page.click('[data-testid="checkout-button"]');
-  await expect(page.locator('[data-testid="order-confirmation"]')).toBeVisible();
+  await expect(
+    page.locator('[data-testid="order-confirmation"]'),
+  ).toBeVisible();
 });
 ```
+
 **Dependencies:** `@playwright/test`.
 **Notes:** استخدام `data-testid` مخصصة (وليس Selectors هشة معتمدة على النص أو الـ CSS classes) — تبقى الاختبارات ثابتة حتى لو تغيّر التصميم أو النص.
 
@@ -168,15 +192,17 @@ test('يكمل المستخدم عملية شراء كاملة', async ({ page }
 
 **Best Practices:** اختبار كل Hook منطقي معقّد، كل دالة في `packages/api`، وكل مخطط Zod (حالات صحيحة وخاطئة). React Testing Library للمكونات (اختبار السلوك من منظور المستخدم، لا تفاصيل التنفيذ الداخلية).
 **Example Structure:**
+
 ```ts
 // packages/api/src/store/getProducts.test.ts
-describe('getProducts', () => {
-  it('يُرجع منتجات مفلترة حسب التصنيف', async () => {
-    const result = await getProducts({ category: 'resistance-bands' });
-    expect(result.every(p => p.category === 'resistance-bands')).toBe(true);
+describe("getProducts", () => {
+  it("يُرجع منتجات مفلترة حسب التصنيف", async () => {
+    const result = await getProducts({ category: "resistance-bands" });
+    expect(result.every((p) => p.category === "resistance-bands")).toBe(true);
   });
 });
 ```
+
 **Dependencies:** `vitest`, `@testing-library/react`, `@testing-library/jest-dom`.
 
 ---
@@ -186,6 +212,7 @@ describe('getProducts', () => {
 **Purpose:** توثيق بصري تفاعلي لكل مكوّن في `packages/ui`، مستقل عن التطبيق الفعلي — مرجع حي للـ Design System.
 **Folder Location:** `packages/ui/.storybook/`, `packages/ui/src/components/**/*.stories.tsx`.
 **Example Structure:**
+
 ```tsx
 // button.stories.tsx
 export const AllVariants: Story = {
@@ -198,6 +225,7 @@ export const AllVariants: Story = {
   ),
 };
 ```
+
 **Dependencies:** `storybook`, `@storybook/react-vite`, `@storybook/addon-a11y` (فحص إمكانية الوصول مباشرة داخل Storybook).
 **Notes:** يُنشر Storybook كموقع مستقل (عبر Chromatic أو Vercel) — مرجع دائم لفريقي التصميم والتطوير معًا، ويُستخدم أيضًا كـ Visual Regression Testing لاحقًا.
 
@@ -207,6 +235,7 @@ export const AllVariants: Story = {
 
 **Folder Location:** `.github/workflows/{ci.yml, deploy-preview.yml}`.
 **Example Structure:**
+
 ```yaml
 # .github/workflows/ci.yml
 on: [pull_request]
@@ -215,8 +244,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: pnpm install --frozen-lockfile
-      - run: pnpm turbo lint type-check test build  # Turborepo يبني فقط المتأثر
+      - run: pnpm turbo lint type-check test build # Turborepo يبني فقط المتأثر
 ```
+
 **Dependencies:** GitHub Actions، Turborepo Remote Caching (لتسريع CI بشكل كبير).
 **Common Mistakes:** تشغيل `build`/`test` لكل الحزم في كل Pull Request بدل الاعتماد على ذكاء Turborepo لتحديد المتأثر فقط — يبطئ CI بشكل غير ضروري مع نمو المشروع.
 
@@ -238,28 +268,30 @@ jobs:
 
 ## 64. Naming Conventions
 
-| النوع | الاصطلاح | مثال |
-|---|---|---|
-| مكونات React | PascalCase | `ProductCard.tsx` |
-| Hooks | camelCase + بادئة `use` | `useCartStore.ts` |
-| دوال عادية | camelCase | `formatCurrency.ts` |
-| أنواع/واجهات TypeScript | PascalCase | `interface ProductVariant` |
-| ثوابت | UPPER_SNAKE_CASE | `MAX_CART_ITEMS` |
-| ملفات غير مكوّنات | kebab-case | `product-card.tsx`, `format-currency.ts` |
+| النوع                   | الاصطلاح                | مثال                                     |
+| ----------------------- | ----------------------- | ---------------------------------------- |
+| مكونات React            | PascalCase              | `ProductCard.tsx`                        |
+| Hooks                   | camelCase + بادئة `use` | `useCartStore.ts`                        |
+| دوال عادية              | camelCase               | `formatCurrency.ts`                      |
+| أنواع/واجهات TypeScript | PascalCase              | `interface ProductVariant`               |
+| ثوابت                   | UPPER_SNAKE_CASE        | `MAX_CART_ITEMS`                         |
+| ملفات غير مكوّنات       | kebab-case              | `product-card.tsx`, `format-currency.ts` |
 
 ## 65. Import Rules
 
 **ترتيب الاستيراد إلزامي (يُفرض عبر `eslint-plugin-import`):**
+
 ```ts
 // 1. مكتبات خارجية
-import { useState } from 'react';
+import { useState } from "react";
 // 2. حزم داخلية من packages/
-import { Button } from '@vertex/ui';
+import { Button } from "@vertex/ui";
 // 3. استيراد نسبي داخل نفس Feature
-import { useCart } from '../hooks/use-cart';
+import { useCart } from "../hooks/use-cart";
 // 4. أنواع (Types) في النهاية دائمًا
-import type { Product } from '@vertex/types';
+import type { Product } from "@vertex/types";
 ```
+
 **Common Mistakes:** استيراد دائري (Circular Imports) بين حزمتين — يُكتشف عبر `eslint-plugin-import/no-cycle` في CI.
 
 ## 66. Folder Naming Rules
@@ -300,4 +332,4 @@ kebab-case دائمًا لكل المجلدات (`exercise-library` وليس `Ex
 
 ---
 
-*(الجزء الرابع والأخير: شجرة المشروع الكاملة النهائية بكل الملفات، وقائمة الموافقة الشاملة.)*
+_(الجزء الرابع والأخير: شجرة المشروع الكاملة النهائية بكل الملفات، وقائمة الموافقة الشاملة.)_

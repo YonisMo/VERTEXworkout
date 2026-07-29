@@ -32,10 +32,9 @@ export default function SwimmingCoachProgramPage() {
           </h2>
 
           <p className="mb-10 leading-8 text-slate-600">
-            The VERTEXworkout Swimming Coach Program is designed to help
-            coaches understand swimming technique, training principles,
-            programming methods, and athlete development from beginner to
-            advanced levels.
+            The VERTEXworkout Swimming Coach Program is designed to help coaches
+            understand swimming technique, training principles, programming
+            methods, and athlete development from beginner to advanced levels.
           </p>
 
           <div className="grid gap-4 md:grid-cols-2">

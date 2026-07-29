@@ -17,8 +17,7 @@ const programs = [
   },
   {
     title: "Swimming Coach",
-    description:
-      "Professional swimming coaching for beginners and athletes.",
+    description: "Professional swimming coaching for beginners and athletes.",
     href: "/academy/programs/swimming-coach",
   },
   {
@@ -29,14 +28,12 @@ const programs = [
   },
   {
     title: "Sports Performance",
-    description:
-      "Increase speed, agility, power and overall athletic ability.",
+    description: "Increase speed, agility, power and overall athletic ability.",
     href: "/academy/programs/sports-performance",
   },
   {
     title: "Corrective Exercise",
-    description:
-      "Restore movement quality, reduce pain and prevent injuries.",
+    description: "Restore movement quality, reduce pain and prevent injuries.",
     href: "/academy/programs/corrective-exercise",
   },
 ];

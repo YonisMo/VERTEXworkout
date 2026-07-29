@@ -4,16 +4,15 @@
 ========================================================== */
 
 :root {
-
   /* =========================
       BRAND COLORS
   ========================== */
 
   --vertex-primary: #022859;
-  --vertex-secondary: #F2EA79;
-  --vertex-accent: #F2DF80;
-  --vertex-neutral: #BFB8BA;
-  --vertex-premium: #A68986;
+  --vertex-secondary: #f2ea79;
+  --vertex-accent: #f2df80;
+  --vertex-neutral: #bfb8ba;
+  --vertex-premium: #a68986;
 
   /* =========================
       BACKGROUNDS
@@ -38,10 +37,10 @@
   ========================== */
 
   --btn-primary: #022859;
-  --btn-primary-hover: #033B79;
+  --btn-primary-hover: #033b79;
 
-  --btn-secondary: #F2EA79;
-  --btn-secondary-hover: #F2DF80;
+  --btn-secondary: #f2ea79;
+  --btn-secondary-hover: #f2df80;
 
   --btn-light: #ffffff;
 
@@ -49,7 +48,7 @@
       BORDER
   ========================== */
 
-  --border-color: #BFB8BA;
+  --border-color: #bfb8ba;
 
   /* =========================
       SUCCESS
@@ -73,20 +72,15 @@
       SHADOWS
   ========================== */
 
-  --shadow-xs:
-    0 2px 4px rgba(0,0,0,.05);
+  --shadow-xs: 0 2px 4px rgba(0, 0, 0, 0.05);
 
-  --shadow-sm:
-    0 6px 12px rgba(0,0,0,.08);
+  --shadow-sm: 0 6px 12px rgba(0, 0, 0, 0.08);
 
-  --shadow-md:
-    0 12px 24px rgba(0,0,0,.10);
+  --shadow-md: 0 12px 24px rgba(0, 0, 0, 0.1);
 
-  --shadow-lg:
-    0 20px 40px rgba(0,0,0,.15);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
 
-  --shadow-xl:
-    0 30px 60px rgba(0,0,0,.18);
+  --shadow-xl: 0 30px 60px rgba(0, 0, 0, 0.18);
 
   /* =========================
       BORDER RADIUS
@@ -104,78 +98,67 @@
       TRANSITIONS
   ========================== */
 
-  --transition-fast: .2s ease;
-  --transition-normal: .35s ease;
-  --transition-slow: .5s ease;
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.35s ease;
+  --transition-slow: 0.5s ease;
 
   /* =========================
       GRADIENTS
   ========================== */
 
-  --gradient-primary:
-  linear-gradient(
-      135deg,
-      #022859 0%,
-      #033B79 100%
-  );
+  --gradient-primary: linear-gradient(135deg, #022859 0%, #033b79 100%);
 
-  --gradient-gold:
-  linear-gradient(
-      135deg,
-      #F2EA79 0%,
-      #F2DF80 100%
-  );
-
+  --gradient-gold: linear-gradient(135deg, #f2ea79 0%, #f2df80 100%);
 }
 
 /* ==================================
       Utility Classes
 ================================== */
 
-.bg-primary{
-  background:var(--vertex-primary);
+.bg-primary {
+  background: var(--vertex-primary);
 }
 
-.bg-secondary{
-  background:var(--vertex-secondary);
+.bg-secondary {
+  background: var(--vertex-secondary);
 }
 
-.bg-accent{
-  background:var(--vertex-accent);
+.bg-accent {
+  background: var(--vertex-accent);
 }
 
-.bg-card{
-  background:var(--bg-card);
+.bg-card {
+  background: var(--bg-card);
 }
 
-.text-primary{
-  color:var(--text-primary);
+.text-primary {
+  color: var(--text-primary);
 }
 
-.text-secondary{
-  color:var(--text-secondary);
+.text-secondary {
+  color: var(--text-secondary);
 }
 
-.text-light{
-  color:var(--text-light);
+.text-light {
+  color: var(--text-light);
 }
 
-.border-theme{
-  border:1px solid var(--border-color);
+.border-theme {
+  border: 1px solid var(--border-color);
 }
 
-.shadow-theme{
-  box-shadow:var(--shadow-md);
+.shadow-theme {
+  box-shadow: var(--shadow-md);
 }
 
-.rounded-theme{
-  border-radius:var(--radius-lg);
+.rounded-theme {
+  border-radius: var(--radius-lg);
 }
 
-.gradient-primary{
-  background:var(--gradient-primary);
+.gradient-primary {
+  background: var(--gradient-primary);
 }
 
-.gradient-gold{
-  background:var(--gradient-gold);
+.gradient-gold {
+  background: var(--gradient-gold);
 }

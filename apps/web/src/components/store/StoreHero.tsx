@@ -5,7 +5,6 @@ export default function StoreHero() {
   return (
     <section className="bg-[#022859] text-white">
       <Container className="py-24">
-
         <span className="inline-block rounded-full border border-[#F2EA79] px-4 py-2 text-sm font-bold uppercase tracking-wider text-[#F2EA79]">
           Premium Equipment
         </span>
@@ -28,15 +27,10 @@ export default function StoreHero() {
         </div>
 
         <div className="mt-10 flex flex-wrap gap-4">
-          <Button>
-            Shop Now
-          </Button>
+          <Button>Shop Now</Button>
 
-          <Button variant="outline">
-            Browse Categories
-          </Button>
+          <Button variant="outline">Browse Categories</Button>
         </div>
-
       </Container>
     </section>
   );

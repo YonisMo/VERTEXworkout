@@ -1,5 +1,7 @@
 # Final Architecture Review & Production Readiness
+
 # VERTEXworkout — الوثيقة الختامية لمرحلة التصميم الكاملة
+
 **المرحلة 18 من 18 — الوثيقة المرجعية النهائية**
 **الإصدار: 1.0 — Design Phase Closure — Production Ready**
 
@@ -12,6 +14,7 @@
 **حالة المشروع الآن:** كل القرارات المعمارية اللازمة لبدء التطوير الفعلي **موثَّقة، مُعتمَدة، مُتّسقة داخليًا، وخالية من التعارضات** (تم التحقق من ذلك صراحة عبر مراجعة معمارية مخصصة بعد المرحلة 14، وعبر مصفوفة التحقق الكاملة في هذه الوثيقة، القسم 4).
 
 **حدود Phase 1 (النطاق الذي تصفه كل هذه الوثائق وسيُبنى أولاً):**
+
 - منصة ويب ثنائية اللغة (عربي/إنجليزي) كاملة: متجر (عرض بدون دفع فعلي مُفعَّل)، برامج تدريبية، مكتبة تمارين، VERTEX Academy، مدونة، حسابات متدربين، بحث موحَّد.
 - بنية Monorepo كاملة جاهزة للتوسع (Turborepo + 17 حزمة مشتركة) دون الحاجة لإعادة هيكلة مستقبلية.
 - قاعدة بيانات كاملة (39+ جدولًا) تدعم كل الميزات الحالية والمستقبلية دون تعديل جذري.
@@ -28,26 +31,26 @@
 
 ## 2. خريطة الوثائق الكاملة (Document Map)
 
-| # | الوثيقة | الحالة |
-|---|---|---|
-| 1 | PRD (Product Requirements Document) | ✅ معتمدة نهائيًا |
-| 2 | Database Schema (ERD + 39 جدولًا + RLS) | ✅ معتمدة نهائيًا (مع امتداد `webhook_events` و`ops.deployment_logs` بعد المراجعة المعمارية) |
-| 3 | User Flow | ✅ معتمدة نهائيًا |
-| 4 | Sitemap | ✅ معتمدة نهائيًا |
-| 5 | Wireframes (Desktop/Tablet/Mobile، 3 أجزاء) | ✅ معتمدة نهائيًا (Frozen) |
-| 6 | Design System (Tokens, Typography, Components) | ✅ معتمدة نهائيًا |
-| 7-11 | Frontend Architecture (4 أجزاء: UI Kit, Component Library, Technical Architecture) | ✅ معتمدة نهائيًا |
-| 9 (API) | API Design (4 أجزاء) | ✅ معتمدة نهائيًا |
-| 10 | Security Architecture (4 أجزاء) | ✅ معتمدة نهائيًا (مع تصحيح JWT/RLS بعد المراجعة المعمارية) |
-| 11 | Performance Strategy (3 أجزاء) | ✅ معتمدة نهائيًا |
-| 12 | SEO Strategy (جزآن) | ✅ معتمدة نهائيًا |
-| 13 | Testing Strategy (3 أجزاء، شامل Advanced Testing 16.1-16.20) | ✅ معتمدة نهائيًا |
-| 14 | Deployment Strategy (نسخة موحَّدة 2.0) | ✅ معتمدة نهائيًا |
-| — | Architectural Review v1 (مراجعة ما بعد المرحلة 14) | ✅ مُطبَّقة، أثرها مدموج في الوثائق أعلاه |
-| 15 | Monitoring & Observability Strategy (جزآن) | ✅ معتمدة نهائيًا |
-| 16 | Documentation Strategy (جزآن) | ✅ معتمدة نهائيًا |
-| 17 | Launch & Go-Live Readiness Plan | ✅ معتمدة نهائيًا |
-| 18 | **هذه الوثيقة** — Final Architecture Review & Production Readiness | ✅ الوثيقة الختامية |
+| #       | الوثيقة                                                                            | الحالة                                                                                       |
+| ------- | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| 1       | PRD (Product Requirements Document)                                                | ✅ معتمدة نهائيًا                                                                            |
+| 2       | Database Schema (ERD + 39 جدولًا + RLS)                                            | ✅ معتمدة نهائيًا (مع امتداد `webhook_events` و`ops.deployment_logs` بعد المراجعة المعمارية) |
+| 3       | User Flow                                                                          | ✅ معتمدة نهائيًا                                                                            |
+| 4       | Sitemap                                                                            | ✅ معتمدة نهائيًا                                                                            |
+| 5       | Wireframes (Desktop/Tablet/Mobile، 3 أجزاء)                                        | ✅ معتمدة نهائيًا (Frozen)                                                                   |
+| 6       | Design System (Tokens, Typography, Components)                                     | ✅ معتمدة نهائيًا                                                                            |
+| 7-11    | Frontend Architecture (4 أجزاء: UI Kit, Component Library, Technical Architecture) | ✅ معتمدة نهائيًا                                                                            |
+| 9 (API) | API Design (4 أجزاء)                                                               | ✅ معتمدة نهائيًا                                                                            |
+| 10      | Security Architecture (4 أجزاء)                                                    | ✅ معتمدة نهائيًا (مع تصحيح JWT/RLS بعد المراجعة المعمارية)                                  |
+| 11      | Performance Strategy (3 أجزاء)                                                     | ✅ معتمدة نهائيًا                                                                            |
+| 12      | SEO Strategy (جزآن)                                                                | ✅ معتمدة نهائيًا                                                                            |
+| 13      | Testing Strategy (3 أجزاء، شامل Advanced Testing 16.1-16.20)                       | ✅ معتمدة نهائيًا                                                                            |
+| 14      | Deployment Strategy (نسخة موحَّدة 2.0)                                             | ✅ معتمدة نهائيًا                                                                            |
+| —       | Architectural Review v1 (مراجعة ما بعد المرحلة 14)                                 | ✅ مُطبَّقة، أثرها مدموج في الوثائق أعلاه                                                    |
+| 15      | Monitoring & Observability Strategy (جزآن)                                         | ✅ معتمدة نهائيًا                                                                            |
+| 16      | Documentation Strategy (جزآن)                                                      | ✅ معتمدة نهائيًا                                                                            |
+| 17      | Launch & Go-Live Readiness Plan                                                    | ✅ معتمدة نهائيًا                                                                            |
+| 18      | **هذه الوثيقة** — Final Architecture Review & Production Readiness                 | ✅ الوثيقة الختامية                                                                          |
 
 ---
 
@@ -55,23 +58,23 @@
 
 يوضح هذا الجدول أي وثيقة **تعتمد على** أي وثيقة أخرى (اعتماد مباشر مذكور صراحة داخل نصها)، لإثبات أن كل وثيقة مبنية فوق أساس سابق متّسق، وليست جزيرة معزولة:
 
-| الوثيقة | تعتمد على | يعتمد عليها |
-|---|---|---|
-| Database Schema | PRD | User Flow، API Design، Security (RLS)، كل الوثائق اللاحقة تقريبًا |
-| User Flow | PRD، Sitemap (تبادليًا) | Wireframes، Testing Strategy (E2E) |
-| Sitemap | User Flow، Database Schema (Slugs) | Wireframes، SEO Strategy، Frontend Architecture (Route Groups) |
-| Wireframes | Sitemap، Design System (جزئيًا متوازٍ) | Design System (تفاصيل نهائية)، Frontend Architecture |
-| Design System | Wireframes | Frontend Architecture، كل مكونات UI |
-| Frontend Architecture | Project Structure، Design System، Database Schema | API Design، Security، Performance، Testing، Deployment |
-| API Design | Database Schema، Frontend Architecture (Server Actions) | Security Architecture، Testing Strategy، Performance Strategy |
-| Security Architecture | Database Schema (RLS)، API Design | Testing Strategy، Deployment Strategy، Monitoring Strategy |
-| Performance Strategy | Frontend Architecture، API Design، Database Schema | SEO Strategy (Core Web Vitals)، Testing Strategy (Load Testing) |
-| SEO Strategy | Sitemap، Frontend Architecture (Metadata)، Performance Strategy | — (طرفية، لا وثيقة لاحقة تعتمد عليها بشكل بنيوي) |
-| Testing Strategy | كل الوثائق التقنية (1-12) | Deployment Strategy (Pipeline)، Launch Plan |
-| Deployment Strategy | Testing Strategy، Security (Backup/DR)، Performance (Scalability) | Monitoring Strategy، Launch Plan |
-| Monitoring & Observability | Security (تنبيهات)، Performance (مقاييس)، Deployment (Post-deploy) | Documentation Strategy (Runbooks)، Launch Plan |
-| Documentation Strategy | كل الوثائق (كمرجع للتنظيم) | Launch Plan (Runbooks) |
-| Launch & Go-Live Plan | **كل الوثائق الـ 16 السابقة** (Go/No-Go Framework يجمعها) | هذه الوثيقة (الإغلاق النهائي) |
+| الوثيقة                    | تعتمد على                                                          | يعتمد عليها                                                       |
+| -------------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| Database Schema            | PRD                                                                | User Flow، API Design، Security (RLS)، كل الوثائق اللاحقة تقريبًا |
+| User Flow                  | PRD، Sitemap (تبادليًا)                                            | Wireframes، Testing Strategy (E2E)                                |
+| Sitemap                    | User Flow، Database Schema (Slugs)                                 | Wireframes، SEO Strategy، Frontend Architecture (Route Groups)    |
+| Wireframes                 | Sitemap، Design System (جزئيًا متوازٍ)                             | Design System (تفاصيل نهائية)، Frontend Architecture              |
+| Design System              | Wireframes                                                         | Frontend Architecture، كل مكونات UI                               |
+| Frontend Architecture      | Project Structure، Design System، Database Schema                  | API Design، Security، Performance، Testing، Deployment            |
+| API Design                 | Database Schema، Frontend Architecture (Server Actions)            | Security Architecture، Testing Strategy، Performance Strategy     |
+| Security Architecture      | Database Schema (RLS)، API Design                                  | Testing Strategy، Deployment Strategy، Monitoring Strategy        |
+| Performance Strategy       | Frontend Architecture، API Design، Database Schema                 | SEO Strategy (Core Web Vitals)، Testing Strategy (Load Testing)   |
+| SEO Strategy               | Sitemap، Frontend Architecture (Metadata)، Performance Strategy    | — (طرفية، لا وثيقة لاحقة تعتمد عليها بشكل بنيوي)                  |
+| Testing Strategy           | كل الوثائق التقنية (1-12)                                          | Deployment Strategy (Pipeline)، Launch Plan                       |
+| Deployment Strategy        | Testing Strategy، Security (Backup/DR)، Performance (Scalability)  | Monitoring Strategy، Launch Plan                                  |
+| Monitoring & Observability | Security (تنبيهات)، Performance (مقاييس)، Deployment (Post-deploy) | Documentation Strategy (Runbooks)، Launch Plan                    |
+| Documentation Strategy     | كل الوثائق (كمرجع للتنظيم)                                         | Launch Plan (Runbooks)                                            |
+| Launch & Go-Live Plan      | **كل الوثائق الـ 16 السابقة** (Go/No-Go Framework يجمعها)          | هذه الوثيقة (الإغلاق النهائي)                                     |
 
 **الملاحظة الجوهرية:** لا توجد وثيقة واحدة "معزولة" بلا اعتمادية واضحة على ما قبلها أو تأثير واضح على ما بعدها — السلسلة الكاملة متماسكة من طرف لطرف.
 
@@ -81,22 +84,22 @@
 
 يثبت هذا الجدول أن كل قرار معماري جوهري **له مرجع توثيقي واحد واضح (لا تكرار متضارب)**، وأنه تم التحقق من عدم تعارضه مع أي قرار آخر:
 
-| القرار المعماري | المرجع الأساسي (مصدر الحقيقة الوحيد) | تم التحقق من التوافق مع |
-|---|---|---|
-| Monorepo (Turborepo + pnpm) | Project Structure، ADR-0001 | Deployment Strategy (نشر كل `apps/*` كمشروع Vercel منفصل) |
-| Supabase (PostgreSQL + Auth + Storage) | ADR-0002 | Database Schema، Security (RLS)، API Design |
-| Next.js 14 App Router | ADR-0003 | Frontend Architecture، SEO Strategy، Performance Strategy |
-| Zustand لحالة الواجهة | ADR-0004 | Frontend Architecture (فصلها عن TanStack Query) |
-| TanStack Query لحالة السيرفر | ADR-0005 | API Design (طبقة الاستهلاك)، Frontend Architecture |
-| RBAC عبر `user_roles` Many-to-Many | Database Schema | Security Architecture (بعد تصحيح JWT/RLS في المراجعة المعمارية) — **مؤكَّد التوافق حاليًا** |
-| Clean Architecture (Layered packages) | Project Structure | Frontend Architecture، API Design (طبقة `packages/api` كوسيط وحيد) |
-| Feature-First داخل `apps/web` | Frontend Architecture | لا تعارض مع Project Structure (نفس المصدر الأصلي وسَّعه) |
-| Server Components افتراضيًا | Frontend Architecture | Performance Strategy، SEO Strategy — كلها تبني على نفس القرار دون تناقض |
-| RLS كخط دفاع أخير على كل جدول | Security Architecture | Database Schema (لا جدول واحد استُثني) — **مؤكَّد 100%** |
-| Zero-Downtime + Expand-Contract Migrations | Deployment Strategy | Testing Strategy (اختبار Up/Down/Rollback لكل Migration) |
-| Monitoring موحَّد (Logs+Metrics+Traces) | Monitoring & Observability Strategy | Security (تنبيهات)، Performance (مقاييس)، Deployment (Post-deploy) — لا تكرار أدوات، مكدّس واحد موحَّد |
-| Documentation as Code | Documentation Strategy | كل الوثائق تعيش في `docs/` بنفس الأسلوب المعتمد |
-| انطلاق تدريجي 3 مراحل | Launch & Go-Live Plan | Deployment Strategy (Production Freeze يُستخدَم أثناء الإطلاق بنفس الآلية المعتمدة سابقًا) |
+| القرار المعماري                            | المرجع الأساسي (مصدر الحقيقة الوحيد) | تم التحقق من التوافق مع                                                                                |
+| ------------------------------------------ | ------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| Monorepo (Turborepo + pnpm)                | Project Structure، ADR-0001          | Deployment Strategy (نشر كل `apps/*` كمشروع Vercel منفصل)                                              |
+| Supabase (PostgreSQL + Auth + Storage)     | ADR-0002                             | Database Schema، Security (RLS)، API Design                                                            |
+| Next.js 14 App Router                      | ADR-0003                             | Frontend Architecture، SEO Strategy، Performance Strategy                                              |
+| Zustand لحالة الواجهة                      | ADR-0004                             | Frontend Architecture (فصلها عن TanStack Query)                                                        |
+| TanStack Query لحالة السيرفر               | ADR-0005                             | API Design (طبقة الاستهلاك)، Frontend Architecture                                                     |
+| RBAC عبر `user_roles` Many-to-Many         | Database Schema                      | Security Architecture (بعد تصحيح JWT/RLS في المراجعة المعمارية) — **مؤكَّد التوافق حاليًا**            |
+| Clean Architecture (Layered packages)      | Project Structure                    | Frontend Architecture، API Design (طبقة `packages/api` كوسيط وحيد)                                     |
+| Feature-First داخل `apps/web`              | Frontend Architecture                | لا تعارض مع Project Structure (نفس المصدر الأصلي وسَّعه)                                               |
+| Server Components افتراضيًا                | Frontend Architecture                | Performance Strategy، SEO Strategy — كلها تبني على نفس القرار دون تناقض                                |
+| RLS كخط دفاع أخير على كل جدول              | Security Architecture                | Database Schema (لا جدول واحد استُثني) — **مؤكَّد 100%**                                               |
+| Zero-Downtime + Expand-Contract Migrations | Deployment Strategy                  | Testing Strategy (اختبار Up/Down/Rollback لكل Migration)                                               |
+| Monitoring موحَّد (Logs+Metrics+Traces)    | Monitoring & Observability Strategy  | Security (تنبيهات)، Performance (مقاييس)، Deployment (Post-deploy) — لا تكرار أدوات، مكدّس واحد موحَّد |
+| Documentation as Code                      | Documentation Strategy               | كل الوثائق تعيش في `docs/` بنفس الأسلوب المعتمد                                                        |
+| انطلاق تدريجي 3 مراحل                      | Launch & Go-Live Plan                | Deployment Strategy (Production Freeze يُستخدَم أثناء الإطلاق بنفس الآلية المعتمدة سابقًا)             |
 
 **نتيجة المصفوفة:** **صفر تعارض غير محلول**. التعارض الوحيد المكتشَف فعليًا طوال المشروع (JWT/RLS، بعد المرحلة 14) عُولج وتم التحقق من توافقه بالكامل قبل كتابة هذه الوثيقة.
 
@@ -133,29 +136,29 @@
 
 قرارات مؤجَّلة **عمدًا** (وليست نسيانًا) — موثَّقة الآن لتفادي "إعادة اكتشافها" لاحقًا كأنها جديدة:
 
-| القرار المؤجَّل | لماذا أُجِّل | يُحسَم في |
-|---|---|---|
-| تفعيل بوابة الدفع الفعلية (Paymob/Stripe) | البنية جاهزة بالكامل (Database Schema، API Design)، لكن التفعيل الحي يتطلب حسابات تجارية معتمَدة وعقودًا قانونية خارج نطاق التصميم التقني | Phase 2 |
-| تفعيل الحجوزات (Bookings) | نفس السبب — البنية (`booking_slots`, `bookings`) موجودة، التفعيل الفعلي لاحق | Phase 2 |
-| بناء لوحتي Admin وCoach الفعليتين | الهياكل (Skeleton Apps) جاهزة ضمن الـ Monorepo الآن، المنطق الكامل يُبنى عند الحاجة الفعلية له | Phase 3 |
-| اختيار مزوّد بريد إلكتروني نهائي لـ `packages/email` | يحتاج قرار تجاري (تكلفة، حجم إرسال متوقَّع) خارج النطاق التقني البحت | بداية Phase 2 (قبل تفعيل الدفع لأن تأكيدات الطلبات تعتمد عليه) |
-| تفعيل MFA لحسابات Admin | مُصمَّم كقدرة أصيلة في Supabase Auth، لم يُفعَّل بعد لعدم وجود حسابات Admin فعلية في Phase 1 | بداية Phase 3 |
-| الانتقال لمحرك بحث متخصص (Meilisearch/Algolia) | PostgreSQL Full-text Search يكفي الحجم الحالي المتوقَّع؛ القرار يُعاد تقييمه فقط عند نمو الكتالوج بشكل كبير جدًا | مشروط بالنمو الفعلي، لا تاريخ محدَّد |
-| تطبيقات Android/iOS، AI Coach، Wearables، Public API خارجي | خارج نطاق منصة الويب بالكامل؛ `packages/api`, `packages/design-system`, `packages/validation` مُصمَّمة أصلاً لتُستهلَك منها لاحقًا دون إعادة بناء | Phase 4 |
-| Feature Flags عبر خدمة مخصصة (LaunchDarkly) بدل Environment Variables بسيطة | البداية بحل بسيط كافٍ لحجم الفريق الحالي؛ الترقية فقط عند تعقُّد سيناريوهات الـ Rollout | مشروط بالحاجة الفعلية |
+| القرار المؤجَّل                                                             | لماذا أُجِّل                                                                                                                                      | يُحسَم في                                                      |
+| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| تفعيل بوابة الدفع الفعلية (Paymob/Stripe)                                   | البنية جاهزة بالكامل (Database Schema، API Design)، لكن التفعيل الحي يتطلب حسابات تجارية معتمَدة وعقودًا قانونية خارج نطاق التصميم التقني         | Phase 2                                                        |
+| تفعيل الحجوزات (Bookings)                                                   | نفس السبب — البنية (`booking_slots`, `bookings`) موجودة، التفعيل الفعلي لاحق                                                                      | Phase 2                                                        |
+| بناء لوحتي Admin وCoach الفعليتين                                           | الهياكل (Skeleton Apps) جاهزة ضمن الـ Monorepo الآن، المنطق الكامل يُبنى عند الحاجة الفعلية له                                                    | Phase 3                                                        |
+| اختيار مزوّد بريد إلكتروني نهائي لـ `packages/email`                        | يحتاج قرار تجاري (تكلفة، حجم إرسال متوقَّع) خارج النطاق التقني البحت                                                                              | بداية Phase 2 (قبل تفعيل الدفع لأن تأكيدات الطلبات تعتمد عليه) |
+| تفعيل MFA لحسابات Admin                                                     | مُصمَّم كقدرة أصيلة في Supabase Auth، لم يُفعَّل بعد لعدم وجود حسابات Admin فعلية في Phase 1                                                      | بداية Phase 3                                                  |
+| الانتقال لمحرك بحث متخصص (Meilisearch/Algolia)                              | PostgreSQL Full-text Search يكفي الحجم الحالي المتوقَّع؛ القرار يُعاد تقييمه فقط عند نمو الكتالوج بشكل كبير جدًا                                  | مشروط بالنمو الفعلي، لا تاريخ محدَّد                           |
+| تطبيقات Android/iOS، AI Coach، Wearables، Public API خارجي                  | خارج نطاق منصة الويب بالكامل؛ `packages/api`, `packages/design-system`, `packages/validation` مُصمَّمة أصلاً لتُستهلَك منها لاحقًا دون إعادة بناء | Phase 4                                                        |
+| Feature Flags عبر خدمة مخصصة (LaunchDarkly) بدل Environment Variables بسيطة | البداية بحل بسيط كافٍ لحجم الفريق الحالي؛ الترقية فقط عند تعقُّد سيناريوهات الـ Rollout                                                           | مشروط بالحاجة الفعلية                                          |
 
 ---
 
 ## 7. Known Risks & Assumptions
 
-| الافتراض/الخطر | الأثر المحتمل إن كان خاطئًا | إجراء التخفيف الموثَّق |
-|---|---|---|
-| حجم كتالوج المنتجات/المحتوى يبقى ضمن عشرات الآلاف خلال أول 1-2 سنة | لو نما أسرع بكثير، PostgreSQL Full-text Search قد يحتاج ترقية أبكر من المخطَّط | مراقَب عبر Business Metrics (Monitoring Strategy)، قرار الترقية مُوثَّق كمؤجَّل جاهز (القسم 6) |
-| Vercel + Supabase يكفيان لحجم الحركة المتوقَّع في أول سنة | لو تجاوزت الحركة المتوقَّع بشكل كبير جدًا ومفاجئ، قد تحتاج ترقية خطط طارئة | Cost Monitoring (Deployment Strategy، القسم 17) يُنبِّه عند 80% من أي حد استخدام قبل الوصول لحد يوقف الخدمة |
-| الجمهور المستهدف (16-55 سنة، مصر/المنطقة العربية) مستقر ولا يحتاج تعديلًا جوهريًا مبكرًا | لو تغيّر التوجّه التسويقي بشكل جذري، قد يتطلب مراجعة User Flow وContent Strategy | خارج نطاق القرار التقني، قرار منتج/تسويق بحت |
-| فريق تطوير صغير-متوسط الحجم في البداية | بعض القرارات (On-Call بسيط بدل نظام تناوب معقّد، Feature Flags بسيطة) مُصمَّمة لهذا الحجم تحديدًا | موثَّق صراحة كقرار مؤقت قابل للترقية (Monitoring Strategy، القسم 8.2) |
-| لا يوجد التزام قانوني بمعايير GDPR الأوروبية الصارمة (السوق المستهدف مصر/المنطقة العربية) | لو توسَّع المشروع لاحقًا لأسواق أوروبية، قد يحتاج مراجعة قانونية إضافية | Security Architecture (القسم 37) طبَّق مبادئ حماية بيانات عامة كأفضل ممارسة احترازية، وليس امتثالًا كاملًا مُعتمَدًا قانونيًا |
-| بوابات الدفع (Paymob/Stripe) تبقى مستقرة وموثوقة كطرف ثالث | اعتماد كامل على استقرار خدمتهما؛ أي تعطل من جهتهم يؤثر مباشرة | Webhook Security + Incident Response (Security Architecture) يغطيان سيناريو تعطلهما، لكن لا بديل فوري كامل مبني |
+| الافتراض/الخطر                                                                            | الأثر المحتمل إن كان خاطئًا                                                                       | إجراء التخفيف الموثَّق                                                                                                        |
+| ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| حجم كتالوج المنتجات/المحتوى يبقى ضمن عشرات الآلاف خلال أول 1-2 سنة                        | لو نما أسرع بكثير، PostgreSQL Full-text Search قد يحتاج ترقية أبكر من المخطَّط                    | مراقَب عبر Business Metrics (Monitoring Strategy)، قرار الترقية مُوثَّق كمؤجَّل جاهز (القسم 6)                                |
+| Vercel + Supabase يكفيان لحجم الحركة المتوقَّع في أول سنة                                 | لو تجاوزت الحركة المتوقَّع بشكل كبير جدًا ومفاجئ، قد تحتاج ترقية خطط طارئة                        | Cost Monitoring (Deployment Strategy، القسم 17) يُنبِّه عند 80% من أي حد استخدام قبل الوصول لحد يوقف الخدمة                   |
+| الجمهور المستهدف (16-55 سنة، مصر/المنطقة العربية) مستقر ولا يحتاج تعديلًا جوهريًا مبكرًا  | لو تغيّر التوجّه التسويقي بشكل جذري، قد يتطلب مراجعة User Flow وContent Strategy                  | خارج نطاق القرار التقني، قرار منتج/تسويق بحت                                                                                  |
+| فريق تطوير صغير-متوسط الحجم في البداية                                                    | بعض القرارات (On-Call بسيط بدل نظام تناوب معقّد، Feature Flags بسيطة) مُصمَّمة لهذا الحجم تحديدًا | موثَّق صراحة كقرار مؤقت قابل للترقية (Monitoring Strategy، القسم 8.2)                                                         |
+| لا يوجد التزام قانوني بمعايير GDPR الأوروبية الصارمة (السوق المستهدف مصر/المنطقة العربية) | لو توسَّع المشروع لاحقًا لأسواق أوروبية، قد يحتاج مراجعة قانونية إضافية                           | Security Architecture (القسم 37) طبَّق مبادئ حماية بيانات عامة كأفضل ممارسة احترازية، وليس امتثالًا كاملًا مُعتمَدًا قانونيًا |
+| بوابات الدفع (Paymob/Stripe) تبقى مستقرة وموثوقة كطرف ثالث                                | اعتماد كامل على استقرار خدمتهما؛ أي تعطل من جهتهم يؤثر مباشرة                                     | Webhook Security + Incident Response (Security Architecture) يغطيان سيناريو تعطلهما، لكن لا بديل فوري كامل مبني               |
 
 ---
 
@@ -163,9 +166,9 @@
 
 **الحالة الحالية:** لا يوجد دَين تقني فعلي بعد — **لم يبدأ التطوير الفعلي بعد**، وكل القرارات المعمارية اتُّخذت بنية صحيحة منذ البداية (لا اختصارات مقصودة قُبلت على أنها "سنصلحها لاحقًا"). هذا السجل يُفتَح الآن **فارغًا عمدًا** كإجراء وقائي وليس لأن لا حاجة له:
 
-| البند | الحالة | ملاحظة |
-|---|---|---|
-| — | لا يوجد دَين تقني مُسجَّل حتى تاريخ هذه الوثيقة | السجل سيُحدَّث فعليًا بمجرد بدء Development (المرحلة 18) وظهور أي قرار تنفيذي عملي يقايض السرعة مقابل الجودة عن وعي |
+| البند | الحالة                                          | ملاحظة                                                                                                              |
+| ----- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| —     | لا يوجد دَين تقني مُسجَّل حتى تاريخ هذه الوثيقة | السجل سيُحدَّث فعليًا بمجرد بدء Development (المرحلة 18) وظهور أي قرار تنفيذي عملي يقايض السرعة مقابل الجودة عن وعي |
 
 **سياسة تشغيل هذا السجل بدءًا من مرحلة البرمجة:** أي قرار تنفيذي يُتَّخذ تحت ضغط وقت (مثال: تنفيذ مبسَّط مؤقت لميزة ثانوية) يُسجَّل هنا فورًا بصيغة: **البند | التاريخ | السبب | الأثر المحتمل | خطة السداد المتوقَّعة** — لا دَين تقني "صامت" يُكتشَف صدفة لاحقًا.
 
@@ -175,16 +178,16 @@
 
 هذه البوابة الأخيرة **لمرحلة التصميم بأكملها** — مختلفة عن Go/No-Go Framework الخاص بلحظة الإطلاق التشغيلي (Launch Plan، القسم 3)، والذي يُطبَّق لاحقًا بعد اكتمال البرمجة الفعلية. هذه البوابة تُجيب: **"هل التصميم بأكمله جاهز لنبدأ نكتب كودًا فعليًا عليه؟"**
 
-| المعيار | الحالة |
-|---|---|
-| كل الوثائق الـ17 السابقة معتمدة رسميًا من صاحب المشروع | ✅ مؤكَّد (كل مرحلة اعتُمدت صراحة قبل الانتقال للتالية) |
-| Cross-Reference Matrix (القسم 3) لا تُظهر أي وثيقة معزولة بلا اعتمادية واضحة | ✅ مؤكَّد |
-| Architecture Validation Matrix (القسم 4) تُظهر صفر تعارض غير محلول | ✅ مؤكَّد |
-| كل القرارات المعمارية الحاكمة (القسم 5) موثَّقة بمرجع واحد لا تكرار متضارب له | ✅ مؤكَّد |
-| القرارات المؤجَّلة (القسم 6) موثَّقة صراحة، لا قرار "منسي" يظهر كمفاجأة لاحقًا | ✅ مؤكَّد |
-| المخاطر والافتراضات (القسم 7) موثَّقة مع إجراء تخفيف لكل واحدة | ✅ مؤكَّد |
-| Technical Debt Register (القسم 8) مفتوح وجاهز للاستخدام من أول يوم برمجة فعلي | ✅ مؤكَّد |
-| شجرة المشروع الكاملة (Project Structure/Frontend Architecture) تعكس كل الحزم والتطبيقات المعتمدة بلا استثناء | ✅ مؤكَّد |
+| المعيار                                                                                                      | الحالة                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------- |
+| كل الوثائق الـ17 السابقة معتمدة رسميًا من صاحب المشروع                                                       | ✅ مؤكَّد (كل مرحلة اعتُمدت صراحة قبل الانتقال للتالية) |
+| Cross-Reference Matrix (القسم 3) لا تُظهر أي وثيقة معزولة بلا اعتمادية واضحة                                 | ✅ مؤكَّد                                               |
+| Architecture Validation Matrix (القسم 4) تُظهر صفر تعارض غير محلول                                           | ✅ مؤكَّد                                               |
+| كل القرارات المعمارية الحاكمة (القسم 5) موثَّقة بمرجع واحد لا تكرار متضارب له                                | ✅ مؤكَّد                                               |
+| القرارات المؤجَّلة (القسم 6) موثَّقة صراحة، لا قرار "منسي" يظهر كمفاجأة لاحقًا                               | ✅ مؤكَّد                                               |
+| المخاطر والافتراضات (القسم 7) موثَّقة مع إجراء تخفيف لكل واحدة                                               | ✅ مؤكَّد                                               |
+| Technical Debt Register (القسم 8) مفتوح وجاهز للاستخدام من أول يوم برمجة فعلي                                | ✅ مؤكَّد                                               |
+| شجرة المشروع الكاملة (Project Structure/Frontend Architecture) تعكس كل الحزم والتطبيقات المعتمدة بلا استثناء | ✅ مؤكَّد                                               |
 
 **نتيجة البوابة: PASS — المشروع جاهز لبدء المرحلة 18 (Development) دون أي حاجة لوثيقة معمارية إضافية.**
 

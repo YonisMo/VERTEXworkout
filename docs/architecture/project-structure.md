@@ -1,4 +1,5 @@
 # Project Structure — VERTEXworkout
+
 **المرحلة 1 من 18 — Software Architecture Documentation**
 **الإصدار:** 2.0 (نهائي)
 
@@ -9,6 +10,7 @@
 انظر التبرير الكامل والمقارنة مع البدائل في `docs/adr/ADRs.md` (السجل الموحّد لقرارات ADR).
 
 ### مبادئ معمارية مُتبعة عبر كل الهيكل
+
 - **Clean Architecture:** فصل صارم بين طبقات العرض (UI)، المنطق (Domain/Use-Cases)، والبيانات (Data Access).
 - **Feature-First Architecture:** كل ميزة وظيفية (Feature) تحتوي كل ملفاتها الخاصة بها في مكان واحد — بدل توزيعها حسب النوع التقني.
 - **Domain-Driven Design (حيث يناسب):** تنظيم حسب النطاق (Store, Academy, Programs) وليس فقط حسب النوع التقني.
@@ -121,10 +123,11 @@ apps/web/
 ```
 
 **الفرق بين `shared/` (داخل web) و `packages/ui` (على مستوى المشروع):**
-| | `packages/ui` | `apps/web/src/shared/` |
-|---|---|---|
-| من يستخدمه | web + admin + coach + mobile | web فقط |
-| مثال | `Button`, `Modal`, `Card` | `SiteHeader`, `SiteFooter` (تصميم خاص بالموقع العام فقط) |
+
+|            | `packages/ui`                | `apps/web/src/shared/`                                   |
+| ---------- | ---------------------------- | -------------------------------------------------------- |
+| من يستخدمه | web + admin + coach + mobile | web فقط                                                  |
+| مثال       | `Button`, `Modal`, `Card`    | `SiteHeader`, `SiteFooter` (تصميم خاص بالموقع العام فقط) |
 
 ---
 
@@ -168,15 +171,16 @@ database/
 
 ## 6. إدارة البيئات (Environment Management)
 
-| الملف | الاستخدام |
-|---|---|
-| `.env.example` | قالب موثّق يحتوي كل المتغيرات المطلوبة بدون قيم حقيقية — يُرفع على Git |
-| `.env.local` | القيم الفعلية لبيئة المطوّر المحلية — **لا يُرفع على Git** |
-| `.env.development` | بيئة التطوير المشتركة (Preview deployments) |
-| `.env.staging` | بيئة الاختبار قبل الإنتاج |
-| `.env.production` | بيئة الإنتاج الفعلية |
+| الملف              | الاستخدام                                                              |
+| ------------------ | ---------------------------------------------------------------------- |
+| `.env.example`     | قالب موثّق يحتوي كل المتغيرات المطلوبة بدون قيم حقيقية — يُرفع على Git |
+| `.env.local`       | القيم الفعلية لبيئة المطوّر المحلية — **لا يُرفع على Git**             |
+| `.env.development` | بيئة التطوير المشتركة (Preview deployments)                            |
+| `.env.staging`     | بيئة الاختبار قبل الإنتاج                                              |
+| `.env.production`  | بيئة الإنتاج الفعلية                                                   |
 
 كل متغير في `.env.example` يُوثّق بتعليق يشرح الغرض منه، مثال:
+
 ```
 # رابط مشروع Supabase
 NEXT_PUBLIC_SUPABASE_URL=
@@ -187,6 +191,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=
 # مفتاح Supabase الخاص (Service Role) — للسيرفر فقط، لا يُكشف أبدًا
 SUPABASE_SERVICE_ROLE_KEY=
 ```
+
 التوثيق الكامل لكل المتغيرات في `docs/deployment/deployment-strategy.md`.
 
 ---
@@ -194,6 +199,7 @@ SUPABASE_SERVICE_ROLE_KEY=
 ## 7. Logging & Monitoring (من البداية، حتى لو غير مفعّل)
 
 داخل `packages/lib/`:
+
 ```
 lib/
 ├── supabase-client.ts
@@ -215,6 +221,7 @@ lib/
 ---
 
 ## ✅ يرجى المراجعة والموافقة على:
+
 - [ ] إضافة `docs/`, `scripts/`, `tests/` على مستوى الجذر
 - [ ] التفصيل الموسّع لـ `packages/database`
 - [ ] استراتيجية إدارة البيئات (.env.*)

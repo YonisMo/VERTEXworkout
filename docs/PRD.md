@@ -1,4 +1,5 @@
 # وثيقة متطلبات المنتج (PRD)
+
 # VERTEXworkout — Fitness Ecosystem المتكامل
 
 **الإصدار:** 2.0
@@ -23,13 +24,13 @@ VERTEXworkout منصة رقمية شاملة للياقة البدنية، تج�
 
 ## 2. الجمهور المستهدف (Target Audience)
 
-| الفئة | الوصف |
-|---|---|
-| المبتدئون | يبحثون عن إرشاد وبرامج بسيطة للبدء |
-| الراغبون في خسارة الوزن | يحتاجون خطط تغذية وتمارين محددة |
-| الراغبون في بناء العضلات | برامج تضخيم وتقوية |
-| الباحثون عن اللياقة العامة | صحة عامة ونمط حياة نشط |
-| رياضيو القوة الوظيفية | برامج متقدمة (Functional Fitness) |
+| الفئة                      | الوصف                              |
+| -------------------------- | ---------------------------------- |
+| المبتدئون                  | يبحثون عن إرشاد وبرامج بسيطة للبدء |
+| الراغبون في خسارة الوزن    | يحتاجون خطط تغذية وتمارين محددة    |
+| الراغبون في بناء العضلات   | برامج تضخيم وتقوية                 |
+| الباحثون عن اللياقة العامة | صحة عامة ونمط حياة نشط             |
+| رياضيو القوة الوظيفية      | برامج متقدمة (Functional Fitness)  |
 
 **النطاق العمري:** 16–55 سنة، رجال ونساء، بدون تخصيص لفئة واحدة.
 
@@ -53,17 +54,21 @@ VERTEXworkout منصة رقمية شاملة للياقة البدنية، تج�
 ## 4. المتجر الإلكتروني (Store)
 
 ### 4.1 نطاق المنتجات — المرحلة الأولى
+
 التركيز على منتجات **VERTEX الخاصة فقط** (وليس المكملات الغذائية):
+
 - VERTEX Power Bags
 - Resistance Bands
 - Functional Training Equipment
 - Training Accessories
-- Apparel *(مستقبلاً)*
+- Apparel _(مستقبلاً)_
 
 > المكملات الغذائية: خيار مستقبلي، خارج نطاق MVP.
 
 ### 4.2 ميزات مُجهّزة بنيويًا (غير مفعّلة بالضرورة في المرحلة الأولى)
+
 يجب أن تدعمها قاعدة البيانات والواجهة منذ البداية دون الحاجة لإعادة هيكلة:
+
 - Wishlist
 - Compare Products
 - Product Reviews
@@ -75,6 +80,7 @@ VERTEXworkout منصة رقمية شاملة للياقة البدنية، تج�
 ## 5. Exercise Library (مكتبة التمارين)
 
 مكتبة تمارين احترافية، كل تمرين يحتوي على:
+
 - فيديو توضيحي
 - شرح مفصل للأداء
 - العضلات المستهدفة (Primary/Secondary Muscles)
@@ -89,6 +95,7 @@ VERTEXworkout منصة رقمية شاملة للياقة البدنية، تج�
 ## 6. VERTEX Academy
 
 قسم تعليمي مستقل ضمن المنصة، يضم:
+
 - Smart Cards (بطاقات معرفية سريعة)
 - Exercise Library (مرتبطة بنفس مكتبة التمارين)
 - Articles (مقالات تعليمية)
@@ -104,6 +111,7 @@ VERTEXworkout منصة رقمية شاملة للياقة البدنية، تج�
 ## 7. حساب المتدرب (Client Profile)
 
 يشمل الحساب الكامل (يُبنى تدريجيًا حسب المرحلة):
+
 - الصورة الشخصية
 - الوزن، الطول، العمر
 - الهدف التدريبي
@@ -112,7 +120,7 @@ VERTEXworkout منصة رقمية شاملة للياقة البدنية، تج�
 - تقدم المتدرب (Progress Tracking)
 - الإنجازات (Achievements/Badges)
 - سجل النشاط (Activity Log)
-- الملفات الطبية *(اختياري، بخصوصية عالية)*
+- الملفات الطبية _(اختياري، بخصوصية عالية)_
 
 ---
 
@@ -120,11 +128,11 @@ VERTEXworkout منصة رقمية شاملة للياقة البدنية، تج�
 
 تُصمَّم قاعدة البيانات منذ البداية لدعم نظام أدوار متعدد (Role-Based Access Control):
 
-| الدور | الصلاحيات الأساسية |
-|---|---|
-| **Admin** | إدارة كاملة: مستخدمين، منتجات، برامج، طلبات، محتوى |
-| **Coach** | إدارة برامجه، متابعة عملائه، تحديث تقدمهم |
-| **Client** | حسابه الشخصي، برامجه، مشترياته |
+| الدور      | الصلاحيات الأساسية                                 |
+| ---------- | -------------------------------------------------- |
+| **Admin**  | إدارة كاملة: مستخدمين، منتجات، برامج، طلبات، محتوى |
+| **Coach**  | إدارة برامجه، متابعة عملائه، تحديث تقدمهم          |
+| **Client** | حسابه الشخصي، برامجه، مشترياته                     |
 
 > البنية قابلة لإضافة أدوار أخرى مستقبلًا (مثل Content Editor أو Support) دون تعديل جوهري.
 
@@ -133,15 +141,19 @@ VERTEXworkout منصة رقمية شاملة للياقة البدنية، تج�
 ## 9. النطاق الوظيفي والخارطة الزمنية (Roadmap)
 
 ### Phase 1 — MVP
+
 Home · About · Services · Programs · VERTEX Academy · Exercise Library · Blog · Login/Register · Basic Profile · Store (عرض) · Contact
 
 ### Phase 2
+
 Shopping Cart · Checkout · Online Payments (Paymob → Stripe) · Bookings · Wishlist · Reviews · Ratings
 
 ### Phase 3
+
 Admin Dashboard · Coach Dashboard · Client Management · Program Management · Progress Tracking · Reports & Analytics
 
 ### Phase 4
+
 Android App · iOS App · AI Fitness Coach · Wearables Integration (Apple Health, Google Fit) · Smart Notifications
 
 ---
@@ -149,12 +161,14 @@ Android App · iOS App · AI Fitness Coach · Wearables Integration (Apple Healt
 ## 10. المتطلبات غير الوظيفية (Non-Functional Requirements)
 
 ### الأداء وتجربة المستخدم
+
 - Core Web Vitals ممتازة (LCP < 2.5s, CLS < 0.1, INP < 200ms)
 - Responsive 100% على كل الأجهزة
 - Clean Architecture + Component-Based Design + مكونات قابلة لإعادة الاستخدام
 - إمكانية الوصول: توافق WCAG 2.1 AA
 
 ### SEO
+
 - Dynamic Metadata لكل صفحة
 - Open Graph + Twitter Cards
 - Canonical URLs
@@ -163,11 +177,13 @@ Android App · iOS App · AI Fitness Coach · Wearables Integration (Apple Healt
 - Breadcrumbs
 
 ### Analytics
+
 - Google Analytics 4
 - Google Search Console
 - Microsoft Clarity
 
 ### الأمان (Security)
+
 - Row Level Security (Supabase)
 - Rate Limiting
 - CAPTCHA (نماذج التسجيل والتواصل)
@@ -177,28 +193,29 @@ Android App · iOS App · AI Fitness Coach · Wearables Integration (Apple Healt
 - تشفير كلمات المرور وHTTPS إلزامي
 
 ### اللغات
+
 - عربي (RTL) وإنجليزي (LTR) بالكامل، مع تذكر تفضيل المستخدم، وبنية قابلة لإضافة لغات مستقبلًا.
 
 ---
 
 ## 11. البنية التقنية المعتمدة (Tech Stack)
 
-| الطبقة | التقنية | السبب |
-|---|---|---|
-| Framework | Next.js 14+ (App Router) + TypeScript | SSR/SSG لـ SEO، أداء عالٍ، Type Safety |
-| التنسيق | Tailwind CSS + shadcn/ui | تصميم مخصص سريع، مكونات قابلة للوصول |
-| قاعدة البيانات | Supabase (PostgreSQL + Auth + Storage) | جاهزة للتوسع، RLS مدمج |
-| إدارة حالة الواجهة | Zustand | خفيف ومناسب لحالة الواجهة |
-| إدارة حالة السيرفر | TanStack Query | Caching تلقائي للبيانات |
-| التحقق من البيانات | Zod | Validation آمن ومتوافق مع TypeScript |
-| الفورمات | React Hook Form | أداء عالٍ في الفورمات |
-| i18n | next-intl | دعم رسمي للعربي/الإنجليزي وRTL/LTR |
-| الحركة (Animation) | Framer Motion | حركات ناعمة متوافقة مع الهوية |
-| جودة الكود | ESLint + Prettier + Husky + lint-staged | معايير كود موحدة |
-| الاستضافة | Vercel | تكامل مباشر، أداء Edge عالمي |
-| الدفع (Phase 2) | Paymob (أساسي) + Stripe (دولي) | تغطية السوق العربي والعالمي |
-| ORM (عند الحاجة) | Prisma (مؤجل) | يُضاف فقط عند تعقّد الاستعلامات |
-| Analytics | GA4 + GSC + Microsoft Clarity | قياس السلوك والأداء |
+| الطبقة             | التقنية                                 | السبب                                  |
+| ------------------ | --------------------------------------- | -------------------------------------- |
+| Framework          | Next.js 14+ (App Router) + TypeScript   | SSR/SSG لـ SEO، أداء عالٍ، Type Safety |
+| التنسيق            | Tailwind CSS + shadcn/ui                | تصميم مخصص سريع، مكونات قابلة للوصول   |
+| قاعدة البيانات     | Supabase (PostgreSQL + Auth + Storage)  | جاهزة للتوسع، RLS مدمج                 |
+| إدارة حالة الواجهة | Zustand                                 | خفيف ومناسب لحالة الواجهة              |
+| إدارة حالة السيرفر | TanStack Query                          | Caching تلقائي للبيانات                |
+| التحقق من البيانات | Zod                                     | Validation آمن ومتوافق مع TypeScript   |
+| الفورمات           | React Hook Form                         | أداء عالٍ في الفورمات                  |
+| i18n               | next-intl                               | دعم رسمي للعربي/الإنجليزي وRTL/LTR     |
+| الحركة (Animation) | Framer Motion                           | حركات ناعمة متوافقة مع الهوية          |
+| جودة الكود         | ESLint + Prettier + Husky + lint-staged | معايير كود موحدة                       |
+| الاستضافة          | Vercel                                  | تكامل مباشر، أداء Edge عالمي           |
+| الدفع (Phase 2)    | Paymob (أساسي) + Stripe (دولي)          | تغطية السوق العربي والعالمي            |
+| ORM (عند الحاجة)   | Prisma (مؤجل)                           | يُضاف فقط عند تعقّد الاستعلامات        |
+| Analytics          | GA4 + GSC + Microsoft Clarity           | قياس السلوك والأداء                    |
 
 ---
 
@@ -225,6 +242,7 @@ Android App · iOS App · AI Fitness Coach · Wearables Integration (Apple Healt
 ---
 
 ## ✅ يرجى المراجعة والموافقة على:
+
 - [ ] نطاق المتجر (منتجات VERTEX فقط في المرحلة الأولى)
 - [ ] Exercise Library وVERTEX Academy كأقسام مستقلة
 - [ ] حساب المتدرب الموسّع

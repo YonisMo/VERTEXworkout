@@ -17,7 +17,6 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b-2 border-[#F2EA79] bg-[#022859]">
       <Container className="flex h-[72px] items-center justify-between">
-
         {/* Logo */}
 
         <Link
@@ -45,18 +44,13 @@ export default function Navbar() {
 
         <div className="flex gap-3">
           <Link href="/login">
-            <Button variant="secondary">
-              Login
-            </Button>
+            <Button variant="secondary">Login</Button>
           </Link>
 
           <Link href="/register">
-            <Button>
-              Join Now
-            </Button>
+            <Button>Join Now</Button>
           </Link>
         </div>
-
       </Container>
     </header>
   );

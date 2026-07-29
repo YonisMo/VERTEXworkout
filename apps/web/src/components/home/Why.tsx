@@ -58,9 +58,7 @@ export default function Why() {
                 {item.title}
               </h3>
 
-              <p className="leading-8 text-slate-600">
-                {item.text}
-              </p>
+              <p className="leading-8 text-slate-600">{item.text}</p>
             </Card>
           ))}
         </div>

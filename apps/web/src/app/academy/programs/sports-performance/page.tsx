@@ -33,8 +33,8 @@ export default function SportsPerformanceProgramPage() {
 
           <p className="mb-10 leading-8 text-slate-600">
             The VERTEXworkout Sports Performance Program helps coaches
-            understand athletic development, performance principles, and how
-            to create structured training plans for different sports and
+            understand athletic development, performance principles, and how to
+            create structured training plans for different sports and
             performance goals.
           </p>
 

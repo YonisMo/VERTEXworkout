@@ -15,8 +15,7 @@ const exercises = [
   },
   {
     title: "Lunge Variations",
-    description:
-      "Improve balance, single-leg strength, and movement control.",
+    description: "Improve balance, single-leg strength, and movement control.",
   },
   {
     title: "Loaded Carries",
@@ -59,9 +58,7 @@ export default function FunctionalExercisesPage() {
                 {exercise.title}
               </h2>
 
-              <p className="leading-8 text-slate-600">
-                {exercise.description}
-              </p>
+              <p className="leading-8 text-slate-600">{exercise.description}</p>
             </div>
           ))}
         </div>

@@ -18,21 +18,15 @@ export const ProductService = {
   },
 
   getBySlug(slug: string) {
-    return products.find(
-      (product) => product.slug === slug
-    );
+    return products.find((product) => product.slug === slug);
   },
 
   getById(id: number) {
-    return products.find(
-      (product) => product.id === id
-    );
+    return products.find((product) => product.id === id);
   },
 
   getByCategory(category: string) {
-    return products.filter(
-      (product) => product.category === category
-    );
+    return products.filter((product) => product.category === category);
   },
 
   getCategories() {
@@ -47,16 +41,14 @@ export const ProductService = {
         product.name.toLowerCase().includes(value) ||
         product.description.toLowerCase().includes(value) ||
         product.category.toLowerCase().includes(value) ||
-        product.brand.toLowerCase().includes(value)
+        product.brand.toLowerCase().includes(value),
     );
   },
 
   getRelated(productId: number, category: string) {
     return products
       .filter(
-        (product) =>
-          product.id !== productId &&
-          product.category === category
+        (product) => product.id !== productId && product.category === category,
       )
       .slice(0, 4);
   },

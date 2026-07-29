@@ -14,9 +14,7 @@ type AcademyLayoutProps = {
   children: React.ReactNode;
 };
 
-export default function AcademyLayout({
-  children,
-}: AcademyLayoutProps) {
+export default function AcademyLayout({ children }: AcademyLayoutProps) {
   return (
     <>
       <AcademyNavigation />

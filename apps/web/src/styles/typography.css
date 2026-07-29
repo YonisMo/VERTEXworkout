@@ -5,187 +5,157 @@
 
 /* Google Fonts */
 
-
 /* ================================
       BODY
 ================================ */
 
-body{
+body {
+  font-family: "Tajawal", sans-serif;
 
-    font-family:"Tajawal",sans-serif;
+  font-size: 16px;
 
-    font-size:16px;
+  line-height: 1.8;
 
-    line-height:1.8;
+  font-weight: 400;
 
-    font-weight:400;
-
-    color:inherit;
-
+  color: inherit;
 }
 
 /* ================================
       HEADINGS
 ================================ */
 
-h1,h2,h3,h4,h5,h6{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Cairo", sans-serif;
 
-    font-family:"Cairo",sans-serif;
+  font-weight: 800;
 
-    font-weight:800;
+  color: inherit;
 
-    color:inherit;
-
-    margin:0;
-
+  margin: 0;
 }
 
 /* ================================
       H1
 ================================ */
 
-h1{
+h1 {
+  font-size: clamp(42px, 5vw, 72px);
 
-    font-size:clamp(42px,5vw,72px);
-
-    line-height:1.1;
-
+  line-height: 1.1;
 }
 
 /* ================================
       H2
 ================================ */
 
-h2{
+h2 {
+  font-size: clamp(34px, 4vw, 54px);
 
-    font-size:clamp(34px,4vw,54px);
-
-    line-height:1.2;
-
+  line-height: 1.2;
 }
 
 /* ================================
       H3
 ================================ */
 
-h3{
-
-    font-size:clamp(28px,3vw,40px);
-
+h3 {
+  font-size: clamp(28px, 3vw, 40px);
 }
 
 /* ================================
       H4
 ================================ */
 
-h4{
-
-    font-size:28px;
-
+h4 {
+  font-size: 28px;
 }
 
 /* ================================
       H5
 ================================ */
 
-h5{
-
-    font-size:22px;
-
+h5 {
+  font-size: 22px;
 }
 
 /* ================================
       H6
 ================================ */
 
-h6{
-
-    font-size:18px;
-
+h6 {
+  font-size: 18px;
 }
 
 /* ================================
       PARAGRAPH
 ================================ */
 
-p{
+p {
+  font-family: "Tajawal", sans-serif;
 
-    font-family:"Tajawal",sans-serif;
+  color: inherit;
 
-    color:inherit;
-
-    margin:0;
-
+  margin: 0;
 }
 
 /* ================================
       LINKS
 ================================ */
 
-a{
+a {
+  text-decoration: none;
 
-    text-decoration:none;
+  color: inherit;
 
-    color:inherit;
-
-    transition:.3s;
-
+  transition: 0.3s;
 }
 
 /* ================================
       STRONG
 ================================ */
 
-strong{
-
-    color:inherit;
-
+strong {
+  color: inherit;
 }
 
 /* ================================
       LIST
 ================================ */
 
-ul{
+ul {
+  padding: 0;
 
-    padding:0;
-
-    margin:0;
-
+  margin: 0;
 }
 
-li{
-
-    list-style:none;
-
+li {
+  list-style: none;
 }
 
 /* ================================
       SMALL TEXT
 ================================ */
 
-.text-small{
-
-    font-size:14px;
-
+.text-small {
+  font-size: 14px;
 }
 
-.text-muted{
-
-    color:var(--text-muted);
-
+.text-muted {
+  color: var(--text-muted);
 }
 
-.text-center{
-
-    text-align:center;
-
+.text-center {
+  text-align: center;
 }
 
-.text-uppercase{
+.text-uppercase {
+  text-transform: uppercase;
 
-    text-transform:uppercase;
-
-    letter-spacing:1px;
-
+  letter-spacing: 1px;
 }

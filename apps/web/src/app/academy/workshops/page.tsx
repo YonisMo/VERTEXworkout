@@ -34,8 +34,8 @@ export default function WorkshopsPage() {
             </h2>
 
             <p className="leading-8 text-slate-600">
-              Improve communication, coaching techniques, client assessment,
-              and professional training delivery.
+              Improve communication, coaching techniques, client assessment, and
+              professional training delivery.
             </p>
           </div>
 

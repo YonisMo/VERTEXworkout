@@ -7,7 +7,6 @@ export default function Hero() {
   return (
     <section className="flex min-h-[calc(100vh-72px)] items-center bg-[#022859] text-white">
       <Container className="text-center">
-
         <span className="inline-block rounded-full border border-[#F2EA79] px-6 py-3 font-semibold text-[#F2EA79]">
           Functional Fitness • Academy • Store
         </span>
@@ -24,21 +23,14 @@ export default function Hero() {
         </p>
 
         <div className="mt-12 flex flex-wrap justify-center gap-5">
-
           <Link href="/programs">
-            <Button>
-              Start Training
-            </Button>
+            <Button>Start Training</Button>
           </Link>
 
           <Link href="/programs">
-            <Button variant="secondary">
-              Explore Programs
-            </Button>
+            <Button variant="secondary">Explore Programs</Button>
           </Link>
-
         </div>
-
       </Container>
     </section>
   );

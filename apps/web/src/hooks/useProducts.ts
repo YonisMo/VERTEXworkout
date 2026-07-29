@@ -1,9 +1,7 @@
 import { ProductService } from "@/services/product.service";
 
 export function useProducts() {
-
   return {
-
     products: ProductService.getAll(),
 
     featured: ProductService.getFeatured(),
@@ -11,7 +9,5 @@ export function useProducts() {
     bestSellers: ProductService.getBestSellers(),
 
     newProducts: ProductService.getNewProducts(),
-
   };
-
 }

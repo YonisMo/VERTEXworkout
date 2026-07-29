@@ -7,323 +7,265 @@
    BUTTONS
 ============================ */
 
-.btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:.6rem;
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
 
-    padding:.95rem 1.8rem;
+  padding: 0.95rem 1.8rem;
 
-    border:none;
+  border: none;
 
-    border-radius:var(--radius-lg);
+  border-radius: var(--radius-lg);
 
-    cursor:pointer;
+  cursor: pointer;
 
-    font-family:"Cairo",sans-serif;
+  font-family: "Cairo", sans-serif;
 
-    font-weight:700;
+  font-weight: 700;
 
-    text-decoration:none;
+  text-decoration: none;
 
-    transition:var(--transition-normal);
+  transition: var(--transition-normal);
 }
 
-.btn-primary{
+.btn-primary {
+  background: var(--vertex-primary);
 
-    background:var(--vertex-primary);
-
-    color:#fff;
-
+  color: #fff;
 }
 
-.btn-primary:hover{
+.btn-primary:hover {
+  background: #033b79;
 
-    background:#033B79;
+  transform: translateY(-3px);
 
-    transform:translateY(-3px);
-
-    box-shadow:var(--shadow-lg);
-
+  box-shadow: var(--shadow-lg);
 }
 
-.btn-secondary{
+.btn-secondary {
+  background: var(--vertex-secondary);
 
-    background:var(--vertex-secondary);
-
-    color:var(--vertex-primary);
-
+  color: var(--vertex-primary);
 }
 
-.btn-secondary:hover{
+.btn-secondary:hover {
+  background: var(--vertex-gold);
 
-    background:var(--vertex-gold);
-
-    transform:translateY(-3px);
-
+  transform: translateY(-3px);
 }
 
-.btn-outline{
+.btn-outline {
+  background: transparent;
 
-    background:transparent;
+  color: var(--vertex-primary);
 
-    color:var(--vertex-primary);
-
-    border:2px solid var(--vertex-primary);
-
+  border: 2px solid var(--vertex-primary);
 }
 
-.btn-outline:hover{
+.btn-outline:hover {
+  background: var(--vertex-primary);
 
-    background:var(--vertex-primary);
-
-    color:white;
-
+  color: white;
 }
 
 /* ============================
    CARDS
 ============================ */
 
-.card{
+.card {
+  background: var(--bg-card);
 
-    background:var(--bg-card);
+  border: 1px solid var(--border-color);
 
-    border:1px solid var(--border-color);
+  border-radius: var(--radius-xl);
 
-    border-radius:var(--radius-xl);
+  box-shadow: var(--shadow-sm);
 
-    box-shadow:var(--shadow-sm);
+  overflow: hidden;
 
-    overflow:hidden;
-
-    transition:var(--transition-normal);
-
+  transition: var(--transition-normal);
 }
 
-.card:hover{
+.card:hover {
+  transform: translateY(-10px);
 
-    transform:translateY(-10px);
-
-    box-shadow:var(--shadow-xl);
-
+  box-shadow: var(--shadow-xl);
 }
 
 /* ============================
    BADGES
 ============================ */
 
-.badge{
+.badge {
+  display: inline-block;
 
-    display:inline-block;
+  padding: 0.45rem 0.9rem;
 
-    padding:.45rem .9rem;
+  border-radius: 999px;
 
-    border-radius:999px;
+  font-size: 0.85rem;
 
-    font-size:.85rem;
-
-    font-weight:700;
-
+  font-weight: 700;
 }
 
-.badge-primary{
+.badge-primary {
+  background: var(--vertex-primary);
 
-    background:var(--vertex-primary);
-
-    color:white;
-
+  color: white;
 }
 
-.badge-gold{
+.badge-gold {
+  background: var(--vertex-secondary);
 
-    background:var(--vertex-secondary);
-
-    color:var(--vertex-primary);
-
+  color: var(--vertex-primary);
 }
 
-.badge-premium{
+.badge-premium {
+  background: var(--vertex-premium);
 
-    background:var(--vertex-premium);
-
-    color:white;
-
+  color: white;
 }
 
 /* ============================
    INPUTS
 ============================ */
 
-.input{
+.input {
+  width: 100%;
 
-    width:100%;
+  padding: 1rem;
 
-    padding:1rem;
+  border-radius: var(--radius-md);
 
-    border-radius:var(--radius-md);
+  border: 1px solid var(--border-color);
 
-    border:1px solid var(--border-color);
+  background: white;
 
-    background:white;
-
-    outline:none;
-
+  outline: none;
 }
 
-.input:focus{
+.input:focus {
+  border-color: var(--vertex-secondary);
 
-    border-color:var(--vertex-secondary);
-
-    box-shadow:0 0 0 4px rgba(242,234,121,.35);
-
+  box-shadow: 0 0 0 4px rgba(242, 234, 121, 0.35);
 }
 
 /* ============================
    SECTION
 ============================ */
 
-.section{
-
-    padding:6rem 0;
-
+.section {
+  padding: 6rem 0;
 }
 
 /* ============================
    CONTAINER
 ============================ */
 
-.container-vertex{
+.container-vertex {
+  width: min(1280px, 92%);
 
-    width:min(1280px,92%);
-
-    margin-inline:auto;
-
+  margin-inline: auto;
 }
 
 /* ============================
    PRODUCT IMAGE
 ============================ */
 
-.product-image{
+.product-image {
+  overflow: hidden;
 
-    overflow:hidden;
-
-    border-radius:var(--radius-xl);
-
+  border-radius: var(--radius-xl);
 }
 
-.product-image img{
+.product-image img {
+  width: 100%;
 
-    width:100%;
-
-    transition:.5s;
-
+  transition: 0.5s;
 }
 
-.product-image:hover img{
-
-    transform:scale(1.08);
-
+.product-image:hover img {
+  transform: scale(1.08);
 }
 
 /* ============================
    NAVBAR
 ============================ */
 
-.nav-link{
+.nav-link {
+  position: relative;
 
-    position:relative;
+  font-weight: 700;
 
-    font-weight:700;
-
-    color:var(--vertex-primary);
-
+  color: var(--vertex-primary);
 }
 
-.nav-link::after{
+.nav-link::after {
+  content: "";
 
-    content:"";
+  position: absolute;
 
-    position:absolute;
+  left: 0;
 
-    left:0;
+  bottom: -5px;
 
-    bottom:-5px;
+  width: 0;
 
-    width:0;
+  height: 3px;
 
-    height:3px;
+  background: var(--vertex-secondary);
 
-    background:var(--vertex-secondary);
-
-    transition:.3s;
-
+  transition: 0.3s;
 }
 
-.nav-link:hover::after{
-
-    width:100%;
-
+.nav-link:hover::after {
+  width: 100%;
 }
 
 /* ============================
    FOOTER
 ============================ */
 
-.footer{
+.footer {
+  background: var(--vertex-primary);
 
-    background:var(--vertex-primary);
-
-    color:white;
-
+  color: white;
 }
 
-.footer a{
-
-    color:white;
-
+.footer a {
+  color: white;
 }
 
-.footer a:hover{
-
-    color:var(--vertex-secondary);
-
+.footer a:hover {
+  color: var(--vertex-secondary);
 }
 
 /* ============================
    DIVIDER
 ============================ */
 
-.divider{
+.divider {
+  width: 80px;
 
-    width:80px;
+  height: 5px;
 
-    height:5px;
+  background: var(--vertex-secondary);
 
-    background:var(--vertex-secondary);
-
-    border-radius:999px;
-
+  border-radius: 999px;
 }
 
 /* ============================
    RESPONSIVE
 ============================ */
 
-@media(max-width:768px){
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 0;
+  }
 
-    .section{
-
-        padding:4rem 0;
-
-    }
-
-    .btn{
-
-        width:100%;
-
-    }
-
+  .btn {
+    width: 100%;
+  }
 }

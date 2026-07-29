@@ -14,7 +14,6 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-
   --vertex-blue: #022859;
   --vertex-gold: #f2ea79;
   --vertex-gold-dark: #d9c84e;
@@ -68,7 +67,6 @@ body {
 }
 
 @theme inline {
-
   --font-heading: var(--font-sans);
 
   --font-sans: var(--font-sans);
@@ -151,7 +149,6 @@ body {
 }
 
 .dark {
-
   --background: oklch(0.145 0 0);
 
   --foreground: oklch(0.985 0 0);
