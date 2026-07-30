@@ -1,41 +1,30 @@
 import { Product } from "@/types/product";
 
 const products: Product[] = [
+  // --- Power Bags ---
   {
     id: 1,
     sku: "VPB-005",
     slug: "vertex-power-bag-5kg",
     name: "VERTEX Power Bag 5 KG",
-
-    shortDescription: "Functional Training Sand Bag",
-
-    description:
-      "Professional Power Bag made from heavy-duty nylon with reinforced handles. Perfect for Functional Training, CrossFit, HIIT and Strength Workouts.",
-
+    shortDescription: "Functional Training Power Bag",
+    description: "Professional Power Bag made from heavy-duty nylon with reinforced handles. Perfect for Functional Training, CrossFit, HIIT and Strength Workouts.",
     category: "Power Bags",
     brand: "VERTEXworkout",
-
     badge: "NEW",
-
     price: 900,
     oldPrice: 1000,
     discount: 10,
-
     stock: 15,
-
     weight: "5 KG",
     size: "Small",
     color: "Black",
-
     featured: true,
     bestseller: true,
     isNew: true,
-
     rating: 4.9,
     reviews: 38,
-
     images: ["/products/powerbag5.jpg"],
-
     features: [
       "Heavy Duty Nylon",
       "Reinforced Handles",
@@ -44,41 +33,29 @@ const products: Product[] = [
       "Lifetime Stitching",
     ],
   },
-
   {
     id: 2,
     sku: "VPB-010",
     slug: "vertex-power-bag-10kg",
     name: "VERTEX Power Bag 10 KG",
-
-    shortDescription: "Functional Training Sand Bag",
-
+    shortDescription: "Functional Training Power Bag",
     description: "Professional Power Bag for athletes and coaches.",
-
     category: "Power Bags",
     brand: "VERTEXworkout",
-
     badge: "BEST SELLER",
-
     price: 1100,
     oldPrice: 1250,
     discount: 12,
-
     stock: 20,
-
     weight: "10 KG",
     size: "Medium",
     color: "Black",
-
     featured: true,
     bestseller: true,
     isNew: false,
-
     rating: 5,
     reviews: 62,
-
     images: ["/products/powerbag10.jpg"],
-
     features: [
       "Heavy Duty Nylon",
       "Professional Handles",
@@ -87,41 +64,29 @@ const products: Product[] = [
       "Premium Quality",
     ],
   },
-
   {
     id: 3,
     sku: "VPB-015",
     slug: "vertex-power-bag-15kg",
     name: "VERTEX Power Bag 15 KG",
-
-    shortDescription: "Professional Sand Bag",
-
+    shortDescription: "Professional Power Bag",
     description: "Professional Functional Fitness Equipment.",
-
     category: "Power Bags",
     brand: "VERTEXworkout",
-
     badge: "HOT",
-
     price: 1350,
     oldPrice: 1500,
     discount: 10,
-
     stock: 10,
-
     weight: "15 KG",
     size: "Large",
     color: "Black",
-
     featured: true,
     bestseller: false,
     isNew: false,
-
     rating: 4.8,
     reviews: 41,
-
     images: ["/products/powerbag15.jpg"],
-
     features: [
       "Premium Nylon",
       "Multiple Grip Handles",
@@ -130,47 +95,134 @@ const products: Product[] = [
       "Outdoor",
     ],
   },
-
   {
     id: 4,
     sku: "VPB-020",
     slug: "vertex-power-bag-20kg",
     name: "VERTEX Power Bag 20 KG",
-
     shortDescription: "Elite Functional Training",
-
     description: "Designed for elite athletes and coaches.",
-
     category: "Power Bags",
     brand: "VERTEXworkout",
-
     badge: "PRO",
-
     price: 1600,
     oldPrice: 1800,
     discount: 11,
-
     stock: 8,
-
     weight: "20 KG",
     size: "XL",
     color: "Black",
-
     featured: true,
     bestseller: true,
     isNew: true,
-
     rating: 5,
     reviews: 74,
-
     images: ["/products/powerbag20.jpg"],
-
     features: [
       "Elite Build",
       "Heavy Duty",
       "Extreme Durability",
       "Competition Ready",
       "Professional Quality",
+    ],
+  },
+
+  // --- Swim Vests ---
+  {
+    id: 5,
+    sku: "VSV-101",
+    slug: "vertex-pro-swim-vest",
+    name: "VERTEX Pro Swim Vest / Life Jacket",
+    shortDescription: "Professional buoyancy swim vest",
+    description: "Engineered for swimming training, safety, and water rehabilitation programs with secure buckles and comfortable ergonomic design.",
+    category: "Swim Vests",
+    brand: "VERTEXworkout",
+    badge: "POPULAR",
+    price: 750,
+    oldPrice: 850,
+    discount: 11,
+    stock: 12,
+    weight: "0.8 KG",
+    size: "Universal",
+    color: "Yellow/Black",
+    featured: true,
+    bestseller: true,
+    isNew: true,
+    rating: 4.9,
+    reviews: 25,
+    images: ["/products/swimvest.jpg"],
+    features: [
+      "High Buoyancy",
+      "Ergonomic Fit",
+      "Quick Release Buckles",
+      "Swimming Training & Safety",
+      "Durable Neoprene",
+    ],
+  },
+
+  // --- Running Bags ---
+  {
+    id: 6,
+    sku: "VRB-201",
+    slug: "vertex-running-hydration-bag",
+    name: "VERTEX Runner Hydration Backpack",
+    shortDescription: "Lightweight running and fitness bag",
+    description: "Ergonomic lightweight running vest bag designed to hold water packs, keys, and essentials securely during intense long-distance runs.",
+    category: "Running Bags",
+    brand: "VERTEXworkout",
+    badge: "NEW",
+    price: 650,
+    oldPrice: 750,
+    discount: 13,
+    stock: 14,
+    weight: "0.4 KG",
+    size: "Standard",
+    color: "Black",
+    featured: true,
+    bestseller: false,
+    isNew: true,
+    rating: 4.7,
+    reviews: 19,
+    images: ["/products/runningbag.jpg"],
+    features: [
+      "Ultra Lightweight",
+      "Hydration Compatible",
+      "Anti-Bounce Design",
+      "Breathable Mesh",
+      "Night Reflectors",
+    ],
+  },
+
+  // --- Sports Bags ---
+  {
+    id: 7,
+    sku: "VSB-301",
+    slug: "vertex-pro-gym-duffel-bag",
+    name: "VERTEX Pro Sports & Gym Duffel Bag",
+    shortDescription: "Heavy-duty gym and sports duffel bag",
+    description: "Spacious sports bag featuring separate shoe compartments, waterproof pockets, and durable material built for daily gym and training routines.",
+    category: "Sports Bags",
+    brand: "VERTEXworkout",
+    badge: "BEST SELLER",
+    price: 1200,
+    oldPrice: 1400,
+    discount: 14,
+    stock: 25,
+    weight: "1.2 KG",
+    size: "Large",
+    color: "Navy Blue",
+    featured: true,
+    bestseller: true,
+    isNew: false,
+    rating: 4.9,
+    reviews: 53,
+    images: ["/products/sportsbag.jpg"],
+    features: [
+      "Waterproof Compartment",
+      "Dedicated Shoe Pocket",
+      "Heavy-Duty Zippers",
+      "Ergonomic Shoulder Strap",
+      "Large Capacity",
     ],
   },
 ];

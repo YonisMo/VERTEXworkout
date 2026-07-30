@@ -1,19 +1,22 @@
 import type { Metadata } from "next";
 import { Cairo, Tajawal } from "next/font/google";
+
 import "./globals.css";
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
+import { CartProvider } from "@/context/CartContext";
+
 const cairo = Cairo({
-  subsets: ["arabic", "latin"],
+  subsets: ["latin"],
   variable: "--font-cairo",
   weight: ["400", "600", "700", "800", "900"],
   display: "swap",
 });
 
 const tajawal = Tajawal({
-  subsets: ["arabic", "latin"],
+  subsets: ["latin"],
   variable: "--font-tajawal",
   weight: ["300", "400", "500", "700"],
   display: "swap",
@@ -24,17 +27,26 @@ export const metadata: Metadata = {
   description: "Functional fitness equipment & fitness academy",
 };
 
+type RootLayoutProps = {
+  children: React.ReactNode;
+};
+
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: RootLayoutProps) {
   return (
-    <html lang="ar" dir="rtl" className={`${cairo.variable} ${tajawal.variable}`}>
+    <html
+      lang="en"
+      dir="ltr"
+      className={`${cairo.variable} ${tajawal.variable}`}
+      suppressHydrationWarning
+    >
       <body className="flex min-h-screen flex-col bg-slate-50 font-tajawal text-[#022859] antialiased selection:bg-[#F2EA79] selection:text-[#022859]">
-        <Navbar />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+        <CartProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

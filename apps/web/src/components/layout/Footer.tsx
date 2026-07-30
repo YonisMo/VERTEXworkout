@@ -3,11 +3,11 @@ import Container from "@/components/ui/Container";
 
 export default function Footer() {
   return (
-    <footer className="mt-20 border-t border-[#F2EA79]/20 bg-[#022859] text-white">
+    <footer className="mt-20 border-t border-[#F2EA79]/20 bg-[#022859] text-white" dir="ltr">
       <Container className="py-16 font-tajawal">
-        <div className="grid gap-12 text-center md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-12 text-left md:grid-cols-2 lg:grid-cols-4">
           {/* Brand / About */}
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-start">
             <h2 className="mb-5 font-cairo text-2xl font-bold text-[#F2EA79]">
               About Us
             </h2>
@@ -19,7 +19,7 @@ export default function Footer() {
           </div>
 
           {/* Platform */}
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-start">
             <h3 className="mb-5 font-cairo text-xl font-bold text-[#F2EA79]">
               Platform
             </h3>
@@ -49,7 +49,7 @@ export default function Footer() {
           </div>
 
           {/* Support */}
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-start">
             <h3 className="mb-5 font-cairo text-xl font-bold text-[#F2EA79]">
               Support
             </h3>
@@ -79,7 +79,7 @@ export default function Footer() {
           </div>
 
           {/* Social */}
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-start">
             <h3 className="mb-5 font-cairo text-xl font-bold text-[#F2EA79]">
               Follow Us
             </h3>
@@ -110,7 +110,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-16 border-t border-[#BFB8BA]/20 pt-8 text-center text-sm font-medium text-[#A68986]">
-          © {new Date().getFullYear()} All rights reserved.
+          © {new Date().getFullYear()} VERTEX Workout. All rights reserved.
         </div>
       </Container>
     </footer>

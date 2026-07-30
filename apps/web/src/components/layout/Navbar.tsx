@@ -15,7 +15,7 @@ const links = [
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-50 border-b border-[#022859]/10 bg-white/90 backdrop-blur-md shadow-sm">
+    <header className="sticky top-0 z-50 border-b border-[#022859]/10 bg-white/90 backdrop-blur-md shadow-sm" dir="ltr">
       <Container className="flex h-[72px] items-center justify-between">
         {/* Logo */}
         <Link

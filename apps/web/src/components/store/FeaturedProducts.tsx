@@ -1,19 +1,17 @@
 import Link from "next/link";
-
 import products from "@/data/store/products";
-
 import Container from "@/components/ui/Container";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Button from "@/components/ui/Button";
 
 export default function FeaturedProducts() {
   return (
-    <section className="bg-white py-24">
+    <section className="bg-white py-24" dir="ltr">
       <Container>
         <SectionTitle
           badge="Featured"
           title="Featured Products"
-          subtitle="Discover our most popular functional fitness equipment and premium VERTEX products."
+          subtitle="Discover our most popular functional fitness equipment and premium VERTEX products, including power bags, swim vests, and professional sports bags."
         />
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
@@ -29,7 +27,7 @@ export default function FeaturedProducts() {
             return (
               <article
                 key={product.id}
-                className="group overflow-hidden rounded-3xl bg-slate-50 shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+                className="group overflow-hidden rounded-3xl bg-slate-50 shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl text-left"
               >
                 <div className="h-64 overflow-hidden">
                   <img
