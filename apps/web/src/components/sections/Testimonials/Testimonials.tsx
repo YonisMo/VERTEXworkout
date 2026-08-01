@@ -40,11 +40,15 @@ export default function Testimonials() {
                 ))}
               </div>
 
-              <p className="mb-6 text-gray-600">"{item.text}"</p>
+              <p className="mb-6 text-gray-600">
+                &ldquo;{item.text}&rdquo;
+              </p>
 
               <h3 className="text-xl font-bold">{item.name}</h3>
 
-              <p className="text-[#022859] font-semibold">{item.result}</p>
+              <p className="font-semibold text-[#022859]">
+                {item.result}
+              </p>
             </div>
           ))}
         </div>

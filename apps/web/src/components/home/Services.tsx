@@ -42,13 +42,17 @@ const services = [
 
 export default function OurServices() {
   return (
-    <section className="bg-slate-50 py-24 border-b border-[#BFB8BA]/20 font-tajawal">
+    <section className="bg-slate-50 py-24 border-b border-[#BFB8BA]/20 font-tajawal" dir="ltr">
       <Container>
-        <SectionTitle
-          badge="OUR SERVICES"
-          title="Our Services"
-          subtitle="Everything you need in one professional fitness ecosystem—from training and education to equipment and coaching"
-        />
+        <div className="text-center">
+          <div className="max-w-3xl mx-auto">
+            <SectionTitle
+              badge="OUR SERVICES"
+              title="Our Services"
+              subtitle="Everything you need in one professional fitness ecosystem—from training and education to equipment and coaching"
+            />
+          </div>
+        </div>
 
         <div className="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {services.map((service) => (
@@ -67,7 +71,7 @@ export default function OurServices() {
               </h3>
 
               {/* Description */}
-              <p className="text-base leading-relaxed text-[#BFB8BA] font-normal">
+              <p className="text-base leading-relaxed text-[#BFB8BA] font-normal text-center">
                 {service.description}
               </p>
             </div>

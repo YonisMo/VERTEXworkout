@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import Container from "@/components/ui/Container";
 import SectionTitle from "@/components/ui/SectionTitle";
 
@@ -44,11 +46,13 @@ export default function Categories() {
               key={category.title}
               className="group cursor-pointer overflow-hidden rounded-3xl bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
             >
-              <div className="h-64 overflow-hidden">
-                <img
+              <div className="relative h-64 overflow-hidden">
+                <Image
                   src={category.image}
                   alt={category.title}
-                  className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+                  fill
+                  sizes="(max-width:768px) 100vw, (max-width:1200px) 50vw, 33vw"
+                  className="object-cover transition duration-500 group-hover:scale-110"
                 />
               </div>
 

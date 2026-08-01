@@ -1,7 +1,8 @@
 import Link from "next/link";
+import type { Url } from "next/dist/shared/lib/router/router";
 import {
-  ButtonHTMLAttributes,
   AnchorHTMLAttributes,
+  ButtonHTMLAttributes,
   ReactNode,
 } from "react";
 
@@ -19,18 +20,19 @@ type ButtonAsButtonProps = CommonProps &
 
 type ButtonAsAnchorProps = CommonProps &
   Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> & {
-    href: string;
+    href: Url;
   };
 
 type ButtonProps = ButtonAsButtonProps | ButtonAsAnchorProps;
 
+function isLinkProps(props: ButtonProps): props is ButtonAsAnchorProps {
+  return props.href !== undefined;
+}
+
 export default function Button(props: ButtonProps) {
-  const {
-    children,
-    variant = "primary",
-    size = "md",
-    className = "",
-  } = props;
+  const variant = props.variant ?? "primary";
+  const size = props.size ?? "md";
+  const className = props.className ?? "";
 
   const variants = {
     primary: "bg-[#F2EA79] text-[#022859] hover:bg-[#F2DF80]",
@@ -45,50 +47,64 @@ export default function Button(props: ButtonProps) {
     lg: "px-8 py-4 text-lg",
   };
 
-  const classes = `
-    inline-flex
-    items-center
-    justify-center
-    rounded-2xl
-    font-bold
-    transition-all
-    duration-300
-    hover:scale-105
-    ${variants[variant]}
-    ${sizes[size]}
-    ${className}
-  `.trim();
+  const classes = [
+    "inline-flex",
+    "items-center",
+    "justify-center",
+    "rounded-2xl",
+    "font-bold",
+    "transition-all",
+    "duration-300",
+    "hover:scale-105",
+    variants[variant],
+    sizes[size],
+    className,
+  ].join(" ");
 
-  // في حالة وجود href (رابط)
-  if ("href" in props && props.href) {
+  if (isLinkProps(props)) {
     const {
       href,
-      children: _children,
+      children,
       variant: _variant,
       size: _size,
       className: _className,
       ...anchorProps
-    } = props as ButtonAsAnchorProps;
+    } = props;
+
+    void _variant;
+    void _size;
+    void _className;
 
     return (
-      <Link href={href} className={classes} {...anchorProps}>
+      <Link
+        href={href}
+        className={classes}
+        {...anchorProps}
+      >
         {children}
       </Link>
     );
   }
 
-  // في حالة الزر العادي button
   const {
-    children: _children,
+    children,
     variant: _variant,
     size: _size,
     className: _className,
     type = "button",
     ...buttonProps
-  } = props as ButtonAsButtonProps;
+  } = props;
+
+  void _variant;
+  void _size;
+  void _className;
 
   return (
-    <button type={type} className={classes} {...buttonProps}>
+    <button
+      type={type}
+      className={classes}
+      {...buttonProps}
+    >
       {children}
     </button>
   );

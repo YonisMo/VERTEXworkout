@@ -37,13 +37,17 @@ const features = [
 
 export default function Why() {
   return (
-    <section className="bg-slate-50 py-24 border-b border-[#BFB8BA]/20 font-tajawal">
+    <section className="bg-slate-50 py-24 border-b border-[#BFB8BA]/20 font-tajawal" dir="ltr">
       <Container>
-        <SectionTitle
-          badge="WHY US"
-          title="Why Choose VERTEXworkout"
-          subtitle="A complete fitness ecosystem that combines training, education, equipment, and performance to help you become stronger every day"
-        />
+        <div className="text-center">
+          <div className="max-w-3xl mx-auto">
+            <SectionTitle
+              badge="WHY US"
+              title="Why Choose VERTEXworkout"
+              subtitle="A complete fitness ecosystem that combines training, education, equipment, and performance to help you become stronger every day"
+            />
+          </div>
+        </div>
 
         <div className="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {features.map((item) => (

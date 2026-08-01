@@ -1,9 +1,15 @@
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
 
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 
-const links = [
+const navigation = [
   { name: "Home", href: "/" },
   { name: "Store", href: "/store" },
   { name: "Academy", href: "/academy" },
@@ -14,45 +20,136 @@ const links = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-[#022859]/10 bg-white/90 backdrop-blur-md shadow-sm" dir="ltr">
-      <Container className="flex h-[72px] items-center justify-between">
+    <header className="sticky top-0 z-50 border-b border-[#022859]/10 bg-[#F2EA79]/95 backdrop-blur-xl shadow-sm">
+      <Container className="flex h-24 items-center justify-between">
+
         {/* Logo */}
         <Link
           href="/"
-          className="font-cairo text-2xl font-black tracking-wider text-[#022859] transition hover:opacity-90 sm:text-3xl"
+          className="flex items-center transition-transform duration-300 hover:scale-105"
         >
-          VERTEX<span className="text-[#022859]/70">workout</span>
+          <Image
+            src="/images/logo/logo.png"
+            alt="VERTEXworkout"
+            width={320}
+            height={90}
+            priority
+            className="h-20 w-auto object-contain"
+          />
         </Link>
 
-        {/* Navigation */}
-        <nav className="hidden items-center gap-7 lg:flex font-tajawal">
-          {links.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="text-base font-bold text-[#022859] transition-colors duration-200 hover:text-[#A68986]"
-            >
-              {link.name}
-            </Link>
-          ))}
+        {/* Desktop Navigation */}
+        <nav className="hidden items-center gap-3 lg:flex">
+          {navigation.map((item) => {
+            const active =
+              pathname === item.href ||
+              (item.href !== "/" && pathname.startsWith(item.href));
+
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`rounded-xl px-4 py-2 text-[15px] font-bold transition-all duration-300 ${
+                  active
+                    ? "bg-white/80 text-[#022859] shadow-sm"
+                    : "text-[#022859] hover:bg-white/50"
+                }`}
+              >
+                {item.name}
+              </Link>
+            );
+          })}
         </nav>
 
-        {/* Actions */}
-        <div className="flex items-center gap-3 font-tajawal">
-          <Link href="/login">
-            <Button variant="secondary" size="sm">
+        {/* Desktop Actions */}
+        <div className="hidden items-center gap-2 lg:flex">
+          <Link href="/auth/login">
+            <Button
+              size="sm"
+              className="bg-transparent text-[#022859] hover:bg-white/50 font-bold shadow-none border-0"
+            >
               Login
             </Button>
           </Link>
 
-          <Link href="/register">
-            <Button variant="primary" size="sm">
+          <Link href="/auth/register">
+            <Button
+              size="sm"
+              className="bg-transparent text-[#022859] hover:bg-white/50 font-bold shadow-none border-0"
+            >
               Join Now
             </Button>
           </Link>
         </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="rounded-xl p-2.5 transition hover:bg-[#022859]/10 lg:hidden"
+          aria-label="Toggle menu"
+        >
+          {mobileOpen ? (
+            <X className="h-7 w-7 text-[#022859]" />
+          ) : (
+            <Menu className="h-7 w-7 text-[#022859]" />
+          )}
+        </button>
       </Container>
+
+      {/* Mobile Menu */}
+      {mobileOpen && (
+        <div className="border-t border-[#022859]/10 bg-[#F2EA79] lg:hidden">
+          <Container className="py-6">
+
+            <nav className="flex flex-col gap-3">
+              {navigation.map((item) => {
+                const active =
+                  pathname === item.href ||
+                  (item.href !== "/" &&
+                    pathname.startsWith(item.href));
+
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={`rounded-xl px-4 py-3 font-bold transition ${
+                      active
+                        ? "bg-white/80 text-[#022859]"
+                        : "text-[#022859] hover:bg-white/50"
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <div className="mt-6 border-t border-[#022859]/10 pt-6 flex flex-col gap-2">
+              <Link href="/auth/login">
+                <Button
+                  className="justify-start bg-transparent text-[#022859] hover:bg-white/50 shadow-none border-0"
+                >
+                  Login
+                </Button>
+              </Link>
+
+              <Link href="/auth/register">
+                <Button
+                  className="justify-start bg-transparent text-[#022859] hover:bg-white/50 shadow-none border-0"
+                >
+                  Join Now
+                </Button>
+              </Link>
+            </div>
+
+          </Container>
+        </div>
+      )}
     </header>
   );
 }

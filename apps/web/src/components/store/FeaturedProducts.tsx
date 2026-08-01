@@ -1,8 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
+
 import products from "@/data/store/products";
+import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import SectionTitle from "@/components/ui/SectionTitle";
-import Button from "@/components/ui/Button";
 
 export default function FeaturedProducts() {
   return (
@@ -16,24 +18,24 @@ export default function FeaturedProducts() {
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {products.map((product) => {
-            // استخراج مسار الصورة بأمان من مصفوفة images أو fallback
             const productImage =
-              Array.isArray(product.images) && product.images.length > 0
-                ? typeof product.images[0] === "string"
-                  ? product.images[0]
-                  : (product.images[0] as { url?: string })?.url
-                : (product as Record<string, any>).image || "/placeholder.jpg";
+              product.images.length > 0
+                ? product.images[0]
+                : "/placeholder.jpg";
 
             return (
               <article
                 key={product.id}
-                className="group overflow-hidden rounded-3xl bg-slate-50 shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl text-left"
+                className="group overflow-hidden rounded-3xl bg-slate-50 text-left shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
               >
-                <div className="h-64 overflow-hidden">
-                  <img
+                <div className="relative h-64 overflow-hidden">
+                  <Image
                     src={productImage}
                     alt={product.name}
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+                    fill
+                    sizes="(max-width:768px) 100vw, (max-width:1200px) 50vw, 25vw"
+                    className="object-cover transition duration-500 group-hover:scale-110"
+                    priority={false}
                   />
                 </div>
 
@@ -46,14 +48,21 @@ export default function FeaturedProducts() {
                     {product.name}
                   </h3>
 
-                  <p className="mt-2 text-slate-500">{product.category}</p>
+                  <p className="mt-2 text-slate-500">
+                    {product.category}
+                  </p>
 
                   <p className="mt-5 text-3xl font-extrabold text-[#022859]">
                     {product.price} EGP
                   </p>
 
-                  <Link href={`/store/${product.slug}`} className="mt-6 block">
-                    <Button className="w-full">View Product</Button>
+                  <Link
+                    href={`/store/${product.slug}`}
+                    className="mt-6 block"
+                  >
+                    <Button className="w-full">
+                      View Product
+                    </Button>
                   </Link>
                 </div>
               </article>

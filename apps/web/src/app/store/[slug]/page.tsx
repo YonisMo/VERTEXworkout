@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { use } from "react";
 
@@ -33,11 +34,16 @@ export default function ProductPage({ params }: Props) {
           {/* Image */}
 
           <div className="overflow-hidden rounded-3xl bg-white p-8 shadow-xl">
-            <img
-              src={product.images[0]}
-              alt={product.name}
-              className="w-full rounded-2xl object-cover transition duration-500 hover:scale-105"
-            />
+            <div className="relative aspect-square w-full">
+              <Image
+                src={product.images[0]}
+                alt={product.name}
+                fill
+                priority
+                sizes="(max-width:1024px) 100vw, 50vw"
+                className="rounded-2xl object-cover transition duration-500 hover:scale-105"
+              />
+            </div>
           </div>
 
           {/* Details */}
@@ -59,15 +65,15 @@ export default function ProductPage({ params }: Props) {
               {product.price} EGP
             </div>
 
-            {/* Buttons */}
-
             <div className="mt-10 flex flex-wrap gap-4">
-              <Button onClick={() => addToCart(product)}>Add To Cart</Button>
+              <Button onClick={() => addToCart(product)}>
+                Add To Cart
+              </Button>
 
-              <Button variant="outline">Buy Now</Button>
+              <Button variant="outline">
+                Buy Now
+              </Button>
             </div>
-
-            {/* Features */}
 
             <div className="mt-14 rounded-3xl bg-white p-8 shadow-lg">
               <h2 className="mb-6 text-2xl font-bold text-[#022859]">
