@@ -1,68 +1,96 @@
-export default function ProductPage() {
-  return (
-    <main className="bg-slate-50 min-h-screen">
-      <section className="mx-auto max-w-7xl px-6 py-20">
-        <div className="grid gap-12 lg:grid-cols-2">
-          {/* Product Image */}
+"use client";
 
-          <div className="overflow-hidden rounded-3xl bg-white shadow-lg">
-            <div className="flex h-[600px] items-center justify-center bg-slate-200">
-              <span className="text-2xl font-bold text-slate-500">
-                Product Image
-              </span>
+import Image from "next/image";
+import { notFound } from "next/navigation";
+import { use } from "react";
+
+import Container from "@/components/ui/Container";
+import Button from "@/components/ui/Button";
+
+import { ProductService } from "@/services/product.service";
+import { useCart } from "@/context/CartContext";
+
+type Props = {
+  params: Promise<{
+    slug: string;
+  }>;
+};
+
+export default function ProductPage({ params }: Props) {
+  const { slug } = use(params);
+
+  const product = ProductService.getBySlug(slug);
+
+  const { addToCart } = useCart();
+
+  if (!product) {
+    notFound();
+  }
+
+  return (
+    <main className="min-h-screen bg-slate-50 py-20">
+      <Container>
+        <div className="grid gap-16 lg:grid-cols-2">
+          <div className="overflow-hidden rounded-3xl bg-white p-8 shadow-xl">
+            <div className="relative aspect-square w-full">
+              <Image
+                src={product.images[0]}
+                alt={product.name}
+                fill
+                priority
+                sizes="(max-width:1024px) 100vw, 50vw"
+                className="rounded-2xl object-cover"
+              />
             </div>
           </div>
 
-          {/* Product Info */}
-
           <div>
-            <span className="rounded-full bg-[#F2EA79] px-4 py-2 font-semibold text-[#022859]">
-              Featured Product
+            <span className="inline-block rounded-full bg-[#F2EA79] px-5 py-2 font-bold text-[#022859]">
+              {product.badge}
             </span>
 
             <h1 className="mt-6 text-5xl font-extrabold text-[#022859]">
-              VERTEX Power Bag 20kg
+              {product.name}
             </h1>
 
-            <p className="mt-6 text-lg leading-8 text-gray-600">
-              Professional Functional Training Power Bag built for strength,
-              conditioning, athletic performance and high-intensity workouts.
+            <p className="mt-8 text-lg leading-9 text-slate-600">
+              {product.description}
             </p>
 
-            <p className="mt-8 text-4xl font-extrabold text-[#022859]">
-              2200 EGP
-            </p>
-
-            <div className="mt-10 flex gap-4">
-              <button className="rounded-2xl bg-[#F2EA79] px-10 py-4 font-bold text-[#022859] transition hover:opacity-90">
-                Add To Cart
-              </button>
-
-              <button className="rounded-2xl border-2 border-[#022859] px-10 py-4 font-bold text-[#022859] transition hover:bg-[#022859] hover:text-white">
-                Buy Now
-              </button>
+            <div className="mt-8 text-5xl font-extrabold text-[#022859]">
+              {product.price} EGP
             </div>
 
-            <div className="mt-12 rounded-2xl bg-white p-8 shadow-md">
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Button onClick={() => addToCart(product)}>
+                Add To Cart
+              </Button>
+
+              <Button variant="outline">
+                Buy Now
+              </Button>
+            </div>
+
+            <div className="mt-14 rounded-3xl bg-white p-8 shadow-lg">
               <h2 className="mb-6 text-2xl font-bold text-[#022859]">
                 Product Features
               </h2>
 
-              <ul className="space-y-4 text-lg text-gray-600">
-                <li>✔ Premium Heavy Duty Material</li>
-
-                <li>✔ Reinforced Handles</li>
-
-                <li>✔ Functional Training Design</li>
-
-                <li>✔ Indoor & Outdoor Use</li>
-
-                <li>✔ Designed by VERTEXworkout</li>
+              <ul className="space-y-4">
+                {product.features.map((feature, index) => (
+                  <li
+                    key={index}
+                    className="flex items-center gap-3 text-lg text-slate-700"
+                  >
+                    <span className="text-green-600">✔</span>
+                    {feature}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
         </div>
-      </section>
+      </Container>
     </main>
   );
 }

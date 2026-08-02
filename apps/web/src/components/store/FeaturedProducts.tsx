@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -5,8 +7,11 @@ import products from "@/data/store/products";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import SectionTitle from "@/components/ui/SectionTitle";
+import { useCart } from "@/context/CartContext";
 
 export default function FeaturedProducts() {
+  const { addToCart } = useCart();
+
   return (
     <section className="bg-white py-24" dir="ltr">
       <Container>
@@ -35,7 +40,6 @@ export default function FeaturedProducts() {
                     fill
                     sizes="(max-width:768px) 100vw, (max-width:1200px) 50vw, 25vw"
                     className="object-cover transition duration-500 group-hover:scale-110"
-                    priority={false}
                   />
                 </div>
 
@@ -56,14 +60,23 @@ export default function FeaturedProducts() {
                     {product.price} EGP
                   </p>
 
-                  <Link
-                    href={`/store/${product.slug}`}
-                    className="mt-6 block"
-                  >
-                    <Button className="w-full">
-                      View Product
+                  <div className="mt-6 flex gap-3">
+                    <Link
+                      href={`/store/${product.slug}`}
+                      className="flex-1"
+                    >
+                      <Button className="w-full">
+                        View Product
+                      </Button>
+                    </Link>
+
+                    <Button
+                      className="flex-1"
+                      onClick={() => addToCart(product)}
+                    >
+                      Add To Cart
                     </Button>
-                  </Link>
+                  </div>
                 </div>
               </article>
             );

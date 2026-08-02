@@ -1,57 +1,79 @@
+import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 
 export default function Footer() {
   return (
-    <footer className="mt-20 border-t border-[#F2EA79]/20 bg-[#022859] text-white">
-      <Container className="py-16 font-tajawal">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+    <footer className="mt-16 bg-[#022859] text-[#F2EA79]">
+      <Container className="py-12">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 items-start">
 
-          {/* About */}
-          <div>
-            <h2 className="mb-5 font-cairo text-2xl font-black text-[#F2EA79]">
-              VERTEXworkout
-            </h2>
+          {/* About - Centered */}
+          <div className="flex flex-col items-center justify-center text-center lg:col-span-1">
+            <Image
+              src="/images/logo/logo-footer.png"
+              alt="VERTEXworkout"
+              width={170}
+              height={95}
+              className="mb-5 h-auto w-auto"
+              priority={false}
+            />
 
-            <p className="max-w-xs leading-8 text-[#BFB8BA]">
-              A professional functional fitness ecosystem combining education,
-              coaching, premium equipment, and performance-driven training.
+            <p className="mt-3 w-full font-tajawal text-[20px] font-medium leading-7 text-[#F2EA79]">
+              Train Smarter
+              <span className="mx-3 text-[#F2EA79]">•</span>
+              Live Stronger
             </p>
           </div>
 
           {/* Platform */}
           <div>
-            <h3 className="mb-5 font-cairo text-xl font-bold text-[#F2EA79]">
+            <h3 className="mb-4 text-lg font-bold text-[#F2EA79]">
               Platform
             </h3>
 
-            <ul className="space-y-3 text-[#BFB8BA]">
+            <ul className="space-y-3 text-[#F2EA79]">
               <li>
-                <Link href="/" className="transition hover:text-[#F2EA79]">
+                <Link
+                  href="/"
+                  className="transition duration-300 hover:text-white"
+                >
                   Home
                 </Link>
               </li>
 
               <li>
-                <Link href="/store" className="transition hover:text-[#F2EA79]">
+                <Link
+                  href="/store"
+                  className="transition duration-300 hover:text-white"
+                >
                   Store
                 </Link>
               </li>
 
               <li>
-                <Link href="/academy" className="transition hover:text-[#F2EA79]">
+                <Link
+                  href="/academy"
+                  className="transition duration-300 hover:text-white"
+                >
                   Academy
                 </Link>
               </li>
 
               <li>
-                <Link href="/programs" className="transition hover:text-[#F2EA79]">
+                <Link
+                  href="/programs"
+                  className="transition duration-300 hover:text-white"
+                >
                   Programs
                 </Link>
               </li>
 
               <li>
-                <Link href="/exercises" className="transition hover:text-[#F2EA79]">
+                <Link
+                  href="/exercises"
+                  className="transition duration-300 hover:text-white"
+                >
                   Exercises
                 </Link>
               </li>
@@ -60,64 +82,88 @@ export default function Footer() {
 
           {/* Support */}
           <div>
-            <h3 className="mb-5 font-cairo text-xl font-bold text-[#F2EA79]">
+            <h3 className="mb-4 text-lg font-bold text-[#F2EA79]">
               Support
             </h3>
 
-            <ul className="space-y-3 text-[#BFB8BA]">
+            <ul className="space-y-3 text-[#F2EA79]">
               <li>
-                <Link href="/contact" className="transition hover:text-[#F2EA79]">
+                <Link
+                  href="/contact"
+                  className="transition duration-300 hover:text-white"
+                >
                   Contact
                 </Link>
               </li>
 
               <li>
-                <Link href="/faq" className="transition hover:text-[#F2EA79]">
+                <Link
+                  href="/faq"
+                  className="transition duration-300 hover:text-white"
+                >
                   FAQ
                 </Link>
               </li>
 
               <li>
-                <Link href="/privacy" className="transition hover:text-[#F2EA79]">
+                <Link
+                  href="/privacy"
+                  className="transition duration-300 hover:text-white"
+                >
                   Privacy Policy
                 </Link>
               </li>
 
               <li>
-                <Link href="/terms" className="transition hover:text-[#F2EA79]">
+                <Link
+                  href="/terms"
+                  className="transition duration-300 hover:text-white"
+                >
                   Terms & Conditions
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Social */}
+          {/* Follow */}
           <div>
-            <h3 className="mb-5 font-cairo text-xl font-bold text-[#F2EA79]">
+            <h3 className="mb-4 text-lg font-bold text-[#F2EA79]">
               Follow Us
             </h3>
 
-            <ul className="space-y-3 text-[#BFB8BA]">
+            <ul className="space-y-3 text-[#F2EA79]">
               <li>
-                <a href="#" className="transition hover:text-[#F2EA79]">
+                <a
+                  href="#"
+                  className="transition duration-300 hover:text-white"
+                >
                   Instagram
                 </a>
               </li>
 
               <li>
-                <a href="#" className="transition hover:text-[#F2EA79]">
+                <a
+                  href="#"
+                  className="transition duration-300 hover:text-white"
+                >
                   Facebook
                 </a>
               </li>
 
               <li>
-                <a href="#" className="transition hover:text-[#F2EA79]">
+                <a
+                  href="#"
+                  className="transition duration-300 hover:text-white"
+                >
                   YouTube
                 </a>
               </li>
 
               <li>
-                <a href="#" className="transition hover:text-[#F2EA79]">
+                <a
+                  href="#"
+                  className="transition duration-300 hover:text-white"
+                >
                   TikTok
                 </a>
               </li>
@@ -126,9 +172,10 @@ export default function Footer() {
 
         </div>
 
-        <div className="mt-16 border-t border-white/10 pt-8 text-center text-sm text-[#A68986]">
+        <div className="mt-6 border-t border-[#F2EA79]/20 pt-5 text-center text-[14px] text-[#F2EA79]">
           © {new Date().getFullYear()} VERTEXworkout. All Rights Reserved.
         </div>
+
       </Container>
     </footer>
   );

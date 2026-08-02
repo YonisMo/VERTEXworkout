@@ -24,7 +24,7 @@ const products: Product[] = [
     isNew: true,
     rating: 4.9,
     reviews: 38,
-    images: ["/products/powerbag5.jpg"],
+    images: ["/images/products/powerbag5.jpeg"],
     features: [
       "Heavy Duty Nylon",
       "Reinforced Handles",
@@ -55,7 +55,7 @@ const products: Product[] = [
     isNew: false,
     rating: 5,
     reviews: 62,
-    images: ["/products/powerbag10.jpg"],
+    images: ["/images/products/powerbag10.jpeg"],
     features: [
       "Heavy Duty Nylon",
       "Professional Handles",
@@ -86,7 +86,7 @@ const products: Product[] = [
     isNew: false,
     rating: 4.8,
     reviews: 41,
-    images: ["/products/powerbag15.jpg"],
+    images: ["/images/products/powerbag15.jpeg"],
     features: [
       "Premium Nylon",
       "Multiple Grip Handles",
@@ -117,7 +117,7 @@ const products: Product[] = [
     isNew: true,
     rating: 5,
     reviews: 74,
-    images: ["/products/powerbag20.jpg"],
+    images: ["/images/products/powerbag20.png"],
     features: [
       "Elite Build",
       "Heavy Duty",
@@ -150,7 +150,7 @@ const products: Product[] = [
     isNew: true,
     rating: 4.9,
     reviews: 25,
-    images: ["/products/swimvest.jpg"],
+    images: ["/images/products/swimvest.jpeg"],
     features: [
       "High Buoyancy",
       "Ergonomic Fit",
@@ -183,7 +183,7 @@ const products: Product[] = [
     isNew: true,
     rating: 4.7,
     reviews: 19,
-    images: ["/products/runningbag.jpg"],
+    images: ["/images/products/runningbag.jpeg"],
     features: [
       "Ultra Lightweight",
       "Hydration Compatible",
@@ -216,7 +216,7 @@ const products: Product[] = [
     isNew: false,
     rating: 4.9,
     reviews: 53,
-    images: ["/products/sportsbag.jpg"],
+    images: ["/images/products/sportsbag.jpeg"],
     features: [
       "Waterproof Compartment",
       "Dedicated Shoe Pocket",
