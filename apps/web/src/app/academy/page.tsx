@@ -35,7 +35,7 @@ export default function AcademyPage() {
     <main>
       <AcademyHero />
 
-      <section className="py-24">
+      <section className="bg-[#F5F3EE] py-24">
         <Container>
           <SectionTitle
             title="VERTEXworkout Academy"

@@ -49,30 +49,32 @@ const categories = [
 
 export default function BlogPage() {
   return (
-    <main className="py-24">
+    <main className="min-h-screen bg-[#F5F3EE] py-24">
       <Container>
         <SectionTitle
           title="VERTEXworkout Blog"
           subtitle="Knowledge, education, and professional insights about fitness, performance, and healthy living."
         />
 
-        <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {categories.map((category) => (
             <div
               key={category.title}
-              className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+              className="flex min-h-[240px] flex-col rounded-2xl border border-[#E8D85A] bg-[#F2EA79] p-5 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
             >
-              <h2 className="mb-4 text-2xl font-bold text-[#022859]">
+              <h2 className="min-h-[48px] text-xl font-bold leading-6 text-[#022859]">
                 {category.title}
               </h2>
 
-              <p className="mb-8 leading-8 text-slate-600">
+              <p className="mt-3 flex-1 text-[16px] leading-8 text-[#022859]/85">
                 {category.description}
               </p>
 
-              <Button href={category.href} size="md">
-                Explore
-              </Button>
+              <div className="mt-4">
+                <Button href={category.href} size="md">
+                  Explore
+                </Button>
+              </div>
             </div>
           ))}
         </div>

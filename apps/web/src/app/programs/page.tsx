@@ -40,7 +40,7 @@ const programs = [
 
 export default function ProgramsPage() {
   return (
-    <main className="py-24">
+    <main className="min-h-screen bg-[#F5F3EE] py-24">
       <Container>
         <SectionTitle
           badge="VERTEXWORKOUT"
@@ -52,19 +52,19 @@ export default function ProgramsPage() {
           {programs.map((program) => (
             <div
               key={program.title}
-              className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition hover:-translate-y-2 hover:shadow-xl"
+              className="rounded-3xl border border-[#E8D85A] bg-[#F2EA79] p-8 shadow-sm transition hover:-translate-y-2 hover:shadow-xl"
             >
               <h3 className="text-2xl font-bold text-[#022859]">
                 {program.title}
               </h3>
 
-              <p className="mt-4 leading-8 text-slate-600">
+              <p className="mt-4 leading-8 text-[#022859]/85">
                 {program.description}
               </p>
 
               <Link
                 href={program.href}
-                className="mt-8 inline-flex font-bold text-[#022859] hover:text-[#F2EA79]"
+                className="mt-8 inline-flex font-bold text-[#022859] transition hover:text-white"
               >
                 Explore Program →
               </Link>

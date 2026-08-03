@@ -6,33 +6,45 @@ import SectionTitle from "@/components/ui/SectionTitle";
 const categories = [
   {
     title: "Training Equipment",
+    description:
+      "Professional functional training equipment for strength, conditioning and athletic performance.",
     image: "/products/training-equipment.jpg",
   },
   {
     title: "Apparel",
+    description:
+      "Premium sportswear designed for comfort, performance and everyday training.",
     image: "/products/apparel.jpg",
   },
   {
     title: "Swimming",
+    description:
+      "Professional swimming gear and accessories for training and competition.",
     image: "/products/swimming.jpg",
   },
   {
     title: "Protection",
+    description:
+      "Protective equipment that enhances safety, stability and injury prevention.",
     image: "/products/protection.jpg",
   },
   {
     title: "Bags",
+    description:
+      "High-quality sports bags for athletes, coaches and everyday fitness use.",
     image: "/products/bags.jpg",
   },
   {
     title: "VERTEX Innovation",
+    description:
+      "Exclusive VERTEX products engineered to deliver innovative training solutions.",
     image: "/products/innovation.jpg",
   },
 ];
 
 export default function Categories() {
   return (
-    <section className="bg-slate-50 py-24">
+    <section className="bg-[#F5F3EE] py-24">
       <Container>
         <SectionTitle
           badge="Categories"
@@ -44,9 +56,9 @@ export default function Categories() {
           {categories.map((category) => (
             <div
               key={category.title}
-              className="group cursor-pointer overflow-hidden rounded-3xl bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+              className="group flex min-h-[470px] flex-col overflow-hidden rounded-2xl border border-[#E8D85A] bg-[#F2EA79] shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
             >
-              <div className="relative h-64 overflow-hidden">
+              <div className="relative h-52 overflow-hidden">
                 <Image
                   src={category.image}
                   alt={category.title}
@@ -56,10 +68,22 @@ export default function Categories() {
                 />
               </div>
 
-              <div className="p-8">
-                <h3 className="text-3xl font-bold text-[#022859] transition group-hover:text-[#d9c84e]">
+              <div className="flex flex-1 flex-col p-6">
+                <span className="mb-3 inline-flex w-fit rounded-full bg-[#022859] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#F2EA79]">
+                  Professional Collection
+                </span>
+
+                <h3 className="text-2xl font-bold text-[#022859] transition group-hover:text-[#A68900]">
                   {category.title}
                 </h3>
+
+                <p className="mt-4 flex-1 text-[16px] leading-7 text-[#022859]/85">
+                  {category.description}
+                </p>
+
+                <button className="mt-6 w-fit font-semibold text-[#022859] transition duration-300 group-hover:text-[#A68900]">
+                  Explore →
+                </button>
               </div>
             </div>
           ))}

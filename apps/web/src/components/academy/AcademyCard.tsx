@@ -12,11 +12,14 @@ export default function AcademyCard({
   href,
 }: AcademyCardProps) {
   return (
-    <div className="group rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-      <h3 className="mb-4 text-2xl font-bold text-[#022859]">{title}</h3>
+    <div className="group rounded-3xl border border-[#E8D85A] bg-[#F2EA79] p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+      <h3 className="mb-4 text-2xl font-bold text-[#022859]">
+        {title}
+      </h3>
 
-      {/* تم تحسين لون الوصف وزيادة وضوحه لئلا يختفي أبداً */}
-      <p className="mb-8 leading-8 text-slate-700 font-medium">{description}</p>
+      <p className="mb-8 font-medium leading-8 text-[#022859]/85">
+        {description}
+      </p>
 
       <Button
         href={href}
