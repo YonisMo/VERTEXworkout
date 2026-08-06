@@ -3,10 +3,8 @@ import { Cairo, Tajawal } from "next/font/google";
 
 import "./globals.css";
 
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-
 import { CartProvider } from "@/context/CartContext";
+import LayoutWrapper from "@/components/layout/LayoutWrapper";
 
 const cairo = Cairo({
   subsets: ["latin"],
@@ -43,9 +41,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-screen flex-col bg-slate-50 font-tajawal text-[#022859] antialiased selection:bg-[#F2EA79] selection:text-[#022859]">
         <CartProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <LayoutWrapper>{children}</LayoutWrapper>
         </CartProvider>
       </body>
     </html>
