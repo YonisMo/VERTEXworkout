@@ -9,9 +9,9 @@ export type MemberFormValues = {
   fullName: string;
   email: string;
   phone: string;
-  gender: string;
+  gender: "Male" | "Female";
   dateOfBirth: string;
-  membership: string;
+  membership: "Active" | "Pending" | "Expired";
   program: string;
   coach: string;
   startDate: string;
