@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 import { useForm } from "react-hook-form";
 
 import MemberForm, {
-  MemberFormValues,
+  type MemberFormValues,
 } from "@/components/dashboard/members/MemberForm";
 
 import { useMembersStore } from "@/store/membersStore";
@@ -52,10 +52,11 @@ export default function AddMemberModal({
 
       dateOfBirth: data.dateOfBirth,
 
-      membership: data.membership as
-        | "Active"
-        | "Pending"
-        | "Expired",
+      membership:
+        data.membership as
+          | "Active"
+          | "Pending"
+          | "Expired",
 
       program: data.program,
 
@@ -79,15 +80,18 @@ export default function AddMemberModal({
     onClose();
   };
 
-  const onError = (errors: unknown) => {
-    console.log("FORM ERRORS", errors);
+  const onError = (formErrors: unknown) => {
+    console.log("FORM ERRORS", formErrors);
   };
 
-  if (!open) return null;
+  if (!open) {
+    return null;
+  }
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 p-4">
-      <div className="mx-auto my-10 w-full max-w-5xl rounded-3xl bg-white shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+
+      <div className="w-full max-w-3xl overflow-hidden rounded-3xl bg-white shadow-2xl">
 
         <div className="flex items-center justify-between border-b border-slate-200 px-8 py-6">
 
@@ -100,14 +104,17 @@ export default function AddMemberModal({
             onClick={onClose}
             className="rounded-xl p-2 transition hover:bg-slate-100"
           >
-            <X />
+            <X size={22} />
           </button>
 
         </div>
 
         <form
-          onSubmit={handleSubmit(onSubmit, onError)}
-          className="max-h-[72vh] overflow-y-auto space-y-5 p-5"
+          onSubmit={handleSubmit(
+            onSubmit,
+            onError
+          )}
+          className="max-h-[72vh] space-y-5 overflow-y-auto p-5"
         >
 
           <MemberForm
@@ -142,6 +149,7 @@ export default function AddMemberModal({
         </form>
 
       </div>
+
     </div>
   );
 }

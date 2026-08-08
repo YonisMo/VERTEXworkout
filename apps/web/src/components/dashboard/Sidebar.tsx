@@ -3,9 +3,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+
 import {
   LayoutDashboard,
   Users,
+  ClipboardCheck,
   Dumbbell,
   GraduationCap,
   ShoppingBag,
@@ -25,6 +27,11 @@ const menu = [
     title: "Members",
     href: "/dashboard/members",
     icon: Users,
+  },
+  {
+    title: "Attendance",
+    href: "/dashboard/attendance",
+    icon: ClipboardCheck,
   },
   {
     title: "Programs",
@@ -67,8 +74,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="flex h-screen w-72 flex-col border-r border-[#E5D85A] bg-[#F2EA79] shadow-xl">
-
+    <aside className="flex h-full flex-col">
       {/* Logo */}
       <div className="flex justify-center border-b border-[#E5D85A] bg-[#F2EA79] px-6 py-6">
         <Image
@@ -86,36 +92,35 @@ export default function Sidebar() {
         {menu.map((item) => {
           const Icon = item.icon;
 
-          const active = pathname === item.href;
+          const active =
+            pathname === item.href ||
+            pathname.startsWith(`${item.href}/`);
 
           return (
             <Link
               key={item.title}
               href={item.href}
-              className={`group flex items-center gap-4 rounded-xl px-4 py-3 transition-all duration-300
-                ${
-                  active
-                    ? "bg-[#022859] text-white shadow-lg"
-                    : "text-[#022859] hover:bg-[#022859] hover:text-white"
-                }`}
+              className={`group flex items-center gap-4 rounded-xl px-4 py-3 transition-all duration-300 ${
+                active
+                  ? "bg-[#022859] text-white shadow-lg"
+                  : "text-[#022859] hover:bg-[#022859] hover:text-white"
+              }`}
             >
               <Icon
                 size={20}
-                className={`transition-all duration-300
-                  ${
-                    active
-                      ? "text-white"
-                      : "text-[#022859] group-hover:text-white"
-                  }`}
+                className={`transition-all duration-300 ${
+                  active
+                    ? "text-white"
+                    : "text-[#022859] group-hover:text-white"
+                }`}
               />
 
               <span
-                className={`text-[15px] font-semibold
-                  ${
-                    active
-                      ? "text-white"
-                      : "text-[#022859] group-hover:text-white"
-                  }`}
+                className={`text-[15px] font-semibold ${
+                  active
+                    ? "text-white"
+                    : "text-[#022859] group-hover:text-white"
+                }`}
               >
                 {item.title}
               </span>

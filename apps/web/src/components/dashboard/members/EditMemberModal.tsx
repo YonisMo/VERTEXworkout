@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import MemberForm, {
-  MemberFormValues,
+  type MemberFormValues,
 } from "@/components/dashboard/members/MemberForm";
 
 import { useMembersStore } from "@/store/membersStore";
@@ -41,7 +41,9 @@ export default function EditMemberModal({
   });
 
   useEffect(() => {
-    if (!member) return;
+    if (!open || !member) {
+      return;
+    }
 
     reset({
       fullName: member.fullName,
@@ -56,10 +58,12 @@ export default function EditMemberModal({
       endDate: member.endDate,
       notes: member.notes,
     });
-  }, [member, reset]);
+  }, [open, member, reset]);
 
   const onSubmit = (data: MemberFormValues) => {
-    if (!member) return;
+    if (!member) {
+      return;
+    }
 
     updateMember({
       ...member,
@@ -68,7 +72,6 @@ export default function EditMemberModal({
       email: data.email,
       phone: data.phone,
       gender: data.gender,
-
       dateOfBirth: data.dateOfBirth,
 
       membership: data.membership as
@@ -86,51 +89,63 @@ export default function EditMemberModal({
     });
 
     reset();
-
     onClose();
   };
 
-  if (!open || !member) return null;
-    return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 p-4">
-      <div className="mx-auto my-6 w-full max-w-3xl rounded-2xl bg-white shadow-2xl">
+  const handleClose = () => {
+    reset();
+    onClose();
+  };
+
+  if (!open || !member) {
+    return null;
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+      <div className="w-full max-w-3xl overflow-hidden rounded-2xl bg-white shadow-2xl">
+        {/* Header */}
 
         <div className="flex items-center justify-between border-b border-slate-200 px-8 py-6">
+          <div>
+            <h2 className="text-3xl font-bold text-[#022859]">
+              Edit Member
+            </h2>
 
-          <h2 className="text-3xl font-bold text-[#022859]">
-            Edit Member
-          </h2>
+            <p className="mt-1 text-sm text-slate-500">
+              Update member information and membership details.
+            </p>
+          </div>
 
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleClose}
             disabled={isSubmitting}
             className="rounded-xl p-2 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-60"
+            aria-label="Close edit member modal"
           >
-            <X />
+            <X size={22} />
           </button>
-
         </div>
+
+        {/* Form */}
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="max-h-[72vh] overflow-y-auto space-y-5 p-5"
+          className="max-h-[72vh] space-y-5 overflow-y-auto p-5"
         >
-
           <MemberForm
             register={register}
             errors={errors}
             disabled={isSubmitting}
           />
 
-          <div className="flex justify-end gap-4 border-t border-slate-200 pt-6">
+          {/* Actions */}
 
+          <div className="flex justify-end gap-4 border-t border-slate-200 pt-6">
             <button
               type="button"
-              onClick={() => {
-                reset();
-                onClose();
-              }}
+              onClick={handleClose}
               disabled={isSubmitting}
               className="rounded-xl border border-slate-300 px-6 py-3 font-medium transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-60"
             >
@@ -142,17 +157,11 @@ export default function EditMemberModal({
               disabled={isSubmitting}
               className="rounded-xl bg-[#022859] px-6 py-3 font-bold text-[#F2EA79] transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {isSubmitting
-                ? "Saving..."
-                : "Save Changes"}
+              {isSubmitting ? "Saving..." : "Save Changes"}
             </button>
-
           </div>
-
         </form>
-
       </div>
-
     </div>
   );
 }

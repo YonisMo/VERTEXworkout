@@ -19,8 +19,10 @@ import { useMembersStore } from "@/store/membersStore";
 const membershipStyles: Record<string, string> = {
   Active:
     "border border-green-200 bg-green-100 text-green-700",
+
   Pending:
     "border border-yellow-200 bg-yellow-100 text-yellow-700",
+
   Expired:
     "border border-red-200 bg-red-100 text-red-700",
 };
@@ -31,75 +33,84 @@ export default function MemberDetailsPage() {
   const { members } = useMembersStore();
 
   const member = members.find(
-    (m) => m.id === Number(params.id)
+    (item) => item.id === Number(params.id)
   );
 
   if (!member) {
     return (
-      <main className="flex min-h-[70vh] flex-col items-center justify-center">
+      <main className="space-y-6">
+        <div className="rounded-2xl border border-red-200 bg-red-50 p-8">
+          <h1 className="text-3xl font-bold text-[#022859]">
+            Member Not Found
+          </h1>
 
-        <h1 className="text-3xl font-bold text-[#022859]">
-          Member Not Found
-        </h1>
+          <p className="mt-3 text-slate-500">
+            The requested member does not exist.
+          </p>
 
-        <p className="mt-3 text-slate-500">
-          The requested member does not exist.
-        </p>
-
-        <Link
-          href="/dashboard/members"
-          className="mt-8 rounded-xl bg-[#022859] px-6 py-3 font-semibold text-[#F2EA79]"
-        >
-          Back to Members
-        </Link>
-
+          <Link
+            href="/dashboard/members"
+            className="mt-8 inline-flex rounded-xl bg-[#022859] px-6 py-3 font-semibold text-[#F2EA79] transition hover:opacity-90"
+          >
+            Back to Members
+          </Link>
+        </div>
       </main>
     );
   }
 
   return (
-    <main className="space-y-8">
+    <main className="space-y-6">
+      {/* Back */}
 
       <Link
         href="/dashboard/members"
-        className="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-4 py-2 transition hover:bg-slate-100"
+        className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 transition hover:bg-slate-100"
       >
         <ArrowLeft size={18} />
+
         Back
       </Link>
 
-      <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+      {/* Member Card */}
 
+      <section className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
         <div className="flex flex-col gap-8 lg:flex-row">
+          {/* Avatar */}
 
-          <Image
-            src={member.avatar}
-            alt={member.fullName}
-            width={180}
-            height={180}
-            className="rounded-3xl border object-cover"
-          />
+          <div className="shrink-0">
+            <Image
+              src={member.avatar}
+              alt={member.fullName}
+              width={180}
+              height={180}
+              className="rounded-3xl border border-slate-200 object-cover"
+            />
+          </div>
+
+          {/* Main Information */}
 
           <div className="flex-1">
+            {/* Name + Membership */}
 
             <div className="flex flex-wrap items-center gap-4">
-
               <h1 className="text-4xl font-bold text-[#022859]">
                 {member.fullName}
               </h1>
 
               <span
                 className={`rounded-full px-4 py-2 text-sm font-semibold ${
-                  membershipStyles[member.membership]
+                  membershipStyles[member.membership] ??
+                  "border border-slate-200 bg-slate-100 text-slate-600"
                 }`}
               >
                 {member.membership}
               </span>
-
             </div>
 
-            <div className="mt-8 grid gap-6 md:grid-cols-2">
+            {/* Information Grid */}
 
+            <div className="mt-8 grid gap-6 md:grid-cols-2">
               <Info
                 icon={<Mail size={18} />}
                 title="Email"
@@ -153,10 +164,11 @@ export default function MemberDetailsPage() {
                 title="Visits"
                 value={member.visits.toString()}
               />
-                          </div>
+            </div>
+
+            {/* Notes */}
 
             <div className="mt-8 rounded-2xl bg-slate-50 p-5">
-
               <h3 className="mb-2 text-lg font-semibold text-[#022859]">
                 Notes
               </h3>
@@ -164,15 +176,10 @@ export default function MemberDetailsPage() {
               <p className="text-slate-600">
                 {member.notes || "No notes available."}
               </p>
-
             </div>
-
           </div>
-
         </div>
-
-      </div>
-
+      </section>
     </main>
   );
 }
@@ -189,17 +196,16 @@ function Info({
   value,
 }: Readonly<InfoProps>) {
   return (
-    <div className="rounded-2xl border border-slate-200 p-4">
-
+    <div>
       <div className="mb-2 flex items-center gap-2 font-semibold text-[#022859]">
         {icon}
+
         {title}
       </div>
 
       <p className="text-slate-600">
         {value || "-"}
       </p>
-
     </div>
   );
 }
