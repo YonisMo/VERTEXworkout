@@ -26,6 +26,13 @@ type BookingStore = {
 
   updateBooking: (booking: Booking) => void;
 
+  updateBookingStatus: (
+    id: number,
+    status: BookingStatus
+  ) => void;
+
+  cancelBooking: (id: number) => void;
+
   deleteBooking: (id: number) => void;
 
   getBooking: (id: number) => Booking | undefined;
@@ -90,6 +97,30 @@ export const useBookingsStore = create<BookingStore>()(
           bookings: state.bookings.map((booking) =>
             booking.id === updatedBooking.id
               ? updatedBooking
+              : booking
+          ),
+        })),
+
+      updateBookingStatus: (id, status) =>
+        set((state) => ({
+          bookings: state.bookings.map((booking) =>
+            booking.id === id
+              ? {
+                  ...booking,
+                  status,
+                }
+              : booking
+          ),
+        })),
+
+      cancelBooking: (id) =>
+        set((state) => ({
+          bookings: state.bookings.map((booking) =>
+            booking.id === id
+              ? {
+                  ...booking,
+                  status: "Cancelled",
+                }
               : booking
           ),
         })),
