@@ -17,7 +17,9 @@ import { useMembersStore } from "@/store/membersStore";
 import { useAttendanceStore } from "@/store/attendanceStore";
 
 export default function DashboardStats() {
-  const members = useMembersStore((state) => state.members);
+  const members = useMembersStore(
+    (state) => state.members
+  );
 
   const attendance = useAttendanceStore(
     (state) => state.attendance
@@ -54,8 +56,7 @@ export default function DashboardStats() {
   ).length;
 
   return (
-    <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-
+    <section className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
       <StatsCard
         title="Total Members"
         value={totalMembers.toString()}
@@ -143,7 +144,6 @@ export default function DashboardStats() {
         color="#DC2626"
         icon={<Package size={30} />}
       />
-
     </section>
   );
 }

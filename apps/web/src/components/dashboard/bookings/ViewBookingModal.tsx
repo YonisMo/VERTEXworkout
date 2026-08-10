@@ -49,7 +49,7 @@ export default function ViewBookingModal({
   open,
   booking,
   onClose,
-}: ViewBookingModalProps) {
+}: Readonly<ViewBookingModalProps>) {
   const {
     updateBooking,
     updateBookingStatus,
@@ -57,11 +57,6 @@ export default function ViewBookingModal({
     deleteBooking,
   } = useBookingsStore();
 
-  /*
-   * Always read the latest booking directly from Zustand.
-   * This makes the modal update immediately when the status
-   * or any other booking data changes.
-   */
   const currentBooking = useBookingsStore((state) =>
     booking
       ? state.bookings.find(
@@ -70,23 +65,39 @@ export default function ViewBookingModal({
       : undefined
   );
 
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] =
+    useState(false);
 
-  const [member, setMember] = useState("");
-  const [program, setProgram] = useState("");
-  const [coach, setCoach] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
+  const [memberName, setMemberName] =
+    useState("");
+
+  const [program, setProgram] =
+    useState("");
+
+  const [coach, setCoach] =
+    useState("");
+
+  const [date, setDate] =
+    useState("");
+
+  const [time, setTime] =
+    useState("");
 
   useEffect(() => {
     if (!currentBooking) {
       return;
     }
 
-    setMember(currentBooking.member);
+    setMemberName(
+      currentBooking.memberName
+    );
+
     setProgram(currentBooking.program);
+
     setCoach(currentBooking.coach);
+
     setDate(currentBooking.date);
+
     setTime(currentBooking.time);
   }, [currentBooking]);
 
@@ -102,7 +113,7 @@ export default function ViewBookingModal({
 
   const handleSaveEdit = () => {
     if (
-      !member.trim() ||
+      !memberName.trim() ||
       !program.trim() ||
       !coach.trim() ||
       !date ||
@@ -117,10 +128,15 @@ export default function ViewBookingModal({
 
     updateBooking({
       ...currentBooking,
-      member: member.trim(),
+
+      memberName: memberName.trim(),
+
       program: program.trim(),
+
       coach: coach.trim(),
+
       date,
+
       time,
     });
 
@@ -167,6 +183,7 @@ export default function ViewBookingModal({
     }
 
     deleteBooking(currentBooking.id);
+
     onClose();
   };
 
@@ -194,7 +211,8 @@ export default function ViewBookingModal({
             </h2>
 
             <p className="mt-1 text-sm text-[#022859]/70">
-              View and manage this training session.
+              View and manage this training
+              session.
             </p>
           </div>
 
@@ -213,7 +231,7 @@ export default function ViewBookingModal({
         <div className="border-b border-slate-200 px-8 py-6">
           <div className="flex items-center gap-4">
             <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#022859] text-2xl font-extrabold text-[#F2EA79]">
-              {currentBooking.member
+              {currentBooking.memberName
                 .charAt(0)
                 .toUpperCase()}
             </div>
@@ -224,8 +242,12 @@ export default function ViewBookingModal({
               </p>
 
               <h3 className="mt-1 text-2xl font-bold text-[#022859]">
-                {currentBooking.member}
+                {currentBooking.memberName}
               </h3>
+
+              <p className="mt-1 text-xs text-slate-400">
+                Member #{currentBooking.memberId}
+              </p>
             </div>
           </div>
         </div>
@@ -234,22 +256,24 @@ export default function ViewBookingModal({
 
         {isEditing ? (
           <div className="space-y-5 px-8 py-6">
-            {/* Member */}
+            {/* Member Name */}
 
             <div>
               <label
-                htmlFor="edit-booking-member"
+                htmlFor="edit-booking-member-name"
                 className="mb-2 block text-sm font-semibold text-slate-700"
               >
-                Member
+                Member Name
               </label>
 
               <input
-                id="edit-booking-member"
+                id="edit-booking-member-name"
                 type="text"
-                value={member}
+                value={memberName}
                 onChange={(event) =>
-                  setMember(event.target.value)
+                  setMemberName(
+                    event.target.value
+                  )
                 }
                 className={inputClass}
               />
@@ -270,7 +294,9 @@ export default function ViewBookingModal({
                 type="text"
                 value={program}
                 onChange={(event) =>
-                  setProgram(event.target.value)
+                  setProgram(
+                    event.target.value
+                  )
                 }
                 className={inputClass}
               />
@@ -291,7 +317,9 @@ export default function ViewBookingModal({
                 type="text"
                 value={coach}
                 onChange={(event) =>
-                  setCoach(event.target.value)
+                  setCoach(
+                    event.target.value
+                  )
                 }
                 className={inputClass}
               />
@@ -313,7 +341,9 @@ export default function ViewBookingModal({
                   type="date"
                   value={date}
                   onChange={(event) =>
-                    setDate(event.target.value)
+                    setDate(
+                      event.target.value
+                    )
                   }
                   className={inputClass}
                 />
@@ -332,7 +362,9 @@ export default function ViewBookingModal({
                   type="time"
                   value={time}
                   onChange={(event) =>
-                    setTime(event.target.value)
+                    setTime(
+                      event.target.value
+                    )
                   }
                   className={inputClass}
                 />
@@ -377,8 +409,6 @@ export default function ViewBookingModal({
               </p>
 
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                {/* Current Status */}
-
                 <span
                   className={`inline-flex w-fit rounded-full px-5 py-2 text-sm font-bold ${
                     statusStyles[
@@ -388,8 +418,6 @@ export default function ViewBookingModal({
                 >
                   {currentBooking.status}
                 </span>
-
-                {/* Change Status */}
 
                 <select
                   value={currentBooking.status}
@@ -410,6 +438,20 @@ export default function ViewBookingModal({
                 </select>
               </div>
             </div>
+
+            {/* Notes */}
+
+            {currentBooking.notes && (
+              <div className="border-t border-slate-200 px-8 py-6">
+                <p className="mb-2 text-sm font-semibold text-slate-500">
+                  Notes
+                </p>
+
+                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600">
+                  {currentBooking.notes}
+                </div>
+              </div>
+            )}
           </>
         )}
 
@@ -437,7 +479,9 @@ export default function ViewBookingModal({
                 "Cancelled" && (
                 <button
                   type="button"
-                  onClick={handleCancelBooking}
+                  onClick={
+                    handleCancelBooking
+                  }
                   className="inline-flex items-center gap-2 rounded-xl border border-yellow-300 px-5 py-3 font-semibold text-yellow-700 transition hover:bg-yellow-50"
                 >
                   <Ban size={17} />
@@ -448,7 +492,9 @@ export default function ViewBookingModal({
             {!isEditing && (
               <button
                 type="button"
-                onClick={handleDeleteBooking}
+                onClick={
+                  handleDeleteBooking
+                }
                 className="inline-flex items-center gap-2 rounded-xl border border-red-200 px-5 py-3 font-semibold text-red-600 transition hover:bg-red-50"
               >
                 <Trash2 size={17} />
@@ -506,7 +552,7 @@ function DetailCard({
   icon,
   label,
   value,
-}: DetailCardProps) {
+}: Readonly<DetailCardProps>) {
   return (
     <div className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-5">
       <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#F2EA79] text-[#022859]">

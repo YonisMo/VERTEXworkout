@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 type StatsCardProps = {
   title: string;
@@ -16,14 +16,14 @@ export default function StatsCard({
   change,
 }: StatsCardProps) {
   return (
-    <div className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">
+    <div className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <div className="flex items-start justify-between gap-4">
+        <div className="min-w-0">
+          <p className="text-sm font-semibold text-slate-500">
             {title}
           </p>
 
-          <h2 className="mt-3 text-4xl font-extrabold text-[#022859]">
+          <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-[#022859]">
             {value}
           </h2>
 
@@ -35,8 +35,9 @@ export default function StatsCard({
         </div>
 
         <div
-          className="flex h-16 w-16 items-center justify-center rounded-2xl text-white transition-transform duration-300 group-hover:scale-110"
+          className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl text-white shadow-sm transition-transform duration-300 group-hover:scale-110"
           style={{ backgroundColor: color }}
+          aria-hidden="true"
         >
           {icon}
         </div>

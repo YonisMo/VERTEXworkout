@@ -4,18 +4,32 @@ import { useMemo, useState } from "react";
 import {
   CalendarDays,
   Clock,
-  User,
-  Dumbbell,
+  Eye,
+  Filter,
   Plus,
+  Search,
+  Users,
 } from "lucide-react";
 
 import {
   useBookingsStore,
   type BookingStatus,
+  type Booking,
 } from "@/store/bookingsStore";
 
-import NewBookingModal from "@/components/dashboard/bookings/NewBookingModal";
+import NewBookingModal, {
+  type BookingFormValues,
+} from "@/components/dashboard/bookings/NewBookingModal";
+
 import ViewBookingModal from "@/components/dashboard/bookings/ViewBookingModal";
+
+const statusOptions: Array<"All" | BookingStatus> = [
+  "All",
+  "Confirmed",
+  "Pending",
+  "Completed",
+  "Cancelled",
+];
 
 const statusStyles: Record<BookingStatus, string> = {
   Confirmed:
@@ -32,380 +46,413 @@ const statusStyles: Record<BookingStatus, string> = {
 };
 
 export default function BookingsPage() {
-  const { bookings, addBooking } = useBookingsStore();
+  const {
+    bookings,
+    addBooking,
+    setSearch,
+    setStatus,
+  } = useBookingsStore();
 
-  const [search, setSearch] = useState("");
-  const [status, setStatus] = useState("All");
+  const [searchValue, setSearchValue] = useState("");
+  const [statusValue, setStatusValue] = useState<
+    "All" | BookingStatus
+  >("All");
 
-  const [openNewBooking, setOpenNewBooking] = useState(false);
+  const [openNewBooking, setOpenNewBooking] =
+    useState(false);
 
-  const [openViewBooking, setOpenViewBooking] = useState(false);
+  const [openViewBooking, setOpenViewBooking] =
+    useState(false);
 
   const [selectedBooking, setSelectedBooking] =
-    useState<(typeof bookings)[number] | null>(null);
+    useState<Booking | null>(null);
 
   const filteredBookings = useMemo(() => {
-    let result = [...bookings];
+    const value = searchValue.trim().toLowerCase();
 
-    if (status !== "All") {
-      result = result.filter(
-        (booking) => booking.status === status
-      );
-    }
+    return bookings.filter((booking) => {
+      const matchesSearch =
+        value === "" ||
+        booking.memberName
+          .toLowerCase()
+          .includes(value) ||
+        booking.program
+          .toLowerCase()
+          .includes(value) ||
+        booking.coach
+          .toLowerCase()
+          .includes(value);
 
-    if (search.trim()) {
-      const value = search.toLowerCase();
+      const matchesStatus =
+        statusValue === "All" ||
+        booking.status === statusValue;
 
-      result = result.filter((booking) => {
-        return (
-          booking.member.toLowerCase().includes(value) ||
-          booking.program.toLowerCase().includes(value) ||
-          booking.coach.toLowerCase().includes(value)
-        );
-      });
-    }
+      return matchesSearch && matchesStatus;
+    });
+  }, [bookings, searchValue, statusValue]);
 
-    return result;
-  }, [bookings, search, status]);
-
-  const confirmed = bookings.filter(
+  const confirmedCount = bookings.filter(
     (booking) => booking.status === "Confirmed"
   ).length;
 
-  const pending = bookings.filter(
+  const pendingCount = bookings.filter(
     (booking) => booking.status === "Pending"
   ).length;
 
-  const completed = bookings.filter(
+  const completedCount = bookings.filter(
     (booking) => booking.status === "Completed"
   ).length;
 
-  const handleCreateBooking = (data: {
-    member: string;
-    program: string;
-    coach: string;
-    date: string;
-    time: string;
-    status: BookingStatus;
-  }) => {
-    addBooking({
-      id: Date.now(),
-      ...data,
-    });
+  const cancelledCount = bookings.filter(
+    (booking) => booking.status === "Cancelled"
+  ).length;
+
+  const handleSearch = (value: string) => {
+    setSearchValue(value);
+    setSearch(value);
+  };
+
+  const handleStatusChange = (
+    value: "All" | BookingStatus
+  ) => {
+    setStatusValue(value);
+    setStatus(value);
+  };
+
+  const handleCreateBooking = (
+    data: BookingFormValues
+  ) => {
+    const nextId =
+      bookings.length > 0
+        ? Math.max(
+            ...bookings.map(
+              (booking) => booking.id
+            )
+          ) + 1
+        : 1;
+
+    const newBooking: Booking = {
+      id: nextId,
+      memberId: data.memberId,
+      memberName: data.memberName,
+      program: data.program,
+      coach: data.coach,
+      date: data.date,
+      time: data.time,
+      status: data.status,
+      notes: data.notes,
+    };
+
+    addBooking(newBooking);
+
+    setOpenNewBooking(false);
   };
 
   const handleViewBooking = (
-    booking: (typeof bookings)[number]
+    booking: Booking
   ) => {
     setSelectedBooking(booking);
     setOpenViewBooking(true);
   };
 
-  const handleCloseViewBooking = () => {
+  const handleCloseView = () => {
     setOpenViewBooking(false);
     setSelectedBooking(null);
   };
 
   return (
-    <main className="space-y-8">
+    <main className="min-h-screen bg-slate-50 p-6 md:p-8">
+      <div className="mx-auto max-w-7xl space-y-6">
+        {/* Header */}
 
-      {/* Header */}
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h1 className="text-3xl font-extrabold text-[#022859]">
+              Bookings Management
+            </h1>
 
-      <header className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-
-        <div>
-          <h1 className="text-4xl font-extrabold tracking-tight text-[#022859]">
-            Bookings Management
-          </h1>
-
-          <p className="mt-2 max-w-2xl text-slate-500">
-            Manage training sessions, appointments, coaches,
-            and member bookings from one place.
-          </p>
-        </div>
-
-        <button
-          type="button"
-          onClick={() => setOpenNewBooking(true)}
-          className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#022859] px-6 py-3 font-bold text-[#F2EA79] transition hover:opacity-90"
-        >
-          <Plus size={18} />
-          New Booking
-        </button>
-
-      </header>
-
-      {/* Stats */}
-
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-
-        <StatCard
-          title="Total Bookings"
-          value={bookings.length}
-          icon={<CalendarDays size={24} />}
-        />
-
-        <StatCard
-          title="Confirmed"
-          value={confirmed}
-          icon={<Clock size={24} />}
-        />
-
-        <StatCard
-          title="Pending"
-          value={pending}
-          icon={<User size={24} />}
-        />
-
-        <StatCard
-          title="Completed"
-          value={completed}
-          icon={<Dumbbell size={24} />}
-        />
-
-      </div>
-
-      {/* Filters */}
-
-      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-
-        <div className="flex flex-col gap-4 md:flex-row">
-
-          <div className="flex-1">
-
-            <input
-              type="text"
-              placeholder="Search member, program or coach..."
-              value={search}
-              onChange={(event) =>
-                setSearch(event.target.value)
-              }
-              className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-[#022859] focus:ring-2 focus:ring-[#022859]/20"
-            />
-
+            <p className="mt-2 text-slate-500">
+              Manage training session bookings,
+              schedules, and booking status.
+            </p>
           </div>
 
-          <select
-            value={status}
-            onChange={(event) =>
-              setStatus(event.target.value)
+          <button
+            type="button"
+            onClick={() =>
+              setOpenNewBooking(true)
             }
-            className="rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-[#022859] focus:ring-2 focus:ring-[#022859]/20"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#022859] px-5 py-3 font-bold text-[#F2EA79] shadow-sm transition hover:opacity-90"
           >
-
-            <option value="All">
-              All Statuses
-            </option>
-
-            <option value="Confirmed">
-              Confirmed
-            </option>
-
-            <option value="Pending">
-              Pending
-            </option>
-
-            <option value="Completed">
-              Completed
-            </option>
-
-            <option value="Cancelled">
-              Cancelled
-            </option>
-
-          </select>
-
+            <Plus size={19} />
+            New Booking
+          </button>
         </div>
 
-      </section>
+        {/* Statistics */}
 
-      {/* Bookings Table */}
+        <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <StatCard
+            icon={<CalendarDays size={20} />}
+            title="Total Bookings"
+            value={bookings.length}
+          />
 
-      <section className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <StatCard
+            icon={<Users size={20} />}
+            title="Confirmed"
+            value={confirmedCount}
+          />
 
-        <div className="border-b border-slate-200 p-6">
+          <StatCard
+            icon={<Clock size={20} />}
+            title="Pending"
+            value={pendingCount}
+          />
 
-          <h2 className="text-2xl font-bold text-[#022859]">
-            Bookings
-          </h2>
+          <StatCard
+            icon={<Eye size={20} />}
+            title="Completed"
+            value={completedCount}
+          />
+        </section>
 
-          <p className="mt-1 text-sm text-slate-500">
+        {/* Secondary Statistics */}
 
-            Total Records{" "}
+        <section className="grid gap-4 sm:grid-cols-2">
+          <StatCard
+            icon={<Filter size={20} />}
+            title="Cancelled"
+            value={cancelledCount}
+          />
 
-            <span className="font-semibold text-[#022859]">
-              ({filteredBookings.length})
-            </span>
+          <StatCard
+            icon={<CalendarDays size={20} />}
+            title="Showing"
+            value={filteredBookings.length}
+          />
+        </section>
 
-          </p>
+        {/* Toolbar */}
 
-        </div>
+        <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            {/* Search */}
 
-        <div className="overflow-x-auto">
+            <div className="relative w-full lg:max-w-md">
+              <Search
+                size={19}
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+              />
 
-          <table className="min-w-full">
+              <input
+                type="text"
+                value={searchValue}
+                onChange={(event) =>
+                  handleSearch(
+                    event.target.value
+                  )
+                }
+                placeholder="Search member, program or coach..."
+                className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-11 pr-4 text-sm outline-none transition focus:border-[#022859] focus:ring-2 focus:ring-[#022859]/20"
+              />
+            </div>
 
-            <thead className="bg-slate-100">
+            {/* Status */}
 
-              <tr className="text-sm uppercase tracking-wide text-slate-600">
+            <div className="flex flex-wrap gap-2">
+              {statusOptions.map((option) => {
+                const active =
+                  statusValue === option;
 
-                <th className="px-6 py-4 text-left">
-                  #
-                </th>
-
-                <th className="px-6 py-4 text-left">
-                  Member
-                </th>
-
-                <th className="px-6 py-4 text-left">
-                  Program
-                </th>
-
-                <th className="px-6 py-4 text-left">
-                  Coach
-                </th>
-
-                <th className="px-6 py-4 text-center">
-                  Date
-                </th>
-
-                <th className="px-6 py-4 text-center">
-                  Time
-                </th>
-
-                <th className="px-6 py-4 text-center">
-                  Status
-                </th>
-
-                <th className="px-6 py-4 text-center">
-                  Actions
-                </th>
-
-              </tr>
-
-            </thead>
-
-            <tbody>
-
-              {filteredBookings.length === 0 ? (
-
-                <tr>
-
-                  <td
-                    colSpan={8}
-                    className="py-16 text-center text-slate-500"
+                return (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() =>
+                      handleStatusChange(
+                        option
+                      )
+                    }
+                    className={`rounded-xl px-4 py-2 text-sm font-semibold transition ${
+                      active
+                        ? "bg-[#022859] text-[#F2EA79]"
+                        : "border border-slate-200 bg-white text-slate-600 hover:bg-slate-100"
+                    }`}
                   >
-                    No bookings found.
-                  </td>
+                    {option}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </section>
 
+        {/* Table */}
+
+        <section className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[1000px]">
+              <thead>
+                <tr className="border-b border-slate-200 bg-slate-50">
+                  <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wide text-slate-500">
+                    Member
+                  </th>
+
+                  <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wide text-slate-500">
+                    Program
+                  </th>
+
+                  <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wide text-slate-500">
+                    Coach
+                  </th>
+
+                  <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wide text-slate-500">
+                    Date
+                  </th>
+
+                  <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wide text-slate-500">
+                    Time
+                  </th>
+
+                  <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wide text-slate-500">
+                    Status
+                  </th>
+
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wide text-slate-500">
+                    Actions
+                  </th>
                 </tr>
+              </thead>
 
-              ) : (
-
-                filteredBookings.map(
-                  (booking, index) => (
-
-                    <tr
-                      key={booking.id}
-                      className="border-b border-slate-100 transition hover:bg-slate-50"
+              <tbody>
+                {filteredBookings.length === 0 ? (
+                  <tr>
+                    <td
+                      colSpan={7}
+                      className="px-6 py-16 text-center"
                     >
-
-                      {/* Number */}
-
-                      <td className="px-6 py-5 font-semibold text-slate-500">
-                        {index + 1}
-                      </td>
-
-                      {/* Member */}
-
-                      <td className="px-6 py-5">
-
-                        <div className="flex items-center gap-3">
-
-                          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#022859] text-sm font-bold text-[#F2EA79]">
-
-                            {booking.member
-                              .charAt(0)
-                              .toUpperCase()}
-
-                          </div>
-
-                          <span className="font-semibold text-[#022859]">
-                            {booking.member}
-                          </span>
-
+                      <div className="mx-auto flex max-w-sm flex-col items-center">
+                        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-slate-400">
+                          <CalendarDays
+                            size={25}
+                          />
                         </div>
 
-                      </td>
+                        <h3 className="mt-4 text-lg font-bold text-[#022859]">
+                          No bookings found
+                        </h3>
 
-                      {/* Program */}
+                        <p className="mt-2 text-sm text-slate-500">
+                          Try changing your
+                          search or filter.
+                        </p>
+                      </div>
+                    </td>
+                  </tr>
+                ) : (
+                  filteredBookings.map(
+                    (booking) => (
+                      <tr
+                        key={booking.id}
+                        className="border-b border-slate-100 transition hover:bg-slate-50"
+                      >
+                        {/* Member */}
 
-                      <td className="px-6 py-5">
-                        {booking.program}
-                      </td>
+                        <td className="px-6 py-5">
+                          <div>
+                            <p className="font-bold text-[#022859]">
+                              {
+                                booking.memberName
+                              }
+                            </p>
 
-                      {/* Coach */}
+                            <p className="mt-1 text-xs text-slate-400">
+                              Member #
+                              {
+                                booking.memberId
+                              }
+                            </p>
+                          </div>
+                        </td>
 
-                      <td className="px-6 py-5">
-                        {booking.coach}
-                      </td>
+                        {/* Program */}
 
-                      {/* Date */}
+                        <td className="px-6 py-5">
+                          <span className="font-medium text-slate-700">
+                            {
+                              booking.program
+                            }
+                          </span>
+                        </td>
 
-                      <td className="px-6 py-5 text-center">
-                        {booking.date}
-                      </td>
+                        {/* Coach */}
 
-                      {/* Time */}
+                        <td className="px-6 py-5">
+                          <span className="text-slate-600">
+                            {
+                              booking.coach
+                            }
+                          </span>
+                        </td>
 
-                      <td className="px-6 py-5 text-center font-semibold text-[#022859]">
-                        {booking.time}
-                      </td>
+                        {/* Date */}
 
-                      {/* Status */}
+                        <td className="px-6 py-5">
+                          <span className="text-slate-600">
+                            {booking.date}
+                          </span>
+                        </td>
 
-                      <td className="px-6 py-5 text-center">
+                        {/* Time */}
 
-                        <span
-                          className={`inline-flex rounded-full px-4 py-2 text-sm font-semibold ${
-                            statusStyles[booking.status]
-                          }`}
-                        >
-                          {booking.status}
-                        </span>
+                        <td className="px-6 py-5">
+                          <span className="font-semibold text-[#022859]">
+                            {booking.time}
+                          </span>
+                        </td>
 
-                      </td>
+                        {/* Status */}
 
-                      {/* Actions */}
+                        <td className="px-6 py-5">
+                          <span
+                            className={`inline-flex rounded-full px-3 py-1.5 text-xs font-bold ${
+                              statusStyles[
+                                booking.status
+                              ]
+                            }`}
+                          >
+                            {
+                              booking.status
+                            }
+                          </span>
+                        </td>
 
-                      <td className="px-6 py-5 text-center">
+                        {/* Actions */}
 
-                        <button
-                          type="button"
-                          onClick={() =>
-                            handleViewBooking(booking)
-                          }
-                          className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold text-[#022859] transition hover:bg-slate-100"
-                        >
-                          View
-                        </button>
-
-                      </td>
-
-                    </tr>
-
+                        <td className="px-6 py-5 text-right">
+                          <button
+                            type="button"
+                            onClick={() =>
+                              handleViewBooking(
+                                booking
+                              )
+                            }
+                            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-[#022859] transition hover:bg-slate-100"
+                          >
+                            <Eye size={17} />
+                            View
+                          </button>
+                        </td>
+                      </tr>
+                    )
                   )
-                )
-
-              )}
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </section>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
 
       {/* New Booking Modal */}
 
@@ -422,47 +469,38 @@ export default function BookingsPage() {
       <ViewBookingModal
         open={openViewBooking}
         booking={selectedBooking}
-        onClose={handleCloseViewBooking}
+        onClose={handleCloseView}
       />
-
     </main>
   );
 }
 
 type StatCardProps = {
+  icon: React.ReactNode;
   title: string;
   value: number;
-  icon: React.ReactNode;
 };
 
 function StatCard({
+  icon,
   title,
   value,
-  icon,
-}: StatCardProps) {
+}: Readonly<StatCardProps>) {
   return (
-    <div className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-
+    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="flex items-center justify-between">
-
-        <div>
-
-          <p className="text-sm font-medium text-slate-500">
-            {title}
-          </p>
-
-          <h2 className="mt-3 text-4xl font-extrabold text-[#022859]">
-            {value}
-          </h2>
-
-        </div>
-
-        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F2EA79] text-[#022859] transition group-hover:scale-110">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#F2EA79] text-[#022859]">
           {icon}
         </div>
 
+        <span className="text-2xl font-extrabold text-[#022859]">
+          {value}
+        </span>
       </div>
 
+      <p className="mt-4 text-sm font-semibold text-slate-500">
+        {title}
+      </p>
     </div>
   );
 }

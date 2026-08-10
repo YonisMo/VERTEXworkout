@@ -1,6 +1,10 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import {
+  useCallback,
+  useMemo,
+  useState,
+} from "react";
 
 import AttendanceToolbar from "@/components/dashboard/attendance/AttendanceToolbar";
 import AttendanceTable from "@/components/dashboard/attendance/AttendanceTable";
@@ -18,10 +22,15 @@ export default function AttendancePage() {
     checkOutAttendance,
   } = useAttendanceStore();
 
-  const [openCheckIn, setOpenCheckIn] = useState(false);
+  const [openCheckIn, setOpenCheckIn] =
+    useState(false);
 
   const filteredAttendance = useMemo(() => {
     let result = [...attendance];
+
+    /*
+     * Status Filter
+     */
 
     if (status !== "All") {
       result = result.filter(
@@ -29,8 +38,14 @@ export default function AttendancePage() {
       );
     }
 
+    /*
+     * Search Filter
+     */
+
     if (search.trim()) {
-      const value = search.toLowerCase().trim();
+      const value = search
+        .toLowerCase()
+        .trim();
 
       result = result.filter((record) => {
         return (
@@ -50,17 +65,28 @@ export default function AttendancePage() {
     return result;
   }, [attendance, search, status]);
 
+  /*
+   * Attendance Statistics
+   */
+
   const checkedIn = attendance.filter(
-    (record) => record.status === "Checked In"
+    (record) =>
+      record.status === "Checked In"
   ).length;
 
   const checkedOut = attendance.filter(
-    (record) => record.status === "Checked Out"
+    (record) =>
+      record.status === "Checked Out"
   ).length;
 
   const absent = attendance.filter(
-    (record) => record.status === "Absent"
+    (record) =>
+      record.status === "Absent"
   ).length;
+
+  /*
+   * Check In Modal
+   */
 
   const handleOpen = useCallback(() => {
     setOpenCheckIn(true);
@@ -70,77 +96,94 @@ export default function AttendancePage() {
     setOpenCheckIn(false);
   }, []);
 
+  /*
+   * Check Out
+   */
+
   const handleCheckOut = useCallback(
     (id: number) => {
-      if (window.confirm("Check out this member?")) {
-        checkOutAttendance(id);
+      const confirmed = window.confirm(
+        "Check out this member?"
+      );
+
+      if (!confirmed) {
+        return;
       }
+
+      checkOutAttendance(id);
     },
     [checkOutAttendance]
   );
 
   return (
-    <main className="space-y-8">
-      {/* Page Header */}
+    <main className="min-h-screen bg-slate-50 p-6 md:p-8">
+      <div className="mx-auto max-w-7xl space-y-6">
+        {/* Page Header */}
 
-      <header className="flex flex-col gap-2">
-        <h1 className="text-4xl font-extrabold tracking-tight text-[#022859]">
-          Attendance Management
-        </h1>
+        <header className="flex flex-col gap-2">
+          <h1 className="text-4xl font-extrabold tracking-tight text-[#022859]">
+            Attendance Management
+          </h1>
 
-        <p className="max-w-2xl text-slate-500">
-          Monitor member attendance, check-in/check-out
-          and manage daily visits.
-        </p>
-      </header>
+          <p className="max-w-2xl text-slate-500">
+            Monitor member attendance,
+            check-in/check-out and manage daily
+            visits.
+          </p>
+        </header>
 
-      {/* Attendance Statistics */}
+        {/* Attendance Statistics */}
 
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-        <StatCard
-          title="Total"
-          value={attendance.length}
-        />
+        <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <StatCard
+            title="Total"
+            value={attendance.length}
+          />
 
-        <StatCard
-          title="Checked In"
-          value={checkedIn}
-        />
+          <StatCard
+            title="Checked In"
+            value={checkedIn}
+          />
 
-        <StatCard
-          title="Checked Out"
-          value={checkedOut}
-        />
+          <StatCard
+            title="Checked Out"
+            value={checkedOut}
+          />
 
-        <StatCard
-          title="Absent"
-          value={absent}
+          <StatCard
+            title="Absent"
+            value={absent}
+          />
+        </section>
+
+        {/* Toolbar */}
+
+        <section>
+          <AttendanceToolbar
+            search={search}
+            setSearch={setSearch}
+            status={status}
+            setStatus={setStatus}
+            onCheckIn={handleOpen}
+          />
+        </section>
+
+        {/* Attendance Table */}
+
+        <section>
+          <AttendanceTable
+            attendance={filteredAttendance}
+            onCheckOut={handleCheckOut}
+          />
+        </section>
+
+        {/* Check In Modal */}
+
+        <CheckInModal
+          open={openCheckIn}
+          onClose={handleClose}
         />
       </div>
-
-      {/* Toolbar */}
-
-      <AttendanceToolbar
-        search={search}
-        setSearch={setSearch}
-        status={status}
-        setStatus={setStatus}
-        onCheckIn={handleOpen}
-      />
-
-      {/* Attendance Table */}
-
-      <AttendanceTable
-        attendance={filteredAttendance}
-        onCheckOut={handleCheckOut}
-      />
-
-      {/* Check In Modal */}
-
-      <CheckInModal
-        open={openCheckIn}
-        onClose={handleClose}
-      />
     </main>
   );
 }
@@ -155,8 +198,8 @@ function StatCard({
   value,
 }: Readonly<StatCardProps>) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
-      <p className="text-sm font-medium text-slate-500">
+    <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md">
+      <p className="text-sm font-semibold text-slate-500">
         {title}
       </p>
 
