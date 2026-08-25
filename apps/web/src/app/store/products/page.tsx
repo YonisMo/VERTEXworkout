@@ -5,18 +5,25 @@ import Image from "next/image";
 import Link from "next/link";
 import { Search, SlidersHorizontal } from "lucide-react";
 
-import products from "@/data/store/products";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
-
-const categories = [
-  "All",
-  ...Array.from(new Set(products.map((product) => product.category))),
-];
+import { useStoreStore } from "@/store/storeStore";
 
 export default function StoreProductsPage() {
+  const products = useStoreStore((state) => state.products);
+
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
+
+  const categories = useMemo(
+    () => [
+      "All",
+      ...Array.from(
+        new Set(products.map((product) => product.category))
+      ),
+    ],
+    [products]
+  );
 
   const filteredProducts = useMemo(() => {
     const value = search.trim().toLowerCase();
@@ -26,14 +33,15 @@ export default function StoreProductsPage() {
         value.length === 0 ||
         product.name.toLowerCase().includes(value) ||
         product.description.toLowerCase().includes(value) ||
-        product.category.toLowerCase().includes(value);
+        product.category.toLowerCase().includes(value) ||
+        product.brand.toLowerCase().includes(value);
 
       const matchesCategory =
         category === "All" || product.category === category;
 
       return matchesSearch && matchesCategory;
     });
-  }, [search, category]);
+  }, [products, search, category]);
 
   return (
     <main className="min-h-screen bg-slate-50 py-16">

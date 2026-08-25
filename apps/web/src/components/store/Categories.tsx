@@ -8,37 +8,37 @@ const categories = [
     title: "Training Equipment",
     description:
       "Professional functional training equipment for strength, conditioning and athletic performance.",
-    image: "/products/training-equipment.jpg",
+    image: "/images/products/powerbag10.jpeg",
   },
   {
     title: "Apparel",
     description:
       "Premium sportswear designed for comfort, performance and everyday training.",
-    image: "/products/apparel.jpg",
+    image: "/images/products/sportsbag.jpeg",
   },
   {
     title: "Swimming",
     description:
       "Professional swimming gear and accessories for training and competition.",
-    image: "/products/swimming.jpg",
+    image: "/images/products/swimvest.jpeg",
   },
   {
     title: "Protection",
     description:
       "Protective equipment that enhances safety, stability and injury prevention.",
-    image: "/products/protection.jpg",
+    image: "/images/products/swimvest.jpeg",
   },
   {
     title: "Bags",
     description:
       "High-quality sports bags for athletes, coaches and everyday fitness use.",
-    image: "/products/bags.jpg",
+    image: "/images/products/runningbag.jpeg",
   },
   {
     title: "VERTEX Innovation",
     description:
       "Exclusive VERTEX products engineered to deliver innovative training solutions.",
-    image: "/products/innovation.jpg",
+    image: "/images/products/powerbag20.png",
   },
 ];
 
@@ -81,7 +81,10 @@ export default function Categories() {
                   {category.description}
                 </p>
 
-                <button className="mt-6 w-fit font-semibold text-[#022859] transition duration-300 group-hover:text-[#A68900]">
+                <button
+                  type="button"
+                  className="mt-6 w-fit font-semibold text-[#022859] transition duration-300 group-hover:text-[#A68900]"
+                >
                   Explore →
                 </button>
               </div>

@@ -1,6 +1,10 @@
 "use client";
 
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
+
+import products from "@/data/store/products";
+import type { Product } from "@/types/product";
 
 export type ProductStatus =
   | "In Stock"
@@ -12,12 +16,7 @@ export type OrderStatus =
   | "Processing"
   | "Pending";
 
-export type StoreProduct = {
-  id: number;
-  name: string;
-  category: string;
-  price: number;
-  stock: number;
+export type StoreProduct = Product & {
   status: ProductStatus;
 };
 
@@ -31,13 +30,18 @@ export type StoreOrder = {
   date: string;
 };
 
+type AddProductInput = {
+  name: string;
+  category: string;
+  price: number;
+  stock: number;
+};
+
 type StoreState = {
   products: StoreProduct[];
   orders: StoreOrder[];
 
-  addProduct: (
-    product: Omit<StoreProduct, "id" | "status">
-  ) => void;
+  addProduct: (product: AddProductInput) => void;
 
   updateProduct: (
     id: number,
@@ -46,9 +50,7 @@ type StoreState = {
 
   removeProduct: (id: number) => void;
 
-  addOrder: (
-    order: Omit<StoreOrder, "id">
-  ) => void;
+  addOrder: (order: Omit<StoreOrder, "id">) => void;
 
   updateOrderStatus: (
     id: number,
@@ -70,64 +72,22 @@ function getProductStatus(stock: number): ProductStatus {
   return "In Stock";
 }
 
-const initialProducts: StoreProduct[] = [
-  {
-    id: 1,
-    name: "VERTEX Power Bag 5kg",
-    category: "Power Bags",
-    price: 35,
-    stock: 24,
-    status: "In Stock",
-  },
-  {
-    id: 2,
-    name: "VERTEX Power Bag 10kg",
-    category: "Power Bags",
-    price: 65,
-    stock: 18,
-    status: "In Stock",
-  },
-  {
-    id: 3,
-    name: "VERTEX Power Bag 15kg",
-    category: "Power Bags",
-    price: 85,
-    stock: 8,
-    status: "Low Stock",
-  },
-  {
-    id: 4,
-    name: "VERTEX Power Bag 20kg",
-    category: "Power Bags",
-    price: 110,
-    stock: 5,
-    status: "Low Stock",
-  },
-  {
-    id: 5,
-    name: "Training Bands Set",
-    category: "Resistance Bands",
-    price: 35,
-    stock: 31,
-    status: "In Stock",
-  },
-  {
-    id: 6,
-    name: "Functional Training Rope",
-    category: "Training Equipment",
-    price: 45,
-    stock: 0,
-    status: "Out of Stock",
-  },
-];
+function createStoreProducts(): StoreProduct[] {
+  return products.map((product) => ({
+    ...product,
+    status: getProductStatus(product.stock),
+  }));
+}
+
+const initialProducts = createStoreProducts();
 
 const initialOrders: StoreOrder[] = [
   {
     id: 1,
     orderNumber: "#ORD-1001",
     customer: "Ahmed Ali",
-    product: "VERTEX Power Bag 15kg",
-    amount: 85,
+    product: "VERTEX Power Bag 15 KG",
+    amount: 1350,
     status: "Completed",
     date: "2026-08-01",
   },
@@ -135,8 +95,8 @@ const initialOrders: StoreOrder[] = [
     id: 2,
     orderNumber: "#ORD-1002",
     customer: "Mohamed Hassan",
-    product: "VERTEX Power Bag 10kg",
-    amount: 65,
+    product: "VERTEX Power Bag 10 KG",
+    amount: 1100,
     status: "Processing",
     date: "2026-08-02",
   },
@@ -144,8 +104,8 @@ const initialOrders: StoreOrder[] = [
     id: 3,
     orderNumber: "#ORD-1003",
     customer: "Omar Khaled",
-    product: "Training Bands Set",
-    amount: 35,
+    product: "VERTEX Pro Swim Vest / Life Jacket",
+    amount: 750,
     status: "Completed",
     date: "2026-08-03",
   },
@@ -153,109 +113,149 @@ const initialOrders: StoreOrder[] = [
     id: 4,
     orderNumber: "#ORD-1004",
     customer: "Youssef Ahmed",
-    product: "VERTEX Power Bag 20kg",
-    amount: 110,
+    product: "VERTEX Power Bag 20 KG",
+    amount: 1600,
     status: "Pending",
     date: "2026-08-04",
   },
 ];
 
-export const useStoreStore = create<StoreState>((set) => ({
-  products: initialProducts,
+export const useStoreStore = create<StoreState>()(
+  persist(
+    (set) => ({
+      products: initialProducts,
 
-  orders: initialOrders,
+      orders: initialOrders,
 
-  addProduct: (product) =>
-    set((state) => {
-      const nextId =
-        state.products.length > 0
-          ? Math.max(
-              ...state.products.map(
-                (item) => item.id
-              )
-            ) + 1
-          : 1;
+      addProduct: (product) =>
+        set((state) => {
+          const nextId =
+            state.products.length > 0
+              ? Math.max(
+                  ...state.products.map(
+                    (item) => item.id
+                  )
+                ) + 1
+              : 1;
 
-      return {
-        products: [
-          ...state.products,
-          {
-            ...product,
+          const slug = product.name
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "");
+
+          const newProduct: StoreProduct = {
             id: nextId,
-            status: getProductStatus(
-              product.stock
-            ),
-          },
-        ],
-      };
-    }),
+            sku: `VTX-${String(nextId).padStart(3, "0")}`,
+            slug: `${slug}-${nextId}`,
+            name: product.name,
+            shortDescription: product.name,
+            description: product.name,
+            category: product.category,
+            brand: "VERTEXworkout",
+            badge: "NEW",
+            price: product.price,
+            stock: product.stock,
+            featured: false,
+            bestseller: false,
+            isNew: true,
+            rating: 0,
+            reviews: 0,
+            images: [],
+            features: [],
+            status: getProductStatus(product.stock),
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          };
 
-  updateProduct: (id, updates) =>
-    set((state) => ({
-      products: state.products.map((product) => {
-        if (product.id !== id) {
-          return product;
-        }
+          return {
+            products: [
+              ...state.products,
+              newProduct,
+            ],
+          };
+        }),
 
-        const updatedProduct = {
-          ...product,
-          ...updates,
-        };
+      updateProduct: (id, updates) =>
+        set((state) => ({
+          products: state.products.map(
+            (product) => {
+              if (product.id !== id) {
+                return product;
+              }
 
-        return {
-          ...updatedProduct,
-          status: getProductStatus(
-            updatedProduct.stock
-          ),
-        };
-      }),
-    })),
+              const updatedProduct = {
+                ...product,
+                ...updates,
+              };
 
-  removeProduct: (id) =>
-    set((state) => ({
-      products: state.products.filter(
-        (product) => product.id !== id
-      ),
-    })),
-
-  addOrder: (order) =>
-    set((state) => {
-      const nextId =
-        state.orders.length > 0
-          ? Math.max(
-              ...state.orders.map(
-                (item) => item.id
-              )
-            ) + 1
-          : 1;
-
-      return {
-        orders: [
-          ...state.orders,
-          {
-            ...order,
-            id: nextId,
-          },
-        ],
-      };
-    }),
-
-  updateOrderStatus: (id, status) =>
-    set((state) => ({
-      orders: state.orders.map((order) =>
-        order.id === id
-          ? {
-              ...order,
-              status,
+              return {
+                ...updatedProduct,
+                status: getProductStatus(
+                  updatedProduct.stock
+                ),
+                updatedAt:
+                  new Date().toISOString(),
+              };
             }
-          : order
-      ),
-    })),
+          ),
+        })),
 
-  removeOrder: (id) =>
-    set((state) => ({
-      orders: state.orders.filter(
-        (order) => order.id !== id
-      ),
-    })),
-}));
+      removeProduct: (id) =>
+        set((state) => ({
+          products: state.products.filter(
+            (product) => product.id !== id
+          ),
+        })),
+
+      addOrder: (order) =>
+        set((state) => {
+          const nextId =
+            state.orders.length > 0
+              ? Math.max(
+                  ...state.orders.map(
+                    (item) => item.id
+                  )
+                ) + 1
+              : 1;
+
+          return {
+            orders: [
+              ...state.orders,
+              {
+                ...order,
+                id: nextId,
+              },
+            ],
+          };
+        }),
+
+      updateOrderStatus: (id, status) =>
+        set((state) => ({
+          orders: state.orders.map(
+            (order) =>
+              order.id === id
+                ? {
+                    ...order,
+                    status,
+                  }
+                : order
+          ),
+        })),
+
+      removeOrder: (id) =>
+        set((state) => ({
+          orders: state.orders.filter(
+            (order) => order.id !== id
+          ),
+        })),
+    }),
+    {
+      name: "vertexworkout-store",
+      partialize: (state) => ({
+        products: state.products,
+        orders: state.orders,
+      }),
+    }
+  )
+);

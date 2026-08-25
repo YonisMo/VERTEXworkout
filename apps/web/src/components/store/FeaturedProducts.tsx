@@ -1,16 +1,33 @@
 "use client";
 
+import { useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import products from "@/data/store/products";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { useCart } from "@/context/CartContext";
+import { useStoreStore } from "@/store/storeStore";
 
 export default function FeaturedProducts() {
   const { addToCart } = useCart();
+
+  // Get the stable products array from the store.
+  const products = useStoreStore((state) => state.products);
+
+  // Filter outside the Zustand selector so React
+  // receives a stable snapshot.
+  const featuredProducts = useMemo(
+    () =>
+      products.filter(
+        (product) =>
+          product.featured ||
+          product.bestseller ||
+          product.isNew
+      ),
+    [products]
+  );
 
   return (
     <section className="bg-white py-24" dir="ltr">
@@ -22,7 +39,7 @@ export default function FeaturedProducts() {
         />
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {products.map((product) => {
+          {featuredProducts.map((product) => {
             const productImage =
               product.images.length > 0
                 ? product.images[0]
@@ -57,7 +74,7 @@ export default function FeaturedProducts() {
                   </p>
 
                   <p className="mt-5 text-3xl font-extrabold text-[#022859]">
-                    {product.price} EGP
+                    {product.price.toLocaleString("en-US")} EGP
                   </p>
 
                   <div className="mt-6 flex gap-3">

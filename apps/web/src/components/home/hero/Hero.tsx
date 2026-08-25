@@ -18,7 +18,6 @@ const heroData = {
 
   title: {
     line1: "Train Smarter.",
-    line2: "Perform Better.",
     highlight: "Live Stronger.",
   },
 
@@ -76,7 +75,6 @@ const heroData = {
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-[#022859] text-white">
-
       <div className="absolute inset-0 bg-gradient-to-br from-[#022859] via-[#04336d] to-[#011d42]" />
 
       <div className="absolute -left-40 top-0 h-[500px] w-[500px] rounded-full bg-[#F2EA79]/10 blur-3xl" />
@@ -84,9 +82,7 @@ export default function Hero() {
       <div className="absolute -right-40 bottom-0 h-[500px] w-[500px] rounded-full bg-cyan-400/10 blur-3xl" />
 
       <Container className="relative z-10">
-
         <div className="grid min-h-screen items-center gap-20 py-24 lg:grid-cols-2">
-
           <div className="flex justify-center lg:justify-start">
             <HeroContent data={heroData} />
           </div>
@@ -95,13 +91,10 @@ export default function Hero() {
             <HeroStats stats={heroData.stats} />
             <HeroTrust items={heroData.trust} />
           </div>
-
         </div>
-
       </Container>
 
       <HeroScroll />
-
     </section>
   );
 }
