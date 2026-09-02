@@ -31,13 +31,13 @@ const actions = [
   {
     title: "Academy",
     description: "Manage courses & students",
-    href: "/dashboard/academy",
+    href: "/academy",
     icon: GraduationCap,
   },
   {
     title: "Analytics",
     description: "View reports and statistics",
-    href: "/dashboard/analytics",
+    href: "/dashboard",
     icon: BarChart3,
   },
 ];
@@ -45,7 +45,6 @@ const actions = [
 export default function QuickActions() {
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-[#022859]">
           Quick Actions
@@ -67,7 +66,6 @@ export default function QuickActions() {
               className="group flex items-center justify-between rounded-2xl border border-slate-200 p-5 transition-all duration-300 hover:border-[#F2EA79] hover:bg-[#FFFBE5] hover:shadow-md"
             >
               <div className="flex items-center gap-4">
-
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#022859] text-white transition-all duration-300 group-hover:bg-[#F2EA79] group-hover:text-[#022859]">
                   <Icon size={24} />
                 </div>
@@ -81,7 +79,6 @@ export default function QuickActions() {
                     {action.description}
                   </p>
                 </div>
-
               </div>
 
               <span className="text-xl font-bold text-slate-300 transition group-hover:text-[#022859]">
@@ -91,7 +88,6 @@ export default function QuickActions() {
           );
         })}
       </div>
-
     </section>
   );
 }

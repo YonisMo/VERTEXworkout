@@ -40,8 +40,6 @@ export default function AddMemberModal({
     console.log("FORM SUBMITTED", data);
 
     addMember({
-      id: Date.now(),
-
       fullName: data.fullName,
 
       email: data.email,
@@ -68,10 +66,6 @@ export default function AddMemberModal({
 
       visits: 0,
 
-      avatar:
-        "https://i.pravatar.cc/150?u=" +
-        Date.now(),
-
       notes: data.notes,
     });
 
@@ -90,11 +84,8 @@ export default function AddMemberModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-
       <div className="w-full max-w-3xl overflow-hidden rounded-3xl bg-white shadow-2xl">
-
         <div className="flex items-center justify-between border-b border-slate-200 px-8 py-6">
-
           <h2 className="text-3xl font-bold text-[#022859]">
             Add New Member
           </h2>
@@ -106,7 +97,6 @@ export default function AddMemberModal({
           >
             <X size={22} />
           </button>
-
         </div>
 
         <form
@@ -116,7 +106,6 @@ export default function AddMemberModal({
           )}
           className="max-h-[72vh] space-y-5 overflow-y-auto p-5"
         >
-
           <MemberForm
             register={register}
             errors={errors}
@@ -124,7 +113,6 @@ export default function AddMemberModal({
           />
 
           <div className="flex justify-end gap-4 border-t border-slate-200 pt-6">
-
             <button
               type="button"
               onClick={onClose}
@@ -143,13 +131,9 @@ export default function AddMemberModal({
                 ? "Saving..."
                 : "Save Member"}
             </button>
-
           </div>
-
         </form>
-
       </div>
-
     </div>
   );
 }

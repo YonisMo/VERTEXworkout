@@ -35,7 +35,7 @@ const menu = [
   },
   {
     title: "Programs",
-    href: "/dashboard/programs",
+    href: "/programs",
     icon: Dumbbell,
   },
   {
@@ -76,6 +76,7 @@ export default function Sidebar() {
   return (
     <aside className="flex h-full flex-col">
       {/* Logo */}
+
       <div className="flex justify-center border-b border-[#E5D85A] bg-[#F2EA79] px-6 py-6">
         <Image
           src="/images/logo/logo-blue.png"
@@ -88,6 +89,7 @@ export default function Sidebar() {
       </div>
 
       {/* Navigation */}
+
       <nav className="flex-1 space-y-2 overflow-y-auto px-4 py-6">
         {menu.map((item) => {
           const Icon = item.icon;
@@ -130,6 +132,7 @@ export default function Sidebar() {
       </nav>
 
       {/* Footer */}
+
       <div className="border-t border-[#E5D85A] bg-[#F2EA79] p-5 text-center">
         <p className="text-xs font-semibold text-[#022859]/70">
           VERTEXworkout Dashboard

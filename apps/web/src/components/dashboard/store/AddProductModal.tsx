@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { X, Package, Plus, Pencil } from "lucide-react";
 
 import {
@@ -45,38 +45,11 @@ export default function AddProductModal({
 
   const isEditing = product !== null;
 
-  useEffect(() => {
-    if (!open) {
-      return;
-    }
-
-    if (product) {
-      setName(product.name);
-      setCategory(product.category);
-      setPrice(String(product.price));
-      setStock(String(product.stock));
-      return;
-    }
-
-    setName("");
-    setCategory(categories[0]);
-    setPrice("");
-    setStock("");
-  }, [open, product]);
-
-  if (!open) {
-    return null;
-  }
-
-  const resetForm = () => {
-    setName("");
-    setCategory(categories[0]);
-    setPrice("");
-    setStock("");
-  };
-
   const handleClose = () => {
-    resetForm();
+    setName("");
+    setCategory(categories[0]);
+    setPrice("");
+    setStock("");
     onClose();
   };
 
@@ -123,9 +96,12 @@ export default function AddProductModal({
       });
     }
 
-    resetForm();
-    onClose();
+    handleClose();
   };
+
+  if (!open) {
+    return null;
+  }
 
   return (
     <div

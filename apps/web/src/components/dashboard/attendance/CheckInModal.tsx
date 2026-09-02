@@ -2,7 +2,10 @@
 
 import { X } from "lucide-react";
 import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import {
+  useForm,
+  useWatch,
+} from "react-hook-form";
 
 import { useAttendanceStore } from "@/store/attendanceStore";
 import { useMembersStore } from "@/store/membersStore";
@@ -14,10 +17,6 @@ type AttendanceFormValues = {
 type CheckInModalProps = {
   open: boolean;
   onClose: () => void;
-
-  // اختياري:
-  // إذا فتحنا النافذة من صفحة عضو معين
-  // يتم تحديد العضو تلقائيًا.
   memberId?: number;
 };
 
@@ -46,7 +45,7 @@ export default function CheckInModal({
 
   const {
     register,
-    watch,
+    control,
     handleSubmit,
     reset,
     formState: {
@@ -61,22 +60,16 @@ export default function CheckInModal({
     },
   });
 
-  const selectedMemberId = watch("memberId");
+  const selectedMemberId = useWatch({
+    control,
+    name: "memberId",
+  });
 
   const selectedMember = members.find(
     (member) =>
       member.id === Number(selectedMemberId)
   );
 
-  /*
-   * عندما تفتح النافذة:
-   *
-   * إذا جاء memberId من صفحة العضو
-   * يتم اختياره تلقائيًا.
-   *
-   * وإذا لم يوجد memberId
-   * تظل النافذة عادية للاختيار اليدوي.
-   */
   useEffect(() => {
     if (!open) {
       reset({
@@ -109,13 +102,6 @@ export default function CheckInModal({
       .toISOString()
       .split("T")[0];
 
-    /*
-     * منع تسجيل Check In جديد
-     * إذا كان العضو بالفعل Checked In اليوم.
-     *
-     * أما إذا كان Checked Out
-     * فيسمح بتسجيل زيارة جديدة.
-     */
     const alreadyCheckedIn = attendance.some(
       (record) =>
         record.memberId === member.id &&
@@ -133,8 +119,17 @@ export default function CheckInModal({
 
     const now = new Date();
 
+    const nextAttendanceId =
+      attendance.length > 0
+        ? Math.max(
+            ...attendance.map(
+              (record) => record.id
+            )
+          ) + 1
+        : 1;
+
     addAttendance({
-      id: Date.now(),
+      id: nextAttendanceId,
 
       memberId: member.id,
 
@@ -144,13 +139,10 @@ export default function CheckInModal({
 
       coach: member.coach,
 
-      checkIn: now.toLocaleTimeString(
-        [],
-        {
-          hour: "2-digit",
-          minute: "2-digit",
-        }
-      ),
+      checkIn: now.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
 
       checkOut: "",
 
@@ -158,12 +150,6 @@ export default function CheckInModal({
 
       status: "Checked In",
     });
-
-    /*
-     * زيادة عدد الزيارات للعضو
-     * سيتم تنفيذها في Store الخاص بالأعضاء
-     * في الخطوة التالية.
-     */
 
     reset({
       memberId: "",
@@ -179,8 +165,6 @@ export default function CheckInModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
       <div className="w-full max-w-2xl overflow-hidden rounded-3xl bg-white shadow-2xl">
-        {/* Header */}
-
         <div className="flex items-center justify-between border-b border-slate-200 px-8 py-6">
           <div>
             <h2 className="text-2xl font-bold text-[#022859]">
@@ -203,14 +187,10 @@ export default function CheckInModal({
           </button>
         </div>
 
-        {/* Form */}
-
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="space-y-6 p-8"
         >
-          {/* Member */}
-
           <div>
             <label
               htmlFor="attendance-member"
@@ -249,8 +229,6 @@ export default function CheckInModal({
             )}
           </div>
 
-          {/* Program */}
-
           <div>
             <label
               htmlFor="attendance-program"
@@ -270,8 +248,6 @@ export default function CheckInModal({
             />
           </div>
 
-          {/* Coach */}
-
           <div>
             <label
               htmlFor="attendance-coach"
@@ -290,8 +266,6 @@ export default function CheckInModal({
               className={`${inputClass} bg-slate-100`}
             />
           </div>
-
-          {/* Actions */}
 
           <div className="flex justify-end gap-4 border-t border-slate-200 pt-6">
             <button

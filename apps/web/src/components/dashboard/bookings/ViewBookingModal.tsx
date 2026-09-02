@@ -10,7 +10,7 @@ import {
   Trash2,
   Ban,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import {
   useBookingsStore,
@@ -83,33 +83,23 @@ export default function ViewBookingModal({
   const [time, setTime] =
     useState("");
 
-  useEffect(() => {
-    if (!currentBooking) {
-      return;
-    }
-
-    setMemberName(
-      currentBooking.memberName
-    );
-
-    setProgram(currentBooking.program);
-
-    setCoach(currentBooking.coach);
-
-    setDate(currentBooking.date);
-
-    setTime(currentBooking.time);
-  }, [currentBooking]);
-
-  useEffect(() => {
-    if (!open) {
-      setIsEditing(false);
-    }
-  }, [open]);
-
   if (!open || !currentBooking) {
     return null;
   }
+
+  const handleClose = () => {
+    setIsEditing(false);
+    onClose();
+  };
+
+  const handleStartEdit = () => {
+    setMemberName(currentBooking.memberName);
+    setProgram(currentBooking.program);
+    setCoach(currentBooking.coach);
+    setDate(currentBooking.date);
+    setTime(currentBooking.time);
+    setIsEditing(true);
+  };
 
   const handleSaveEdit = () => {
     if (
@@ -184,7 +174,7 @@ export default function ViewBookingModal({
 
     deleteBooking(currentBooking.id);
 
-    onClose();
+    handleClose();
   };
 
   const inputClass =
@@ -197,7 +187,7 @@ export default function ViewBookingModal({
         if (
           event.target === event.currentTarget
         ) {
-          onClose();
+          handleClose();
         }
       }}
     >
@@ -218,7 +208,7 @@ export default function ViewBookingModal({
 
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleClose}
             className="rounded-xl p-2 text-[#022859] transition hover:bg-white/60"
             aria-label="Close booking details"
           >
@@ -464,9 +454,7 @@ export default function ViewBookingModal({
             {!isEditing && (
               <button
                 type="button"
-                onClick={() =>
-                  setIsEditing(true)
-                }
+                onClick={handleStartEdit}
                 className="inline-flex items-center gap-2 rounded-xl border border-[#022859] px-5 py-3 font-semibold text-[#022859] transition hover:bg-[#022859] hover:text-white"
               >
                 <Pencil size={17} />
@@ -529,7 +517,7 @@ export default function ViewBookingModal({
             ) : (
               <button
                 type="button"
-                onClick={onClose}
+                onClick={handleClose}
                 className="rounded-xl bg-[#022859] px-6 py-3 font-bold text-[#F2EA79] transition hover:opacity-90"
               >
                 Close

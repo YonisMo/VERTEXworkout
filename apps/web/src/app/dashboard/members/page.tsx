@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
+import { Suspense, useCallback, useMemo, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
 import MembersToolbar from "@/components/dashboard/members/MembersToolbar";
@@ -25,7 +25,7 @@ function MembersPageContent() {
     deleteMember,
   } = useMembersStore();
 
-  const [openAdd, setOpenAdd] = useState(false);
+  const openAdd = searchParams.get("action") === "add";
 
   const [openEdit, setOpenEdit] = useState(false);
 
@@ -59,20 +59,12 @@ function MembersPageContent() {
   }, [members, search, status]);
 
   const handleOpenAdd = useCallback(() => {
-    setOpenAdd(true);
-  }, []);
-
-  const handleCloseAdd = useCallback(() => {
-    setOpenAdd(false);
-
-    router.replace("/dashboard/members");
+    router.push("/dashboard/members?action=add");
   }, [router]);
 
-  useEffect(() => {
-    if (searchParams.get("action") === "add") {
-      setOpenAdd(true);
-    }
-  }, [searchParams]);
+  const handleCloseAdd = useCallback(() => {
+    router.replace("/dashboard/members");
+  }, [router]);
 
   const handleEdit = useCallback((member: Member) => {
     setSelectedMember(member);
@@ -95,7 +87,6 @@ function MembersPageContent() {
 
   return (
     <main className="space-y-8">
-
       {/* Header */}
 
       <header>
@@ -141,7 +132,6 @@ function MembersPageContent() {
         member={selectedMember}
         onClose={handleCloseEdit}
       />
-
     </main>
   );
 }
@@ -149,7 +139,6 @@ function MembersPageContent() {
 function MembersPageFallback() {
   return (
     <main className="space-y-8">
-
       <header>
         <div className="h-10 w-72 animate-pulse rounded-lg bg-slate-200" />
 
@@ -159,7 +148,6 @@ function MembersPageFallback() {
       <div className="h-20 animate-pulse rounded-3xl bg-slate-100" />
 
       <div className="h-96 animate-pulse rounded-3xl bg-slate-100" />
-
     </main>
   );
 }

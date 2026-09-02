@@ -8,6 +8,10 @@ import {
   type Member,
 } from "@/data/members";
 
+type NewMember = Omit<Member, "id" | "avatar"> & {
+  avatar?: string;
+};
+
 type MembersStore = {
   members: Member[];
 
@@ -17,7 +21,7 @@ type MembersStore = {
   setSearch: (value: string) => void;
   setStatus: (value: string) => void;
 
-  addMember: (member: Member) => void;
+  addMember: (member: NewMember) => void;
   updateMember: (member: Member) => void;
   deleteMember: (id: number) => void;
 
@@ -46,26 +50,29 @@ export const useMembersStore = create<MembersStore>()(
         }),
 
       addMember: (member) => {
-        console.log("ADDING MEMBER:", member);
-
         set((state) => {
-          console.log(
-            "OLD MEMBERS:",
-            state.members.length
-          );
+          const nextId =
+            state.members.reduce(
+              (maxId, currentMember) =>
+                Math.max(maxId, currentMember.id),
+              0
+            ) + 1;
 
-          const updatedMembers = [
-            ...state.members,
-            member,
-          ];
+          const newMember: Member = {
+            ...member,
 
-          console.log(
-            "NEW MEMBERS:",
-            updatedMembers.length
-          );
+            id: nextId,
+
+            avatar:
+              member.avatar ??
+              `https://i.pravatar.cc/150?u=${nextId}`,
+          };
 
           return {
-            members: updatedMembers,
+            members: [
+              ...state.members,
+              newMember,
+            ],
           };
         });
       },
